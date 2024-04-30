@@ -3,11 +3,9 @@
 import * as Core from 'honcho/core';
 import { APIResource } from 'honcho/resource';
 import * as AppsAPI from 'honcho/resources/apps/apps';
-import * as NameAPI from 'honcho/resources/apps/name';
 import * as UsersAPI from 'honcho/resources/apps/users/users';
 
 export class Apps extends APIResource {
-  name: NameAPI.Name = new NameAPI.Name(this._client);
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
 
   /**
@@ -22,17 +20,6 @@ export class Apps extends APIResource {
   }
 
   /**
-   * Get an App by ID
-   *
-   * Args: app_id (uuid.UUID): The ID of the app
-   *
-   * Returns: schemas.App: App object
-   */
-  retrieve(appId: string, options?: Core.RequestOptions): Core.APIPromise<App> {
-    return this._client.get(`/apps/${appId}`, options);
-  }
-
-  /**
    * Update an App
    *
    * Args: app_id (uuid.UUID): The ID of the app to update app (schemas.AppUpdate):
@@ -42,6 +29,28 @@ export class Apps extends APIResource {
    */
   update(appId: string, body: AppUpdateParams, options?: Core.RequestOptions): Core.APIPromise<App> {
     return this._client.put(`/apps/${appId}`, { body, ...options });
+  }
+
+  /**
+   * Get an App by ID
+   *
+   * Args: app_id (uuid.UUID): The ID of the app
+   *
+   * Returns: schemas.App: App object
+   */
+  get(appId: string, options?: Core.RequestOptions): Core.APIPromise<App> {
+    return this._client.get(`/apps/${appId}`, options);
+  }
+
+  /**
+   * Get an App by Name
+   *
+   * Args: app_name (str): The name of the app
+   *
+   * Returns: schemas.App: App object
+   */
+  getByName(name: string, options?: Core.RequestOptions): Core.APIPromise<App> {
+    return this._client.get(`/apps/name/${name}`, options);
   }
 
   /**
@@ -82,7 +91,6 @@ export namespace Apps {
   export import App = AppsAPI.App;
   export import AppCreateParams = AppsAPI.AppCreateParams;
   export import AppUpdateParams = AppsAPI.AppUpdateParams;
-  export import Name = NameAPI.Name;
   export import Users = UsersAPI.Users;
   export import PageUser = UsersAPI.PageUser;
   export import User = UsersAPI.User;

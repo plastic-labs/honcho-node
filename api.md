@@ -7,15 +7,10 @@ Types:
 Methods:
 
 - <code title="post /apps">client.apps.<a href="./src/resources/apps/apps.ts">create</a>({ ...params }) -> App</code>
-- <code title="get /apps/{app_id}">client.apps.<a href="./src/resources/apps/apps.ts">retrieve</a>(appId) -> App</code>
 - <code title="put /apps/{app_id}">client.apps.<a href="./src/resources/apps/apps.ts">update</a>(appId, { ...params }) -> App</code>
+- <code title="get /apps/{app_id}">client.apps.<a href="./src/resources/apps/apps.ts">get</a>(appId) -> App</code>
+- <code title="get /apps/name/{name}">client.apps.<a href="./src/resources/apps/apps.ts">getByName</a>(name) -> App</code>
 - <code title="get /apps/get_or_create/{name}">client.apps.<a href="./src/resources/apps/apps.ts">getOrCreate</a>(name) -> App</code>
-
-## Name
-
-Methods:
-
-- <code title="get /apps/name/{name}">client.apps.name.<a href="./src/resources/apps/name.ts">retrieve</a>(name) -> App</code>
 
 ## Users
 
