@@ -4,6 +4,7 @@ import * as Core from 'honcho/core';
 import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as MetamessagesAPI from 'honcho/resources/apps/users/sessions/metamessages';
+import { Page, type PageParams } from 'honcho/pagination';
 
 export class Metamessages extends APIResource {
   /**
@@ -30,31 +31,6 @@ export class Metamessages extends APIResource {
       body,
       ...options,
     });
-  }
-
-  /**
-   * Get a specific Metamessage by ID
-   *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user session_id (int): The ID of the Session to retrieve
-   *
-   * Returns: schemas.Session: The Session object of the requested Session
-   *
-   * Raises: HTTPException: If the session is not found
-   */
-  retrieve(
-    appId: string,
-    userId: string,
-    sessionId: string,
-    metamessageId: string,
-    query: MetamessageRetrieveParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Metamessage> {
-    return this._client.get(
-      `/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages/${metamessageId}`,
-      { query, ...options },
-    );
   }
 
   /**
@@ -92,29 +68,57 @@ export class Metamessages extends APIResource {
     sessionId: string,
     query?: MetamessageListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageMetamessage>;
+  ): Core.PagePromise<MetamessagesPage, Metamessage>;
   list(
     appId: string,
     userId: string,
     sessionId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageMetamessage>;
+  ): Core.PagePromise<MetamessagesPage, Metamessage>;
   list(
     appId: string,
     userId: string,
     sessionId: string,
     query: MetamessageListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageMetamessage> {
+  ): Core.PagePromise<MetamessagesPage, Metamessage> {
     if (isRequestOptions(query)) {
       return this.list(appId, userId, sessionId, {}, query);
     }
-    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages`, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages`,
+      MetamessagesPage,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Get a specific Metamessage by ID
+   *
+   * Args: app_id (uuid.UUID): The ID of the app representing the client application
+   * using honcho user_id (str): The User ID representing the user, managed by the
+   * user session_id (int): The ID of the Session to retrieve
+   *
+   * Returns: schemas.Session: The Session object of the requested Session
+   *
+   * Raises: HTTPException: If the session is not found
+   */
+  get(
+    appId: string,
+    userId: string,
+    sessionId: string,
+    metamessageId: string,
+    query: MetamessageGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Metamessage> {
+    return this._client.get(
+      `/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages/${metamessageId}`,
+      { query, ...options },
+    );
   }
 }
+
+export class MetamessagesPage extends Page<Metamessage> {}
 
 export interface Metamessage {
   id: string;
@@ -125,21 +129,25 @@ export interface Metamessage {
 
   message_id: string;
 
-  metadata: unknown;
+  metadata: Metamessage.Metadata;
 
   metamessage_type: string;
+}
+
+export namespace Metamessage {
+  export interface Metadata {}
 }
 
 export interface PageMetamessage {
   items: Array<Metamessage>;
 
-  page: number | null;
+  page: number;
 
-  size: number | null;
+  size: number;
 
-  total: number | null;
+  total: number;
 
-  pages?: number | null;
+  pages?: number;
 }
 
 export interface MetamessageCreateParams {
@@ -149,46 +157,45 @@ export interface MetamessageCreateParams {
 
   metamessage_type: string;
 
-  metadata?: unknown | null;
+  metadata?: MetamessageCreateParams.Metadata | null;
 }
 
-export interface MetamessageRetrieveParams {
-  message_id: string;
+export namespace MetamessageCreateParams {
+  export interface Metadata {}
 }
 
 export interface MetamessageUpdateParams {
   message_id: string;
 
-  metadata?: unknown | null;
+  metadata?: MetamessageUpdateParams.Metadata | null;
 
   metamessage_type?: string | null;
 }
 
-export interface MetamessageListParams {
+export namespace MetamessageUpdateParams {
+  export interface Metadata {}
+}
+
+export interface MetamessageListParams extends PageParams {
   filter?: string | null;
 
   message_id?: string | null;
 
   metamessage_type?: string | null;
 
-  /**
-   * Page number
-   */
-  page?: number;
-
   reverse?: boolean | null;
+}
 
-  /**
-   * Page size
-   */
-  size?: number;
+export interface MetamessageGetParams {
+  message_id: string;
 }
 
 export namespace Metamessages {
   export import Metamessage = MetamessagesAPI.Metamessage;
   export import PageMetamessage = MetamessagesAPI.PageMetamessage;
+  export import MetamessagesPage = MetamessagesAPI.MetamessagesPage;
   export import MetamessageCreateParams = MetamessagesAPI.MetamessageCreateParams;
-  export import MetamessageRetrieveParams = MetamessagesAPI.MetamessageRetrieveParams;
   export import MetamessageUpdateParams = MetamessagesAPI.MetamessageUpdateParams;
   export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;
+  export import MetamessageGetParams = MetamessagesAPI.MetamessageGetParams;
 }

@@ -6,6 +6,7 @@ import { isRequestOptions } from 'honcho/core';
 import * as SessionsAPI from 'honcho/resources/apps/users/sessions/sessions';
 import * as MessagesAPI from 'honcho/resources/apps/users/sessions/messages';
 import * as MetamessagesAPI from 'honcho/resources/apps/users/sessions/metamessages';
+import { Page, type PageParams } from 'honcho/pagination';
 
 export class Sessions extends APIResource {
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
@@ -28,26 +29,6 @@ export class Sessions extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<Session> {
     return this._client.post(`/apps/${appId}/users/${userId}/sessions`, { body, ...options });
-  }
-
-  /**
-   * Get a specific session for a user by ID
-   *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (uuid.UUID): The User ID representing the user, managed by
-   * the user session_id (uuid.UUID): The ID of the Session to retrieve
-   *
-   * Returns: schemas.Session: The Session object of the requested Session
-   *
-   * Raises: HTTPException: If the session is not found
-   */
-  retrieve(
-    appId: string,
-    userId: string,
-    sessionId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Session> {
-    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}`, options);
   }
 
   /**
@@ -85,18 +66,21 @@ export class Sessions extends APIResource {
     userId: string,
     query?: SessionListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageSession>;
-  list(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<PageSession>;
+  ): Core.PagePromise<SessionsPage, Session>;
+  list(appId: string, userId: string, options?: Core.RequestOptions): Core.PagePromise<SessionsPage, Session>;
   list(
     appId: string,
     userId: string,
     query: SessionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageSession> {
+  ): Core.PagePromise<SessionsPage, Session> {
     if (isRequestOptions(query)) {
       return this.list(appId, userId, {}, query);
     }
-    return this._client.get(`/apps/${appId}/users/${userId}/sessions`, { query, ...options });
+    return this._client.getAPIList(`/apps/${appId}/users/${userId}/sessions`, SessionsPage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -134,7 +118,29 @@ export class Sessions extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Get a specific session for a user by ID
+   *
+   * Args: app_id (uuid.UUID): The ID of the app representing the client application
+   * using honcho user_id (uuid.UUID): The User ID representing the user, managed by
+   * the user session_id (uuid.UUID): The ID of the Session to retrieve
+   *
+   * Returns: schemas.Session: The Session object of the requested Session
+   *
+   * Raises: HTTPException: If the session is not found
+   */
+  get(
+    appId: string,
+    userId: string,
+    sessionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Session> {
+    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}`, options);
+  }
 }
+
+export class SessionsPage extends Page<Session> {}
 
 export interface AgentChat {
   content: string;
@@ -143,13 +149,13 @@ export interface AgentChat {
 export interface PageSession {
   items: Array<Session>;
 
-  page: number | null;
+  page: number;
 
-  size: number | null;
+  size: number;
 
-  total: number | null;
+  total: number;
 
-  pages?: number | null;
+  pages?: number;
 }
 
 export interface Session {
@@ -161,9 +167,13 @@ export interface Session {
 
   location_id: string;
 
-  metadata: unknown;
+  metadata: Session.Metadata;
 
   user_id: string;
+}
+
+export namespace Session {
+  export interface Metadata {}
 }
 
 export type SessionDeleteResponse = unknown;
@@ -171,31 +181,29 @@ export type SessionDeleteResponse = unknown;
 export interface SessionCreateParams {
   location_id: string;
 
-  metadata?: unknown | null;
+  metadata?: SessionCreateParams.Metadata | null;
+}
+
+export namespace SessionCreateParams {
+  export interface Metadata {}
 }
 
 export interface SessionUpdateParams {
-  metadata?: unknown | null;
+  metadata?: SessionUpdateParams.Metadata | null;
 }
 
-export interface SessionListParams {
+export namespace SessionUpdateParams {
+  export interface Metadata {}
+}
+
+export interface SessionListParams extends PageParams {
   filter?: string | null;
 
   is_active?: boolean | null;
 
   location_id?: string | null;
 
-  /**
-   * Page number
-   */
-  page?: number;
-
   reverse?: boolean | null;
-
-  /**
-   * Page size
-   */
-  size?: number;
 }
 
 export interface SessionChatParams {
@@ -207,6 +215,7 @@ export namespace Sessions {
   export import PageSession = SessionsAPI.PageSession;
   export import Session = SessionsAPI.Session;
   export import SessionDeleteResponse = SessionsAPI.SessionDeleteResponse;
+  export import SessionsPage = SessionsAPI.SessionsPage;
   export import SessionCreateParams = SessionsAPI.SessionCreateParams;
   export import SessionUpdateParams = SessionsAPI.SessionUpdateParams;
   export import SessionListParams = SessionsAPI.SessionListParams;
@@ -214,14 +223,16 @@ export namespace Sessions {
   export import Messages = MessagesAPI.Messages;
   export import Message = MessagesAPI.Message;
   export import PageMessage = MessagesAPI.PageMessage;
+  export import MessagesPage = MessagesAPI.MessagesPage;
   export import MessageCreateParams = MessagesAPI.MessageCreateParams;
   export import MessageUpdateParams = MessagesAPI.MessageUpdateParams;
   export import MessageListParams = MessagesAPI.MessageListParams;
   export import Metamessages = MetamessagesAPI.Metamessages;
   export import Metamessage = MetamessagesAPI.Metamessage;
   export import PageMetamessage = MetamessagesAPI.PageMetamessage;
+  export import MetamessagesPage = MetamessagesAPI.MetamessagesPage;
   export import MetamessageCreateParams = MetamessagesAPI.MetamessageCreateParams;
-  export import MetamessageRetrieveParams = MetamessagesAPI.MetamessageRetrieveParams;
   export import MetamessageUpdateParams = MetamessagesAPI.MetamessageUpdateParams;
   export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;
+  export import MetamessageGetParams = MetamessagesAPI.MetamessageGetParams;
 }

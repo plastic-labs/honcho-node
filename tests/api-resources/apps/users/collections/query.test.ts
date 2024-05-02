@@ -6,8 +6,8 @@ import { Response } from 'node-fetch';
 const honcho = new Honcho({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
 
 describe('resource query', () => {
-  test('list: only required params', async () => {
-    const responsePromise = honcho.apps.users.collections.query.list(
+  test('query: only required params', async () => {
+    const responsePromise = honcho.apps.users.collections.query.query(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -22,8 +22,8 @@ describe('resource query', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await honcho.apps.users.collections.query.list(
+  test('query: required and optional params', async () => {
+    const response = await honcho.apps.users.collections.query.query(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
