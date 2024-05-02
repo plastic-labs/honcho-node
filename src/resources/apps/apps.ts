@@ -70,21 +70,33 @@ export interface App {
 
   created_at: string;
 
-  metadata: unknown;
+  metadata: App.Metadata;
 
   name: string;
+}
+
+export namespace App {
+  export interface Metadata {}
 }
 
 export interface AppCreateParams {
   name: string;
 
-  metadata?: unknown | null;
+  metadata?: AppCreateParams.Metadata | null;
+}
+
+export namespace AppCreateParams {
+  export interface Metadata {}
 }
 
 export interface AppUpdateParams {
-  metadata?: unknown | null;
+  metadata?: AppUpdateParams.Metadata | null;
 
   name?: string | null;
+}
+
+export namespace AppUpdateParams {
+  export interface Metadata {}
 }
 
 export namespace Apps {
@@ -94,6 +106,7 @@ export namespace Apps {
   export import Users = UsersAPI.Users;
   export import PageUser = UsersAPI.PageUser;
   export import User = UsersAPI.User;
+  export import UsersPage = UsersAPI.UsersPage;
   export import UserCreateParams = UsersAPI.UserCreateParams;
   export import UserUpdateParams = UsersAPI.UserUpdateParams;
   export import UserListParams = UsersAPI.UserListParams;

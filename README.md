@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Honcho REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found [on docs.honcho.com](https://docs.honcho.com). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found [on docs.honcho.dev](https://docs.honcho.dev). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainlessapi.com/).
 
@@ -133,6 +133,37 @@ await honcho.apps.create({ name: 'string' }, {
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
+
+## Auto-pagination
+
+List methods in the Honcho API are paginated.
+You can use `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllAppsUsers(params) {
+  const allAppsUsers = [];
+  // Automatically fetches more pages as needed.
+  for await (const user of honcho.apps.users.list('REPLACE_ME')) {
+    allAppsUsers.push(user);
+  }
+  return allAppsUsers;
+}
+```
+
+Alternatively, you can make request a single page at a time:
+
+```ts
+let page = await honcho.apps.users.list('REPLACE_ME');
+for (const user of page.items) {
+  console.log(user);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = page.getNextPage();
+  // ...
+}
+```
 
 ## Advanced Usage
 

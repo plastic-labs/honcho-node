@@ -9,6 +9,7 @@ export {
   SessionUpdateParams,
   SessionListParams,
   SessionChatParams,
+  SessionsPage,
   Sessions,
 } from './sessions/index';
 export {
@@ -18,6 +19,15 @@ export {
   CollectionCreateParams,
   CollectionUpdateParams,
   CollectionListParams,
+  CollectionsPage,
   Collections,
 } from './collections/index';
-export { PageUser, User, UserCreateParams, UserUpdateParams, UserListParams, Users } from './users';
+export {
+  PageUser,
+  User,
+  UserCreateParams,
+  UserUpdateParams,
+  UserListParams,
+  UsersPage,
+  Users,
+} from './users';

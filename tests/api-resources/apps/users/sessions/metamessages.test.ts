@@ -36,33 +36,6 @@ describe('resource metamessages', () => {
     );
   });
 
-  test('retrieve: only required params', async () => {
-    const responsePromise = honcho.apps.users.sessions.metamessages.retrieve(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('retrieve: required and optional params', async () => {
-    const response = await honcho.apps.users.sessions.metamessages.retrieve(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
-    );
-  });
-
   test('update: only required params', async () => {
     const responsePromise = honcho.apps.users.sessions.metamessages.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -135,5 +108,32 @@ describe('resource metamessages', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Honcho.NotFoundError);
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = honcho.apps.users.sessions.metamessages.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await honcho.apps.users.sessions.metamessages.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+    );
   });
 });

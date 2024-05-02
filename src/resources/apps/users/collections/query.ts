@@ -9,13 +9,13 @@ export class Query extends APIResource {
   /**
    * Query Documents
    */
-  list(
+  query(
     appId: string,
     userId: string,
     collectionId: string,
-    query: QueryListParams,
+    query: QueryQueryParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<QueryListResponse> {
+  ): Core.APIPromise<QueryQueryResponse> {
     return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}/query`, {
       query,
       ...options,
@@ -23,9 +23,9 @@ export class Query extends APIResource {
   }
 }
 
-export type QueryListResponse = Array<DocumentsAPI.Document>;
+export type QueryQueryResponse = Array<DocumentsAPI.Document>;
 
-export interface QueryListParams {
+export interface QueryQueryParams {
   query: string;
 
   filter?: string | null;
@@ -34,6 +34,6 @@ export interface QueryListParams {
 }
 
 export namespace Query {
-  export import QueryListResponse = QueryAPI.QueryListResponse;
-  export import QueryListParams = QueryAPI.QueryListParams;
+  export import QueryQueryResponse = QueryAPI.QueryQueryResponse;
+  export import QueryQueryParams = QueryAPI.QueryQueryParams;
 }

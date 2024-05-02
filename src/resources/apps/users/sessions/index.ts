@@ -9,6 +9,7 @@ export {
   SessionUpdateParams,
   SessionListParams,
   SessionChatParams,
+  SessionsPage,
   Sessions,
 } from './sessions';
 export {
@@ -17,14 +18,16 @@ export {
   MessageCreateParams,
   MessageUpdateParams,
   MessageListParams,
+  MessagesPage,
   Messages,
 } from './messages';
 export {
   Metamessage,
   PageMetamessage,
   MetamessageCreateParams,
-  MetamessageRetrieveParams,
   MetamessageUpdateParams,
   MetamessageListParams,
+  MetamessageGetParams,
+  MetamessagesPage,
   Metamessages,
 } from './metamessages';
