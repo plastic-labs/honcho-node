@@ -145,4 +145,29 @@ describe('resource documents', () => {
       ),
     ).rejects.toThrow(Honcho.NotFoundError);
   });
+
+  test('query: only required params', async () => {
+    const responsePromise = honcho.apps.users.collections.documents.query(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { query: 'string' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('query: required and optional params', async () => {
+    const response = await honcho.apps.users.collections.documents.query(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { query: 'string', filter: 'string', top_k: 0 },
+    );
+  });
 });

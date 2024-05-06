@@ -5,14 +5,10 @@ import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as CollectionsAPI from 'honcho/resources/apps/users/collections/collections';
 import * as DocumentsAPI from 'honcho/resources/apps/users/collections/documents';
-import * as NameAPI from 'honcho/resources/apps/users/collections/name';
-import * as QueryAPI from 'honcho/resources/apps/users/collections/query';
 import { Page, type PageParams } from 'honcho/pagination';
 
 export class Collections extends APIResource {
   documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
-  query: QueryAPI.Query = new QueryAPI.Query(this._client);
-  name: NameAPI.Name = new NameAPI.Name(this._client);
 
   /**
    * Create Collection
@@ -172,12 +168,10 @@ export namespace Collections {
   export import Document = DocumentsAPI.Document;
   export import PageDocument = DocumentsAPI.PageDocument;
   export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
+  export import DocumentQueryResponse = DocumentsAPI.DocumentQueryResponse;
   export import DocumentsPage = DocumentsAPI.DocumentsPage;
   export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
   export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
   export import DocumentListParams = DocumentsAPI.DocumentListParams;
-  export import Query = QueryAPI.Query;
-  export import QueryQueryResponse = QueryAPI.QueryQueryResponse;
-  export import QueryQueryParams = QueryAPI.QueryQueryParams;
-  export import Name = NameAPI.Name;
+  export import DocumentQueryParams = DocumentsAPI.DocumentQueryParams;
 }
