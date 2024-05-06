@@ -4,12 +4,14 @@ import * as Core from 'honcho/core';
 import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as UsersAPI from 'honcho/resources/apps/users/users';
+import * as NameAPI from 'honcho/resources/apps/users/name';
 import * as CollectionsAPI from 'honcho/resources/apps/users/collections/collections';
 import * as SessionsAPI from 'honcho/resources/apps/users/sessions/sessions';
 
 export class Users extends APIResource {
   sessions: SessionsAPI.Sessions = new SessionsAPI.Sessions(this._client);
   collections: CollectionsAPI.Collections = new CollectionsAPI.Collections(this._client);
+  name: NameAPI.Name = new NameAPI.Name(this._client);
 
   /**
    * Create a User
@@ -21,6 +23,19 @@ export class Users extends APIResource {
    */
   create(appId: string, body: UserCreateParams, options?: Core.RequestOptions): Core.APIPromise<User> {
     return this._client.post(`/apps/${appId}/users`, { body, ...options });
+  }
+
+  /**
+   * Get a User
+   *
+   * Args: app_id (uuid.UUID): The ID of the app representing the client application
+   * using honcho user_id (str): The User ID representing the user, managed by the
+   * user
+   *
+   * Returns: schemas.User: User object
+   */
+  retrieve(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<User> {
+    return this._client.get(`/apps/${appId}/users/${userId}`, options);
   }
 
   /**
@@ -142,7 +157,6 @@ export namespace Users {
   export import SessionCreateParams = SessionsAPI.SessionCreateParams;
   export import SessionUpdateParams = SessionsAPI.SessionUpdateParams;
   export import SessionListParams = SessionsAPI.SessionListParams;
-  export import SessionChatParams = SessionsAPI.SessionChatParams;
   export import Collections = CollectionsAPI.Collections;
   export import Collection = CollectionsAPI.Collection;
   export import PageCollection = CollectionsAPI.PageCollection;
@@ -150,4 +164,5 @@ export namespace Users {
   export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
   export import CollectionListParams = CollectionsAPI.CollectionListParams;
+  export import Name = NameAPI.Name;
 }

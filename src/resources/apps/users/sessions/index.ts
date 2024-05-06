@@ -8,9 +8,9 @@ export {
   SessionCreateParams,
   SessionUpdateParams,
   SessionListParams,
-  SessionChatParams,
   Sessions,
 } from './sessions';
+export { ChatStreamResponse, ChatStreamParams, Chat } from './chat';
 export {
   Message,
   PageMessage,
