@@ -4,7 +4,6 @@ import * as Core from 'honcho/core';
 import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as MetamessagesAPI from 'honcho/resources/apps/users/sessions/metamessages';
-import { Page, type PageParams } from 'honcho/pagination';
 
 export class Metamessages extends APIResource {
   /**
@@ -68,28 +67,27 @@ export class Metamessages extends APIResource {
     sessionId: string,
     query?: MetamessageListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MetamessagesPage, Metamessage>;
+  ): Core.APIPromise<PageMetamessage>;
   list(
     appId: string,
     userId: string,
     sessionId: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MetamessagesPage, Metamessage>;
+  ): Core.APIPromise<PageMetamessage>;
   list(
     appId: string,
     userId: string,
     sessionId: string,
     query: MetamessageListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MetamessagesPage, Metamessage> {
+  ): Core.APIPromise<PageMetamessage> {
     if (isRequestOptions(query)) {
       return this.list(appId, userId, sessionId, {}, query);
     }
-    return this._client.getAPIList(
-      `/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages`,
-      MetamessagesPage,
-      { query, ...options },
-    );
+    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -118,8 +116,6 @@ export class Metamessages extends APIResource {
   }
 }
 
-export class MetamessagesPage extends Page<Metamessage> {}
-
 export interface Metamessage {
   id: string;
 
@@ -129,25 +125,21 @@ export interface Metamessage {
 
   message_id: string;
 
-  metadata: Metamessage.Metadata;
+  metadata: unknown;
 
   metamessage_type: string;
-}
-
-export namespace Metamessage {
-  export interface Metadata {}
 }
 
 export interface PageMetamessage {
   items: Array<Metamessage>;
 
-  page: number;
+  page: number | null;
 
-  size: number;
+  size: number | null;
 
-  total: number;
+  total: number | null;
 
-  pages?: number;
+  pages?: number | null;
 }
 
 export interface MetamessageCreateParams {
@@ -157,33 +149,35 @@ export interface MetamessageCreateParams {
 
   metamessage_type: string;
 
-  metadata?: MetamessageCreateParams.Metadata | null;
-}
-
-export namespace MetamessageCreateParams {
-  export interface Metadata {}
+  metadata?: unknown | null;
 }
 
 export interface MetamessageUpdateParams {
   message_id: string;
 
-  metadata?: MetamessageUpdateParams.Metadata | null;
+  metadata?: unknown | null;
 
   metamessage_type?: string | null;
 }
 
-export namespace MetamessageUpdateParams {
-  export interface Metadata {}
-}
-
-export interface MetamessageListParams extends PageParams {
+export interface MetamessageListParams {
   filter?: string | null;
 
   message_id?: string | null;
 
   metamessage_type?: string | null;
 
+  /**
+   * Page number
+   */
+  page?: number;
+
   reverse?: boolean | null;
+
+  /**
+   * Page size
+   */
+  size?: number;
 }
 
 export interface MetamessageGetParams {
@@ -193,7 +187,6 @@ export interface MetamessageGetParams {
 export namespace Metamessages {
   export import Metamessage = MetamessagesAPI.Metamessage;
   export import PageMetamessage = MetamessagesAPI.PageMetamessage;
-  export import MetamessagesPage = MetamessagesAPI.MetamessagesPage;
   export import MetamessageCreateParams = MetamessagesAPI.MetamessageCreateParams;
   export import MetamessageUpdateParams = MetamessagesAPI.MetamessageUpdateParams;
   export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;

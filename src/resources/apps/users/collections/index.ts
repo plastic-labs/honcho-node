@@ -7,7 +7,6 @@ export {
   CollectionCreateParams,
   CollectionUpdateParams,
   CollectionListParams,
-  CollectionsPage,
   Collections,
 } from './collections';
 export {
@@ -17,7 +16,6 @@ export {
   DocumentCreateParams,
   DocumentUpdateParams,
   DocumentListParams,
-  DocumentsPage,
   Documents,
 } from './documents';
 export { QueryQueryResponse, QueryQueryParams, Query } from './query';

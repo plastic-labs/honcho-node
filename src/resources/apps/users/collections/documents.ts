@@ -4,7 +4,6 @@ import * as Core from 'honcho/core';
 import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as DocumentsAPI from 'honcho/resources/apps/users/collections/documents';
-import { Page, type PageParams } from 'honcho/pagination';
 
 export class Documents extends APIResource {
   /**
@@ -49,28 +48,27 @@ export class Documents extends APIResource {
     collectionId: string,
     query?: DocumentListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DocumentsPage, Document>;
+  ): Core.APIPromise<PageDocument>;
   list(
     appId: string,
     userId: string,
     collectionId: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DocumentsPage, Document>;
+  ): Core.APIPromise<PageDocument>;
   list(
     appId: string,
     userId: string,
     collectionId: string,
     query: DocumentListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DocumentsPage, Document> {
+  ): Core.APIPromise<PageDocument> {
     if (isRequestOptions(query)) {
       return this.list(appId, userId, collectionId, {}, query);
     }
-    return this._client.getAPIList(
-      `/apps/${appId}/users/${userId}/collections/${collectionId}/documents`,
-      DocumentsPage,
-      { query, ...options },
-    );
+    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}/documents`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -106,8 +104,6 @@ export class Documents extends APIResource {
   }
 }
 
-export class DocumentsPage extends Page<Document> {}
-
 export interface Document {
   id: string;
 
@@ -117,23 +113,19 @@ export interface Document {
 
   created_at: string;
 
-  metadata: Document.Metadata;
-}
-
-export namespace Document {
-  export interface Metadata {}
+  metadata: unknown;
 }
 
 export interface PageDocument {
   items: Array<Document>;
 
-  page: number;
+  page: number | null;
 
-  size: number;
+  size: number | null;
 
-  total: number;
+  total: number | null;
 
-  pages?: number;
+  pages?: number | null;
 }
 
 export type DocumentDeleteResponse = unknown;
@@ -141,34 +133,35 @@ export type DocumentDeleteResponse = unknown;
 export interface DocumentCreateParams {
   content: string;
 
-  metadata?: DocumentCreateParams.Metadata | null;
-}
-
-export namespace DocumentCreateParams {
-  export interface Metadata {}
+  metadata?: unknown | null;
 }
 
 export interface DocumentUpdateParams {
   content?: string | null;
 
-  metadata?: DocumentUpdateParams.Metadata | null;
+  metadata?: unknown | null;
 }
 
-export namespace DocumentUpdateParams {
-  export interface Metadata {}
-}
-
-export interface DocumentListParams extends PageParams {
+export interface DocumentListParams {
   filter?: string | null;
 
+  /**
+   * Page number
+   */
+  page?: number;
+
   reverse?: boolean | null;
+
+  /**
+   * Page size
+   */
+  size?: number;
 }
 
 export namespace Documents {
   export import Document = DocumentsAPI.Document;
   export import PageDocument = DocumentsAPI.PageDocument;
   export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
-  export import DocumentsPage = DocumentsAPI.DocumentsPage;
   export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
   export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
   export import DocumentListParams = DocumentsAPI.DocumentListParams;

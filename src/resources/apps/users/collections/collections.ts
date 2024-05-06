@@ -6,7 +6,6 @@ import { isRequestOptions } from 'honcho/core';
 import * as CollectionsAPI from 'honcho/resources/apps/users/collections/collections';
 import * as DocumentsAPI from 'honcho/resources/apps/users/collections/documents';
 import * as QueryAPI from 'honcho/resources/apps/users/collections/query';
-import { Page, type PageParams } from 'honcho/pagination';
 
 export class Collections extends APIResource {
   documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
@@ -54,25 +53,18 @@ export class Collections extends APIResource {
     userId: string,
     query?: CollectionListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<CollectionsPage, Collection>;
-  list(
-    appId: string,
-    userId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CollectionsPage, Collection>;
+  ): Core.APIPromise<PageCollection>;
+  list(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<PageCollection>;
   list(
     appId: string,
     userId: string,
     query: CollectionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<CollectionsPage, Collection> {
+  ): Core.APIPromise<PageCollection> {
     if (isRequestOptions(query)) {
       return this.list(appId, userId, {}, query);
     }
-    return this._client.getAPIList(`/apps/${appId}/users/${userId}/collections`, CollectionsPage, {
-      query,
-      ...options,
-    });
+    return this._client.get(`/apps/${appId}/users/${userId}/collections`, { query, ...options });
   }
 
   /**
@@ -86,48 +78,30 @@ export class Collections extends APIResource {
   ): Core.APIPromise<unknown> {
     return this._client.delete(`/apps/${appId}/users/${userId}/collections/${collectionId}`, options);
   }
-
-  /**
-   * Get Collection By Name
-   */
-  get(
-    appId: string,
-    userId: string,
-    name: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Collection> {
-    return this._client.get(`/apps/${appId}/users/${userId}/collections/${name}`, options);
-  }
 }
-
-export class CollectionsPage extends Page<Collection> {}
 
 export interface Collection {
   id: string;
 
   created_at: string;
 
-  metadata: Collection.Metadata;
+  metadata: unknown;
 
   name: string;
 
   user_id: string;
 }
 
-export namespace Collection {
-  export interface Metadata {}
-}
-
 export interface PageCollection {
   items: Array<Collection>;
 
-  page: number;
+  page: number | null;
 
-  size: number;
+  size: number | null;
 
-  total: number;
+  total: number | null;
 
-  pages?: number;
+  pages?: number | null;
 }
 
 export type CollectionDeleteResponse = unknown;
@@ -135,34 +109,35 @@ export type CollectionDeleteResponse = unknown;
 export interface CollectionCreateParams {
   name: string;
 
-  metadata?: CollectionCreateParams.Metadata | null;
-}
-
-export namespace CollectionCreateParams {
-  export interface Metadata {}
+  metadata?: unknown | null;
 }
 
 export interface CollectionUpdateParams {
   name: string;
 
-  metadata?: CollectionUpdateParams.Metadata | null;
+  metadata?: unknown | null;
 }
 
-export namespace CollectionUpdateParams {
-  export interface Metadata {}
-}
-
-export interface CollectionListParams extends PageParams {
+export interface CollectionListParams {
   filter?: string | null;
 
+  /**
+   * Page number
+   */
+  page?: number;
+
   reverse?: boolean | null;
+
+  /**
+   * Page size
+   */
+  size?: number;
 }
 
 export namespace Collections {
   export import Collection = CollectionsAPI.Collection;
   export import PageCollection = CollectionsAPI.PageCollection;
   export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
-  export import CollectionsPage = CollectionsAPI.CollectionsPage;
   export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
   export import CollectionListParams = CollectionsAPI.CollectionListParams;
@@ -170,7 +145,6 @@ export namespace Collections {
   export import Document = DocumentsAPI.Document;
   export import PageDocument = DocumentsAPI.PageDocument;
   export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
-  export import DocumentsPage = DocumentsAPI.DocumentsPage;
   export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
   export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
   export import DocumentListParams = DocumentsAPI.DocumentListParams;
