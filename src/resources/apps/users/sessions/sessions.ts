@@ -4,12 +4,14 @@ import * as Core from 'honcho/core';
 import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as SessionsAPI from 'honcho/resources/apps/users/sessions/sessions';
+import * as ChatAPI from 'honcho/resources/apps/users/sessions/chat';
 import * as MessagesAPI from 'honcho/resources/apps/users/sessions/messages';
 import * as MetamessagesAPI from 'honcho/resources/apps/users/sessions/metamessages';
 
 export class Sessions extends APIResource {
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
   metamessages: MetamessagesAPI.Metamessages = new MetamessagesAPI.Metamessages(this._client);
+  chat: ChatAPI.Chat = new ChatAPI.Chat(this._client);
 
   /**
    * Create a Session for a User
@@ -100,22 +102,6 @@ export class Sessions extends APIResource {
   }
 
   /**
-   * Get Chat
-   */
-  chat(
-    appId: string,
-    userId: string,
-    sessionId: string,
-    query: SessionChatParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AgentChat> {
-    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}/chat`, {
-      query,
-      ...options,
-    });
-  }
-
-  /**
    * Get a specific session for a user by ID
    *
    * Args: app_id (uuid.UUID): The ID of the app representing the client application
@@ -198,10 +184,6 @@ export interface SessionListParams {
   size?: number;
 }
 
-export interface SessionChatParams {
-  query: string;
-}
-
 export namespace Sessions {
   export import AgentChat = SessionsAPI.AgentChat;
   export import PageSession = SessionsAPI.PageSession;
@@ -210,7 +192,6 @@ export namespace Sessions {
   export import SessionCreateParams = SessionsAPI.SessionCreateParams;
   export import SessionUpdateParams = SessionsAPI.SessionUpdateParams;
   export import SessionListParams = SessionsAPI.SessionListParams;
-  export import SessionChatParams = SessionsAPI.SessionChatParams;
   export import Messages = MessagesAPI.Messages;
   export import Message = MessagesAPI.Message;
   export import PageMessage = MessagesAPI.PageMessage;
@@ -224,4 +205,7 @@ export namespace Sessions {
   export import MetamessageUpdateParams = MetamessagesAPI.MetamessageUpdateParams;
   export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;
   export import MetamessageGetParams = MetamessagesAPI.MetamessageGetParams;
+  export import Chat = ChatAPI.Chat;
+  export import ChatStreamResponse = ChatAPI.ChatStreamResponse;
+  export import ChatStreamParams = ChatAPI.ChatStreamParams;
 }

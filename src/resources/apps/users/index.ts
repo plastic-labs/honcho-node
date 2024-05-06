@@ -8,7 +8,6 @@ export {
   SessionCreateParams,
   SessionUpdateParams,
   SessionListParams,
-  SessionChatParams,
   Sessions,
 } from './sessions/index';
 export {
@@ -20,4 +19,5 @@ export {
   CollectionListParams,
   Collections,
 } from './collections/index';
+export { Name } from './name';
 export { PageUser, User, UserCreateParams, UserUpdateParams, UserListParams, Users } from './users';

@@ -22,6 +22,7 @@ Types:
 Methods:
 
 - <code title="post /apps/{app_id}/users">client.apps.users.<a href="./src/resources/apps/users/users.ts">create</a>(appId, { ...params }) -> User</code>
+- <code title="get /apps/{app_id}/users/{user_id}">client.apps.users.<a href="./src/resources/apps/users/users.ts">retrieve</a>(appId, userId) -> User</code>
 - <code title="put /apps/{app_id}/users/{user_id}">client.apps.users.<a href="./src/resources/apps/users/users.ts">update</a>(appId, userId, { ...params }) -> User</code>
 - <code title="get /apps/{app_id}/users">client.apps.users.<a href="./src/resources/apps/users/users.ts">list</a>(appId, { ...params }) -> PageUser</code>
 - <code title="get /apps/{app_id}/users/get_or_create/{name}">client.apps.users.<a href="./src/resources/apps/users/users.ts">getOrCreate</a>(appId, name) -> User</code>
@@ -41,7 +42,6 @@ Methods:
 - <code title="put /apps/{app_id}/users/{user_id}/sessions/{session_id}">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">update</a>(appId, userId, sessionId, { ...params }) -> Session</code>
 - <code title="get /apps/{app_id}/users/{user_id}/sessions">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">list</a>(appId, userId, { ...params }) -> PageSession</code>
 - <code title="delete /apps/{app_id}/users/{user_id}/sessions/{session_id}">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">delete</a>(appId, userId, sessionId) -> unknown</code>
-- <code title="get /apps/{app_id}/users/{user_id}/sessions/{session_id}/chat">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">chat</a>(appId, userId, sessionId, { ...params }) -> AgentChat</code>
 - <code title="get /apps/{app_id}/users/{user_id}/sessions/{session_id}">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">get</a>(appId, userId, sessionId) -> Session</code>
 
 #### Messages
@@ -72,6 +72,16 @@ Methods:
 - <code title="get /apps/{app_id}/users/{user_id}/sessions/{session_id}/metamessages">client.apps.users.sessions.metamessages.<a href="./src/resources/apps/users/sessions/metamessages.ts">list</a>(appId, userId, sessionId, { ...params }) -> PageMetamessage</code>
 - <code title="get /apps/{app_id}/users/{user_id}/sessions/{session_id}/metamessages/{metamessage_id}">client.apps.users.sessions.metamessages.<a href="./src/resources/apps/users/sessions/metamessages.ts">get</a>(appId, userId, sessionId, metamessageId, { ...params }) -> Metamessage</code>
 
+#### Chat
+
+Types:
+
+- <code><a href="./src/resources/apps/users/sessions/chat.ts">ChatStreamResponse</a></code>
+
+Methods:
+
+- <code title="get /apps/{app_id}/users/{user_id}/sessions/{session_id}/chat/stream">client.apps.users.sessions.chat.<a href="./src/resources/apps/users/sessions/chat.ts">stream</a>(appId, userId, sessionId, { ...params }) -> unknown</code>
+
 ### Collections
 
 Types:
@@ -83,6 +93,7 @@ Types:
 Methods:
 
 - <code title="post /apps/{app_id}/users/{user_id}/collections">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">create</a>(appId, userId, { ...params }) -> Collection</code>
+- <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">retrieve</a>(appId, userId, collectionId) -> Collection</code>
 - <code title="put /apps/{app_id}/users/{user_id}/collections/{collection_id}">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">update</a>(appId, userId, collectionId, { ...params }) -> Collection</code>
 - <code title="get /apps/{app_id}/users/{user_id}/collections">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">list</a>(appId, userId, { ...params }) -> PageCollection</code>
 - <code title="delete /apps/{app_id}/users/{user_id}/collections/{collection_id}">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">delete</a>(appId, userId, collectionId) -> unknown</code>
@@ -112,3 +123,15 @@ Types:
 Methods:
 
 - <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}/query">client.apps.users.collections.query.<a href="./src/resources/apps/users/collections/query.ts">query</a>(appId, userId, collectionId, { ...params }) -> QueryQueryResponse</code>
+
+#### Name
+
+Methods:
+
+- <code title="get /apps/{app_id}/users/{user_id}/collections/name/{name}">client.apps.users.collections.name.<a href="./src/resources/apps/users/collections/name.ts">retrieve</a>(appId, userId, name) -> Collection</code>
+
+### Name
+
+Methods:
+
+- <code title="get /apps/{app_id}/users/name/{name}">client.apps.users.name.<a href="./src/resources/apps/users/name.ts">retrieve</a>(appId, name) -> User</code>

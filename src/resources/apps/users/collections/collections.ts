@@ -5,11 +5,13 @@ import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as CollectionsAPI from 'honcho/resources/apps/users/collections/collections';
 import * as DocumentsAPI from 'honcho/resources/apps/users/collections/documents';
+import * as NameAPI from 'honcho/resources/apps/users/collections/name';
 import * as QueryAPI from 'honcho/resources/apps/users/collections/query';
 
 export class Collections extends APIResource {
   documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
   query: QueryAPI.Query = new QueryAPI.Query(this._client);
+  name: NameAPI.Name = new NameAPI.Name(this._client);
 
   /**
    * Create Collection
@@ -21,6 +23,18 @@ export class Collections extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<Collection> {
     return this._client.post(`/apps/${appId}/users/${userId}/collections`, { body, ...options });
+  }
+
+  /**
+   * Get Collection By Id
+   */
+  retrieve(
+    appId: string,
+    userId: string,
+    collectionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Collection> {
+    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}`, options);
   }
 
   /**
@@ -151,4 +165,5 @@ export namespace Collections {
   export import Query = QueryAPI.Query;
   export import QueryQueryResponse = QueryAPI.QueryQueryResponse;
   export import QueryQueryParams = QueryAPI.QueryQueryParams;
+  export import Name = NameAPI.Name;
 }
