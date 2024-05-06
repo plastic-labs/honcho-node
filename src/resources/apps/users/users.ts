@@ -7,6 +7,7 @@ import * as UsersAPI from 'honcho/resources/apps/users/users';
 import * as NameAPI from 'honcho/resources/apps/users/name';
 import * as CollectionsAPI from 'honcho/resources/apps/users/collections/collections';
 import * as SessionsAPI from 'honcho/resources/apps/users/sessions/sessions';
+import { Page, type PageParams } from 'honcho/pagination';
 
 export class Users extends APIResource {
   sessions: SessionsAPI.Sessions = new SessionsAPI.Sessions(this._client);
@@ -23,19 +24,6 @@ export class Users extends APIResource {
    */
   create(appId: string, body: UserCreateParams, options?: Core.RequestOptions): Core.APIPromise<User> {
     return this._client.post(`/apps/${appId}/users`, { body, ...options });
-  }
-
-  /**
-   * Get a User
-   *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user
-   *
-   * Returns: schemas.User: User object
-   */
-  retrieve(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<User> {
-    return this._client.get(`/apps/${appId}/users/${userId}`, options);
   }
 
   /**
@@ -64,17 +52,47 @@ export class Users extends APIResource {
    *
    * Returns: list[schemas.User]: List of User objects
    */
-  list(appId: string, query?: UserListParams, options?: Core.RequestOptions): Core.APIPromise<PageUser>;
-  list(appId: string, options?: Core.RequestOptions): Core.APIPromise<PageUser>;
+  list(
+    appId: string,
+    query?: UserListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<UsersPage, User>;
+  list(appId: string, options?: Core.RequestOptions): Core.PagePromise<UsersPage, User>;
   list(
     appId: string,
     query: UserListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageUser> {
+  ): Core.PagePromise<UsersPage, User> {
     if (isRequestOptions(query)) {
       return this.list(appId, {}, query);
     }
-    return this._client.get(`/apps/${appId}/users`, { query, ...options });
+    return this._client.getAPIList(`/apps/${appId}/users`, UsersPage, { query, ...options });
+  }
+
+  /**
+   * Get a User
+   *
+   * Args: app_id (uuid.UUID): The ID of the app representing the client application
+   * using honcho user_id (str): The User ID representing the user, managed by the
+   * user
+   *
+   * Returns: schemas.User: User object
+   */
+  get(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<User> {
+    return this._client.get(`/apps/${appId}/users/${userId}`, options);
+  }
+
+  /**
+   * Get a User
+   *
+   * Args: app_id (uuid.UUID): The ID of the app representing the client application
+   * using honcho user_id (str): The User ID representing the user, managed by the
+   * user
+   *
+   * Returns: schemas.User: User object
+   */
+  getByName(appId: string, name: string, options?: Core.RequestOptions): Core.APIPromise<User> {
+    return this._client.get(`/apps/${appId}/users/name/${name}`, options);
   }
 
   /**
@@ -91,16 +109,18 @@ export class Users extends APIResource {
   }
 }
 
+export class UsersPage extends Page<User> {}
+
 export interface PageUser {
   items: Array<User>;
 
-  page: number | null;
+  page: number;
 
-  size: number | null;
+  size: number;
 
-  total: number | null;
+  total: number;
 
-  pages?: number | null;
+  pages?: number;
 }
 
 export interface User {
@@ -127,25 +147,16 @@ export interface UserUpdateParams {
   name?: string | null;
 }
 
-export interface UserListParams {
+export interface UserListParams extends PageParams {
   filter?: string | null;
 
-  /**
-   * Page number
-   */
-  page?: number;
-
   reverse?: boolean;
-
-  /**
-   * Page size
-   */
-  size?: number;
 }
 
 export namespace Users {
   export import PageUser = UsersAPI.PageUser;
   export import User = UsersAPI.User;
+  export import UsersPage = UsersAPI.UsersPage;
   export import UserCreateParams = UsersAPI.UserCreateParams;
   export import UserUpdateParams = UsersAPI.UserUpdateParams;
   export import UserListParams = UsersAPI.UserListParams;
@@ -154,13 +165,18 @@ export namespace Users {
   export import PageSession = SessionsAPI.PageSession;
   export import Session = SessionsAPI.Session;
   export import SessionDeleteResponse = SessionsAPI.SessionDeleteResponse;
+  export import SessionStreamResponse = SessionsAPI.SessionStreamResponse;
+  export import SessionsPage = SessionsAPI.SessionsPage;
   export import SessionCreateParams = SessionsAPI.SessionCreateParams;
   export import SessionUpdateParams = SessionsAPI.SessionUpdateParams;
   export import SessionListParams = SessionsAPI.SessionListParams;
+  export import SessionChatParams = SessionsAPI.SessionChatParams;
+  export import SessionStreamParams = SessionsAPI.SessionStreamParams;
   export import Collections = CollectionsAPI.Collections;
   export import Collection = CollectionsAPI.Collection;
   export import PageCollection = CollectionsAPI.PageCollection;
   export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
+  export import CollectionsPage = CollectionsAPI.CollectionsPage;
   export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
   export import CollectionListParams = CollectionsAPI.CollectionListParams;

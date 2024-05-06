@@ -5,18 +5,22 @@ export {
   PageSession,
   Session,
   SessionDeleteResponse,
+  SessionStreamResponse,
   SessionCreateParams,
   SessionUpdateParams,
   SessionListParams,
+  SessionChatParams,
+  SessionStreamParams,
+  SessionsPage,
   Sessions,
 } from './sessions';
-export { ChatStreamResponse, ChatStreamParams, Chat } from './chat';
 export {
   Message,
   PageMessage,
   MessageCreateParams,
   MessageUpdateParams,
   MessageListParams,
+  MessagesPage,
   Messages,
 } from './messages';
 export {
@@ -26,5 +30,6 @@ export {
   MetamessageUpdateParams,
   MetamessageListParams,
   MetamessageGetParams,
+  MetamessagesPage,
   Metamessages,
 } from './metamessages';
