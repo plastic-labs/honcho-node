@@ -14,11 +14,11 @@ export {
   Document,
   PageDocument,
   DocumentDeleteResponse,
+  DocumentQueryResponse,
   DocumentCreateParams,
   DocumentUpdateParams,
   DocumentListParams,
+  DocumentQueryParams,
   DocumentsPage,
   Documents,
 } from './documents';
-export { Name } from './name';
-export { QueryQueryResponse, QueryQueryParams, Query } from './query';

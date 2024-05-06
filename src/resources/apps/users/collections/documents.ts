@@ -104,6 +104,22 @@ export class Documents extends APIResource {
       options,
     );
   }
+
+  /**
+   * Query Documents
+   */
+  query(
+    appId: string,
+    userId: string,
+    collectionId: string,
+    query: DocumentQueryParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DocumentQueryResponse> {
+    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}/query`, {
+      query,
+      ...options,
+    });
+  }
 }
 
 export class DocumentsPage extends Page<Document> {}
@@ -134,6 +150,8 @@ export interface PageDocument {
 
 export type DocumentDeleteResponse = unknown;
 
+export type DocumentQueryResponse = Array<Document>;
+
 export interface DocumentCreateParams {
   content: string;
 
@@ -152,12 +170,22 @@ export interface DocumentListParams extends PageParams {
   reverse?: boolean | null;
 }
 
+export interface DocumentQueryParams {
+  query: string;
+
+  filter?: string | null;
+
+  top_k?: number;
+}
+
 export namespace Documents {
   export import Document = DocumentsAPI.Document;
   export import PageDocument = DocumentsAPI.PageDocument;
   export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
+  export import DocumentQueryResponse = DocumentsAPI.DocumentQueryResponse;
   export import DocumentsPage = DocumentsAPI.DocumentsPage;
   export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
   export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
   export import DocumentListParams = DocumentsAPI.DocumentListParams;
+  export import DocumentQueryParams = DocumentsAPI.DocumentQueryParams;
 }
