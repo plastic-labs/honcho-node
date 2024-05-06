@@ -7,6 +7,7 @@ import * as CollectionsAPI from 'honcho/resources/apps/users/collections/collect
 import * as DocumentsAPI from 'honcho/resources/apps/users/collections/documents';
 import * as NameAPI from 'honcho/resources/apps/users/collections/name';
 import * as QueryAPI from 'honcho/resources/apps/users/collections/query';
+import { Page, type PageParams } from 'honcho/pagination';
 
 export class Collections extends APIResource {
   documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
@@ -23,18 +24,6 @@ export class Collections extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<Collection> {
     return this._client.post(`/apps/${appId}/users/${userId}/collections`, { body, ...options });
-  }
-
-  /**
-   * Get Collection By Id
-   */
-  retrieve(
-    appId: string,
-    userId: string,
-    collectionId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Collection> {
-    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}`, options);
   }
 
   /**
@@ -67,18 +56,25 @@ export class Collections extends APIResource {
     userId: string,
     query?: CollectionListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageCollection>;
-  list(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<PageCollection>;
+  ): Core.PagePromise<CollectionsPage, Collection>;
+  list(
+    appId: string,
+    userId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CollectionsPage, Collection>;
   list(
     appId: string,
     userId: string,
     query: CollectionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageCollection> {
+  ): Core.PagePromise<CollectionsPage, Collection> {
     if (isRequestOptions(query)) {
       return this.list(appId, userId, {}, query);
     }
-    return this._client.get(`/apps/${appId}/users/${userId}/collections`, { query, ...options });
+    return this._client.getAPIList(`/apps/${appId}/users/${userId}/collections`, CollectionsPage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -92,7 +88,33 @@ export class Collections extends APIResource {
   ): Core.APIPromise<unknown> {
     return this._client.delete(`/apps/${appId}/users/${userId}/collections/${collectionId}`, options);
   }
+
+  /**
+   * Get Collection By Id
+   */
+  get(
+    appId: string,
+    userId: string,
+    collectionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Collection> {
+    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}`, options);
+  }
+
+  /**
+   * Get Collection By Name
+   */
+  getByName(
+    appId: string,
+    userId: string,
+    name: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Collection> {
+    return this._client.get(`/apps/${appId}/users/${userId}/collections/name/${name}`, options);
+  }
 }
+
+export class CollectionsPage extends Page<Collection> {}
 
 export interface Collection {
   id: string;
@@ -109,13 +131,13 @@ export interface Collection {
 export interface PageCollection {
   items: Array<Collection>;
 
-  page: number | null;
+  page: number;
 
-  size: number | null;
+  size: number;
 
-  total: number | null;
+  total: number;
 
-  pages?: number | null;
+  pages?: number;
 }
 
 export type CollectionDeleteResponse = unknown;
@@ -132,26 +154,17 @@ export interface CollectionUpdateParams {
   metadata?: unknown | null;
 }
 
-export interface CollectionListParams {
+export interface CollectionListParams extends PageParams {
   filter?: string | null;
 
-  /**
-   * Page number
-   */
-  page?: number;
-
   reverse?: boolean | null;
-
-  /**
-   * Page size
-   */
-  size?: number;
 }
 
 export namespace Collections {
   export import Collection = CollectionsAPI.Collection;
   export import PageCollection = CollectionsAPI.PageCollection;
   export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
+  export import CollectionsPage = CollectionsAPI.CollectionsPage;
   export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
   export import CollectionListParams = CollectionsAPI.CollectionListParams;
@@ -159,6 +172,7 @@ export namespace Collections {
   export import Document = DocumentsAPI.Document;
   export import PageDocument = DocumentsAPI.PageDocument;
   export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
+  export import DocumentsPage = DocumentsAPI.DocumentsPage;
   export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
   export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
   export import DocumentListParams = DocumentsAPI.DocumentListParams;

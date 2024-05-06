@@ -5,9 +5,13 @@ export {
   PageSession,
   Session,
   SessionDeleteResponse,
+  SessionStreamResponse,
   SessionCreateParams,
   SessionUpdateParams,
   SessionListParams,
+  SessionChatParams,
+  SessionStreamParams,
+  SessionsPage,
   Sessions,
 } from './sessions/index';
 export {
@@ -17,7 +21,16 @@ export {
   CollectionCreateParams,
   CollectionUpdateParams,
   CollectionListParams,
+  CollectionsPage,
   Collections,
 } from './collections/index';
 export { Name } from './name';
-export { PageUser, User, UserCreateParams, UserUpdateParams, UserListParams, Users } from './users';
+export {
+  PageUser,
+  User,
+  UserCreateParams,
+  UserUpdateParams,
+  UserListParams,
+  UsersPage,
+  Users,
+} from './users';
