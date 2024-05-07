@@ -108,6 +108,22 @@ export class Collections extends APIResource {
   ): Core.APIPromise<Collection> {
     return this._client.get(`/apps/${appId}/users/${userId}/collections/name/${name}`, options);
   }
+
+  /**
+   * Query Documents
+   */
+  query(
+    appId: string,
+    userId: string,
+    collectionId: string,
+    query: CollectionQueryParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CollectionQueryResponse> {
+    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}/query`, {
+      query,
+      ...options,
+    });
+  }
 }
 
 export class CollectionsPage extends Page<Collection> {}
@@ -138,6 +154,8 @@ export interface PageCollection {
 
 export type CollectionDeleteResponse = unknown;
 
+export type CollectionQueryResponse = Array<DocumentsAPI.Document>;
+
 export interface CollectionCreateParams {
   name: string;
 
@@ -156,22 +174,30 @@ export interface CollectionListParams extends PageParams {
   reverse?: boolean | null;
 }
 
+export interface CollectionQueryParams {
+  query: string;
+
+  filter?: string | null;
+
+  top_k?: number;
+}
+
 export namespace Collections {
   export import Collection = CollectionsAPI.Collection;
   export import PageCollection = CollectionsAPI.PageCollection;
   export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
+  export import CollectionQueryResponse = CollectionsAPI.CollectionQueryResponse;
   export import CollectionsPage = CollectionsAPI.CollectionsPage;
   export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
   export import CollectionListParams = CollectionsAPI.CollectionListParams;
+  export import CollectionQueryParams = CollectionsAPI.CollectionQueryParams;
   export import Documents = DocumentsAPI.Documents;
   export import Document = DocumentsAPI.Document;
   export import PageDocument = DocumentsAPI.PageDocument;
   export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
-  export import DocumentQueryResponse = DocumentsAPI.DocumentQueryResponse;
   export import DocumentsPage = DocumentsAPI.DocumentsPage;
   export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
   export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
   export import DocumentListParams = DocumentsAPI.DocumentListParams;
-  export import DocumentQueryParams = DocumentsAPI.DocumentQueryParams;
 }
