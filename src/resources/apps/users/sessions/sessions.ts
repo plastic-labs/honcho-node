@@ -6,6 +6,7 @@ import { isRequestOptions } from 'honcho/core';
 import * as SessionsAPI from 'honcho/resources/apps/users/sessions/sessions';
 import * as MessagesAPI from 'honcho/resources/apps/users/sessions/messages';
 import * as MetamessagesAPI from 'honcho/resources/apps/users/sessions/metamessages';
+import { type Uploadable } from 'honcho/core';
 import { Page, type PageParams } from 'honcho/pagination';
 
 export class Sessions extends APIResource {
@@ -148,10 +149,11 @@ export class Sessions extends APIResource {
     sessionId: string,
     query: SessionStreamParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
+  ): Core.APIPromise<string> {
     return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}/chat/stream`, {
       query,
       ...options,
+      headers: { Accept: 'text/event-stream', ...options?.headers },
     });
   }
 }
@@ -190,7 +192,7 @@ export interface Session {
 
 export type SessionDeleteResponse = unknown;
 
-export type SessionStreamResponse = unknown;
+export type SessionStreamResponse = Uploadable;
 
 export interface SessionCreateParams {
   location_id: string;
