@@ -18,13 +18,14 @@ export {
   Collection,
   PageCollection,
   CollectionDeleteResponse,
+  CollectionQueryResponse,
   CollectionCreateParams,
   CollectionUpdateParams,
   CollectionListParams,
+  CollectionQueryParams,
   CollectionsPage,
   Collections,
 } from './collections/index';
-export { Name } from './name';
 export {
   PageUser,
   User,

@@ -83,6 +83,7 @@ Types:
 - <code><a href="./src/resources/apps/users/collections/collections.ts">Collection</a></code>
 - <code><a href="./src/resources/apps/users/collections/collections.ts">PageCollection</a></code>
 - <code><a href="./src/resources/apps/users/collections/collections.ts">CollectionDeleteResponse</a></code>
+- <code><a href="./src/resources/apps/users/collections/collections.ts">CollectionQueryResponse</a></code>
 
 Methods:
 
@@ -92,6 +93,7 @@ Methods:
 - <code title="delete /apps/{app_id}/users/{user_id}/collections/{collection_id}">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">delete</a>(appId, userId, collectionId) -> unknown</code>
 - <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">get</a>(appId, userId, collectionId) -> Collection</code>
 - <code title="get /apps/{app_id}/users/{user_id}/collections/name/{name}">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">getByName</a>(appId, userId, name) -> Collection</code>
+- <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}/query">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">query</a>(appId, userId, collectionId, { ...params }) -> CollectionQueryResponse</code>
 
 #### Documents
 
@@ -100,7 +102,6 @@ Types:
 - <code><a href="./src/resources/apps/users/collections/documents.ts">Document</a></code>
 - <code><a href="./src/resources/apps/users/collections/documents.ts">PageDocument</a></code>
 - <code><a href="./src/resources/apps/users/collections/documents.ts">DocumentDeleteResponse</a></code>
-- <code><a href="./src/resources/apps/users/collections/documents.ts">DocumentQueryResponse</a></code>
 
 Methods:
 
@@ -109,10 +110,3 @@ Methods:
 - <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}/documents">client.apps.users.collections.documents.<a href="./src/resources/apps/users/collections/documents.ts">list</a>(appId, userId, collectionId, { ...params }) -> DocumentsPage</code>
 - <code title="delete /apps/{app_id}/users/{user_id}/collections/{collection_id}/documents/{document_id}">client.apps.users.collections.documents.<a href="./src/resources/apps/users/collections/documents.ts">delete</a>(appId, userId, collectionId, documentId) -> unknown</code>
 - <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}/documents/{document_id}">client.apps.users.collections.documents.<a href="./src/resources/apps/users/collections/documents.ts">get</a>(appId, userId, collectionId, documentId) -> Document</code>
-- <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}/query">client.apps.users.collections.documents.<a href="./src/resources/apps/users/collections/documents.ts">query</a>(appId, userId, collectionId, { ...params }) -> DocumentQueryResponse</code>
-
-### Name
-
-Methods:
-
-- <code title="get /apps/{app_id}/users/name/{name}">client.apps.users.name.<a href="./src/resources/apps/users/name.ts">retrieve</a>(appId, name) -> User</code>

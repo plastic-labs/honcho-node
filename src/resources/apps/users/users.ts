@@ -4,7 +4,6 @@ import * as Core from 'honcho/core';
 import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as UsersAPI from 'honcho/resources/apps/users/users';
-import * as NameAPI from 'honcho/resources/apps/users/name';
 import * as CollectionsAPI from 'honcho/resources/apps/users/collections/collections';
 import * as SessionsAPI from 'honcho/resources/apps/users/sessions/sessions';
 import { Page, type PageParams } from 'honcho/pagination';
@@ -12,7 +11,6 @@ import { Page, type PageParams } from 'honcho/pagination';
 export class Users extends APIResource {
   sessions: SessionsAPI.Sessions = new SessionsAPI.Sessions(this._client);
   collections: CollectionsAPI.Collections = new CollectionsAPI.Collections(this._client);
-  name: NameAPI.Name = new NameAPI.Name(this._client);
 
   /**
    * Create a User
@@ -176,9 +174,10 @@ export namespace Users {
   export import Collection = CollectionsAPI.Collection;
   export import PageCollection = CollectionsAPI.PageCollection;
   export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
+  export import CollectionQueryResponse = CollectionsAPI.CollectionQueryResponse;
   export import CollectionsPage = CollectionsAPI.CollectionsPage;
   export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
   export import CollectionListParams = CollectionsAPI.CollectionListParams;
-  export import Name = NameAPI.Name;
+  export import CollectionQueryParams = CollectionsAPI.CollectionQueryParams;
 }
