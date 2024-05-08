@@ -27,6 +27,7 @@ import Honcho from 'honcho';
 
 const honcho = new Honcho({
   apiKey: process.env['HONCHO_AUTH_TOKEN'], // This is the default and can be omitted
+  environment: 'demo', // defaults to 'local'
 });
 
 async function main() {
@@ -48,6 +49,7 @@ import Honcho from 'honcho';
 
 const honcho = new Honcho({
   apiKey: process.env['HONCHO_AUTH_TOKEN'], // This is the default and can be omitted
+  environment: 'demo', // defaults to 'local'
 });
 
 async function main() {
