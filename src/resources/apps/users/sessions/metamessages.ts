@@ -4,6 +4,7 @@ import * as Core from 'honcho/core';
 import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as MetamessagesAPI from 'honcho/resources/apps/users/sessions/metamessages';
+import { Page, type PageParams } from 'honcho/pagination';
 
 export class Metamessages extends APIResource {
   /**
@@ -67,27 +68,28 @@ export class Metamessages extends APIResource {
     sessionId: string,
     query?: MetamessageListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageMetamessage>;
+  ): Core.PagePromise<MetamessagesPage, Metamessage>;
   list(
     appId: string,
     userId: string,
     sessionId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageMetamessage>;
+  ): Core.PagePromise<MetamessagesPage, Metamessage>;
   list(
     appId: string,
     userId: string,
     sessionId: string,
     query: MetamessageListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageMetamessage> {
+  ): Core.PagePromise<MetamessagesPage, Metamessage> {
     if (isRequestOptions(query)) {
       return this.list(appId, userId, sessionId, {}, query);
     }
-    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages`, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages`,
+      MetamessagesPage,
+      { query, ...options },
+    );
   }
 
   /**
@@ -116,6 +118,8 @@ export class Metamessages extends APIResource {
   }
 }
 
+export class MetamessagesPage extends Page<Metamessage> {}
+
 export interface Metamessage {
   id: string;
 
@@ -133,13 +137,13 @@ export interface Metamessage {
 export interface PageMetamessage {
   items: Array<Metamessage>;
 
-  page: number | null;
+  page: number;
 
-  size: number | null;
+  size: number;
 
-  total: number | null;
+  total: number;
 
-  pages?: number | null;
+  pages?: number;
 }
 
 export interface MetamessageCreateParams {
@@ -160,24 +164,14 @@ export interface MetamessageUpdateParams {
   metamessage_type?: string | null;
 }
 
-export interface MetamessageListParams {
+export interface MetamessageListParams extends PageParams {
   filter?: string | null;
 
   message_id?: string | null;
 
   metamessage_type?: string | null;
 
-  /**
-   * Page number
-   */
-  page?: number;
-
   reverse?: boolean | null;
-
-  /**
-   * Page size
-   */
-  size?: number;
 }
 
 export interface MetamessageGetParams {
@@ -187,6 +181,7 @@ export interface MetamessageGetParams {
 export namespace Metamessages {
   export import Metamessage = MetamessagesAPI.Metamessage;
   export import PageMetamessage = MetamessagesAPI.PageMetamessage;
+  export import MetamessagesPage = MetamessagesAPI.MetamessagesPage;
   export import MetamessageCreateParams = MetamessagesAPI.MetamessageCreateParams;
   export import MetamessageUpdateParams = MetamessagesAPI.MetamessageUpdateParams;
   export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;

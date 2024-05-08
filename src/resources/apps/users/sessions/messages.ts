@@ -4,6 +4,7 @@ import * as Core from 'honcho/core';
 import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as MessagesAPI from 'honcho/resources/apps/users/sessions/messages';
+import { Page, type PageParams } from 'honcho/pagination';
 
 export class Messages extends APIResource {
   /**
@@ -67,27 +68,28 @@ export class Messages extends APIResource {
     sessionId: string,
     query?: MessageListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageMessage>;
+  ): Core.PagePromise<MessagesPage, Message>;
   list(
     appId: string,
     userId: string,
     sessionId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageMessage>;
+  ): Core.PagePromise<MessagesPage, Message>;
   list(
     appId: string,
     userId: string,
     sessionId: string,
     query: MessageListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageMessage> {
+  ): Core.PagePromise<MessagesPage, Message> {
     if (isRequestOptions(query)) {
       return this.list(appId, userId, sessionId, {}, query);
     }
-    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}/messages`, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/apps/${appId}/users/${userId}/sessions/${sessionId}/messages`,
+      MessagesPage,
+      { query, ...options },
+    );
   }
 
   /**
@@ -107,6 +109,8 @@ export class Messages extends APIResource {
   }
 }
 
+export class MessagesPage extends Page<Message> {}
+
 export interface Message {
   id: string;
 
@@ -124,13 +128,13 @@ export interface Message {
 export interface PageMessage {
   items: Array<Message>;
 
-  page: number | null;
+  page: number;
 
-  size: number | null;
+  size: number;
 
-  total: number | null;
+  total: number;
 
-  pages?: number | null;
+  pages?: number;
 }
 
 export interface MessageCreateParams {
@@ -145,25 +149,16 @@ export interface MessageUpdateParams {
   metadata?: unknown | null;
 }
 
-export interface MessageListParams {
+export interface MessageListParams extends PageParams {
   filter?: string | null;
 
-  /**
-   * Page number
-   */
-  page?: number;
-
   reverse?: boolean | null;
-
-  /**
-   * Page size
-   */
-  size?: number;
 }
 
 export namespace Messages {
   export import Message = MessagesAPI.Message;
   export import PageMessage = MessagesAPI.PageMessage;
+  export import MessagesPage = MessagesAPI.MessagesPage;
   export import MessageCreateParams = MessagesAPI.MessageCreateParams;
   export import MessageUpdateParams = MessagesAPI.MessageUpdateParams;
   export import MessageListParams = MessagesAPI.MessageListParams;

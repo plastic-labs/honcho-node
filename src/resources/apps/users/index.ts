@@ -11,6 +11,7 @@ export {
   SessionListParams,
   SessionChatParams,
   SessionStreamParams,
+  SessionsPage,
   Sessions,
 } from './sessions/index';
 export {
@@ -22,6 +23,15 @@ export {
   CollectionUpdateParams,
   CollectionListParams,
   CollectionQueryParams,
+  CollectionsPage,
   Collections,
 } from './collections/index';
-export { PageUser, User, UserCreateParams, UserUpdateParams, UserListParams, Users } from './users';
+export {
+  PageUser,
+  User,
+  UserCreateParams,
+  UserUpdateParams,
+  UserListParams,
+  UsersPage,
+  Users,
+} from './users';
