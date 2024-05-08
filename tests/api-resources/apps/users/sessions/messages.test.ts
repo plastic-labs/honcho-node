@@ -3,7 +3,10 @@
 import Honcho from 'honcho';
 import { Response } from 'node-fetch';
 
-const honcho = new Honcho({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
+const honcho = new Honcho({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource messages', () => {
   test('create: only required params', async () => {

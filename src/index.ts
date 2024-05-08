@@ -9,6 +9,11 @@ import * as API from 'honcho/resources/index';
 
 export interface ClientOptions {
   /**
+   * Defaults to process.env['HONCHO_AUTH_TOKEN'].
+   */
+  apiKey?: string | undefined;
+
+  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['HONCHO_BASE_URL'].
@@ -67,11 +72,14 @@ export interface ClientOptions {
 
 /** API Client for interfacing with the Honcho API. */
 export class Honcho extends Core.APIClient {
+  apiKey: string;
+
   private _options: ClientOptions;
 
   /**
    * API Client for interfacing with the Honcho API.
    *
+   * @param {string | undefined} [opts.apiKey=process.env['HONCHO_AUTH_TOKEN'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['HONCHO_BASE_URL'] ?? https://localhost:8080/test-api] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -80,8 +88,19 @@ export class Honcho extends Core.APIClient {
    * @param {Core.Headers} opts.defaultHeaders - Default headers to include with every request to the API.
    * @param {Core.DefaultQuery} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
-  constructor({ baseURL = Core.readEnv('HONCHO_BASE_URL'), ...opts }: ClientOptions = {}) {
+  constructor({
+    baseURL = Core.readEnv('HONCHO_BASE_URL'),
+    apiKey = Core.readEnv('HONCHO_AUTH_TOKEN'),
+    ...opts
+  }: ClientOptions = {}) {
+    if (apiKey === undefined) {
+      throw new Errors.HonchoError(
+        "The HONCHO_AUTH_TOKEN environment variable is missing or empty; either provide it, or instantiate the Honcho client with an apiKey option, like new Honcho({ apiKey: 'My API Key' }).",
+      );
+    }
+
     const options: ClientOptions = {
+      apiKey,
       ...opts,
       baseURL: baseURL || `https://localhost:8080/test-api`,
     };
@@ -94,6 +113,8 @@ export class Honcho extends Core.APIClient {
       fetch: options.fetch,
     });
     this._options = options;
+
+    this.apiKey = apiKey;
   }
 
   apps: API.Apps = new API.Apps(this);
@@ -107,6 +128,10 @@ export class Honcho extends Core.APIClient {
       ...super.defaultHeaders(opts),
       ...this._options.defaultHeaders,
     };
+  }
+
+  protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
+    return { Authorization: `Bearer ${this.apiKey}` };
   }
 
   static Honcho = this;

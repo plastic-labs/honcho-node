@@ -6,8 +6,6 @@ import { isRequestOptions } from 'honcho/core';
 import * as SessionsAPI from 'honcho/resources/apps/users/sessions/sessions';
 import * as MessagesAPI from 'honcho/resources/apps/users/sessions/messages';
 import * as MetamessagesAPI from 'honcho/resources/apps/users/sessions/metamessages';
-import { type Uploadable } from 'honcho/core';
-import { Page, type PageParams } from 'honcho/pagination';
 
 export class Sessions extends APIResource {
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
@@ -67,21 +65,18 @@ export class Sessions extends APIResource {
     userId: string,
     query?: SessionListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionsPage, Session>;
-  list(appId: string, userId: string, options?: Core.RequestOptions): Core.PagePromise<SessionsPage, Session>;
+  ): Core.APIPromise<PageSession>;
+  list(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<PageSession>;
   list(
     appId: string,
     userId: string,
     query: SessionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionsPage, Session> {
+  ): Core.APIPromise<PageSession> {
     if (isRequestOptions(query)) {
       return this.list(appId, userId, {}, query);
     }
-    return this._client.getAPIList(`/apps/${appId}/users/${userId}/sessions`, SessionsPage, {
-      query,
-      ...options,
-    });
+    return this._client.get(`/apps/${appId}/users/${userId}/sessions`, { query, ...options });
   }
 
   /**
@@ -149,16 +144,13 @@ export class Sessions extends APIResource {
     sessionId: string,
     query: SessionStreamParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<string> {
+  ): Core.APIPromise<unknown> {
     return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}/chat/stream`, {
       query,
       ...options,
-      headers: { Accept: 'text/event-stream', ...options?.headers },
     });
   }
 }
-
-export class SessionsPage extends Page<Session> {}
 
 export interface AgentChat {
   content: string;
@@ -167,13 +159,13 @@ export interface AgentChat {
 export interface PageSession {
   items: Array<Session>;
 
-  page: number;
+  page: number | null;
 
-  size: number;
+  size: number | null;
 
-  total: number;
+  total: number | null;
 
-  pages?: number;
+  pages?: number | null;
 }
 
 export interface Session {
@@ -192,7 +184,7 @@ export interface Session {
 
 export type SessionDeleteResponse = unknown;
 
-export type SessionStreamResponse = Uploadable;
+export type SessionStreamResponse = unknown;
 
 export interface SessionCreateParams {
   location_id: string;
@@ -204,14 +196,24 @@ export interface SessionUpdateParams {
   metadata?: unknown | null;
 }
 
-export interface SessionListParams extends PageParams {
+export interface SessionListParams {
   filter?: string | null;
 
   is_active?: boolean | null;
 
   location_id?: string | null;
 
+  /**
+   * Page number
+   */
+  page?: number;
+
   reverse?: boolean | null;
+
+  /**
+   * Page size
+   */
+  size?: number;
 }
 
 export interface SessionChatParams {
@@ -228,7 +230,6 @@ export namespace Sessions {
   export import Session = SessionsAPI.Session;
   export import SessionDeleteResponse = SessionsAPI.SessionDeleteResponse;
   export import SessionStreamResponse = SessionsAPI.SessionStreamResponse;
-  export import SessionsPage = SessionsAPI.SessionsPage;
   export import SessionCreateParams = SessionsAPI.SessionCreateParams;
   export import SessionUpdateParams = SessionsAPI.SessionUpdateParams;
   export import SessionListParams = SessionsAPI.SessionListParams;
@@ -237,14 +238,12 @@ export namespace Sessions {
   export import Messages = MessagesAPI.Messages;
   export import Message = MessagesAPI.Message;
   export import PageMessage = MessagesAPI.PageMessage;
-  export import MessagesPage = MessagesAPI.MessagesPage;
   export import MessageCreateParams = MessagesAPI.MessageCreateParams;
   export import MessageUpdateParams = MessagesAPI.MessageUpdateParams;
   export import MessageListParams = MessagesAPI.MessageListParams;
   export import Metamessages = MetamessagesAPI.Metamessages;
   export import Metamessage = MetamessagesAPI.Metamessage;
   export import PageMetamessage = MetamessagesAPI.PageMetamessage;
-  export import MetamessagesPage = MetamessagesAPI.MetamessagesPage;
   export import MetamessageCreateParams = MetamessagesAPI.MetamessageCreateParams;
   export import MetamessageUpdateParams = MetamessagesAPI.MetamessageUpdateParams;
   export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;

@@ -25,7 +25,9 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Honcho from 'honcho';
 
-const honcho = new Honcho();
+const honcho = new Honcho({
+  apiKey: process.env['HONCHO_AUTH_TOKEN'], // This is the default and can be omitted
+});
 
 async function main() {
   const app = await honcho.apps.create({ name: 'string' });
@@ -44,7 +46,9 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Honcho from 'honcho';
 
-const honcho = new Honcho();
+const honcho = new Honcho({
+  apiKey: process.env['HONCHO_AUTH_TOKEN'], // This is the default and can be omitted
+});
 
 async function main() {
   const params: Honcho.AppCreateParams = { name: 'string' };
@@ -133,37 +137,6 @@ await honcho.apps.create({ name: 'string' }, {
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
-
-## Auto-pagination
-
-List methods in the Honcho API are paginated.
-You can use `for await … of` syntax to iterate through items across all pages:
-
-```ts
-async function fetchAllAppsUsers(params) {
-  const allAppsUsers = [];
-  // Automatically fetches more pages as needed.
-  for await (const user of honcho.apps.users.list('REPLACE_ME')) {
-    allAppsUsers.push(user);
-  }
-  return allAppsUsers;
-}
-```
-
-Alternatively, you can make request a single page at a time:
-
-```ts
-let page = await honcho.apps.users.list('REPLACE_ME');
-for (const user of page.items) {
-  console.log(user);
-}
-
-// Convenience methods are provided for manually paginating:
-while (page.hasNextPage()) {
-  page = page.getNextPage();
-  // ...
-}
-```
 
 ## Advanced Usage
 

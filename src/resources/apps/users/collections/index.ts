@@ -9,7 +9,6 @@ export {
   CollectionUpdateParams,
   CollectionListParams,
   CollectionQueryParams,
-  CollectionsPage,
   Collections,
 } from './collections';
 export {
@@ -19,6 +18,5 @@ export {
   DocumentCreateParams,
   DocumentUpdateParams,
   DocumentListParams,
-  DocumentsPage,
   Documents,
 } from './documents';
