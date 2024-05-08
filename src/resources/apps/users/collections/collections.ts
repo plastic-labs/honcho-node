@@ -5,7 +5,6 @@ import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as CollectionsAPI from 'honcho/resources/apps/users/collections/collections';
 import * as DocumentsAPI from 'honcho/resources/apps/users/collections/documents';
-import { Page, type PageParams } from 'honcho/pagination';
 
 export class Collections extends APIResource {
   documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
@@ -52,25 +51,18 @@ export class Collections extends APIResource {
     userId: string,
     query?: CollectionListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<CollectionsPage, Collection>;
-  list(
-    appId: string,
-    userId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CollectionsPage, Collection>;
+  ): Core.APIPromise<PageCollection>;
+  list(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<PageCollection>;
   list(
     appId: string,
     userId: string,
     query: CollectionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<CollectionsPage, Collection> {
+  ): Core.APIPromise<PageCollection> {
     if (isRequestOptions(query)) {
       return this.list(appId, userId, {}, query);
     }
-    return this._client.getAPIList(`/apps/${appId}/users/${userId}/collections`, CollectionsPage, {
-      query,
-      ...options,
-    });
+    return this._client.get(`/apps/${appId}/users/${userId}/collections`, { query, ...options });
   }
 
   /**
@@ -126,8 +118,6 @@ export class Collections extends APIResource {
   }
 }
 
-export class CollectionsPage extends Page<Collection> {}
-
 export interface Collection {
   id: string;
 
@@ -143,13 +133,13 @@ export interface Collection {
 export interface PageCollection {
   items: Array<Collection>;
 
-  page: number;
+  page: number | null;
 
-  size: number;
+  size: number | null;
 
-  total: number;
+  total: number | null;
 
-  pages?: number;
+  pages?: number | null;
 }
 
 export type CollectionDeleteResponse = unknown;
@@ -168,10 +158,20 @@ export interface CollectionUpdateParams {
   metadata?: unknown | null;
 }
 
-export interface CollectionListParams extends PageParams {
+export interface CollectionListParams {
   filter?: string | null;
 
+  /**
+   * Page number
+   */
+  page?: number;
+
   reverse?: boolean | null;
+
+  /**
+   * Page size
+   */
+  size?: number;
 }
 
 export interface CollectionQueryParams {
@@ -187,7 +187,6 @@ export namespace Collections {
   export import PageCollection = CollectionsAPI.PageCollection;
   export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
   export import CollectionQueryResponse = CollectionsAPI.CollectionQueryResponse;
-  export import CollectionsPage = CollectionsAPI.CollectionsPage;
   export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
   export import CollectionListParams = CollectionsAPI.CollectionListParams;
@@ -196,7 +195,6 @@ export namespace Collections {
   export import Document = DocumentsAPI.Document;
   export import PageDocument = DocumentsAPI.PageDocument;
   export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
-  export import DocumentsPage = DocumentsAPI.DocumentsPage;
   export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
   export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
   export import DocumentListParams = DocumentsAPI.DocumentListParams;

@@ -94,7 +94,6 @@ export namespace Apps {
   export import Users = UsersAPI.Users;
   export import PageUser = UsersAPI.PageUser;
   export import User = UsersAPI.User;
-  export import UsersPage = UsersAPI.UsersPage;
   export import UserCreateParams = UsersAPI.UserCreateParams;
   export import UserUpdateParams = UsersAPI.UserUpdateParams;
   export import UserListParams = UsersAPI.UserListParams;
