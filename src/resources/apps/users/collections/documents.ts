@@ -4,6 +4,7 @@ import * as Core from 'honcho/core';
 import { APIResource } from 'honcho/resource';
 import { isRequestOptions } from 'honcho/core';
 import * as DocumentsAPI from 'honcho/resources/apps/users/collections/documents';
+import { Page, type PageParams } from 'honcho/pagination';
 
 export class Documents extends APIResource {
   /**
@@ -48,27 +49,28 @@ export class Documents extends APIResource {
     collectionId: string,
     query?: DocumentListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageDocument>;
+  ): Core.PagePromise<DocumentsPage, Document>;
   list(
     appId: string,
     userId: string,
     collectionId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageDocument>;
+  ): Core.PagePromise<DocumentsPage, Document>;
   list(
     appId: string,
     userId: string,
     collectionId: string,
     query: DocumentListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageDocument> {
+  ): Core.PagePromise<DocumentsPage, Document> {
     if (isRequestOptions(query)) {
       return this.list(appId, userId, collectionId, {}, query);
     }
-    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}/documents`, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/apps/${appId}/users/${userId}/collections/${collectionId}/documents`,
+      DocumentsPage,
+      { query, ...options },
+    );
   }
 
   /**
@@ -104,6 +106,8 @@ export class Documents extends APIResource {
   }
 }
 
+export class DocumentsPage extends Page<Document> {}
+
 export interface Document {
   id: string;
 
@@ -119,13 +123,13 @@ export interface Document {
 export interface PageDocument {
   items: Array<Document>;
 
-  page: number | null;
+  page: number;
 
-  size: number | null;
+  size: number;
 
-  total: number | null;
+  total: number;
 
-  pages?: number | null;
+  pages?: number;
 }
 
 export type DocumentDeleteResponse = unknown;
@@ -142,26 +146,17 @@ export interface DocumentUpdateParams {
   metadata?: unknown | null;
 }
 
-export interface DocumentListParams {
+export interface DocumentListParams extends PageParams {
   filter?: string | null;
 
-  /**
-   * Page number
-   */
-  page?: number;
-
   reverse?: boolean | null;
-
-  /**
-   * Page size
-   */
-  size?: number;
 }
 
 export namespace Documents {
   export import Document = DocumentsAPI.Document;
   export import PageDocument = DocumentsAPI.PageDocument;
   export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
+  export import DocumentsPage = DocumentsAPI.DocumentsPage;
   export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
   export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
   export import DocumentListParams = DocumentsAPI.DocumentListParams;
