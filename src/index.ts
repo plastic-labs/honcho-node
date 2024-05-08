@@ -7,11 +7,26 @@ import * as Uploads from './uploads';
 import * as Pagination from 'honcho/pagination';
 import * as API from 'honcho/resources/index';
 
+const environments = {
+  local: 'http://localhost:8000',
+  demo: 'https://demo.honcho.dev',
+};
+type Environment = keyof typeof environments;
+
 export interface ClientOptions {
   /**
    * Defaults to process.env['HONCHO_AUTH_TOKEN'].
    */
   apiKey?: string | undefined;
+
+  /**
+   * Specifies the environment to use for the API.
+   *
+   * Each environment maps to a different base URL:
+   * - `local` corresponds to `http://localhost:8000`
+   * - `demo` corresponds to `https://demo.honcho.dev`
+   */
+  environment?: Environment;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -80,7 +95,8 @@ export class Honcho extends Core.APIClient {
    * API Client for interfacing with the Honcho API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['HONCHO_AUTH_TOKEN'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['HONCHO_BASE_URL'] ?? https://localhost:8080/test-api] - Override the default base URL for the API.
+   * @param {Environment} [opts.environment=local] - Specifies the environment URL to use for the API.
+   * @param {string} [opts.baseURL=process.env['HONCHO_BASE_URL'] ?? http://localhost:8000] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -102,11 +118,18 @@ export class Honcho extends Core.APIClient {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://localhost:8080/test-api`,
+      baseURL,
+      environment: opts.environment ?? 'local',
     };
 
+    if (baseURL && opts.environment) {
+      throw new Errors.HonchoError(
+        'Ambiguous URL; The `baseURL` option (or HONCHO_BASE_URL env var) and the `environment` option are given. If you want to use the environment you must pass baseURL: null',
+      );
+    }
+
     super({
-      baseURL: options.baseURL!,
+      baseURL: options.baseURL || environments[options.environment || 'local'],
       timeout: options.timeout ?? 60000 /* 1 minute */,
       httpAgent: options.httpAgent,
       maxRetries: options.maxRetries,
