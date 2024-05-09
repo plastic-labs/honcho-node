@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'honcho/core';
-import { APIResource } from 'honcho/resource';
-import { isRequestOptions } from 'honcho/core';
-import * as SessionsAPI from 'honcho/resources/apps/users/sessions/sessions';
-import * as MessagesAPI from 'honcho/resources/apps/users/sessions/messages';
-import * as MetamessagesAPI from 'honcho/resources/apps/users/sessions/metamessages';
-import { Page, type PageParams } from 'honcho/pagination';
+import * as Core from 'honcho-ai/core';
+import { APIResource } from 'honcho-ai/resource';
+import { isRequestOptions } from 'honcho-ai/core';
+import * as SessionsAPI from 'honcho-ai/resources/apps/users/sessions/sessions';
+import * as MessagesAPI from 'honcho-ai/resources/apps/users/sessions/messages';
+import * as MetamessagesAPI from 'honcho-ai/resources/apps/users/sessions/metamessages';
+import { Page, type PageParams } from 'honcho-ai/pagination';
 
 export class Sessions extends APIResource {
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);

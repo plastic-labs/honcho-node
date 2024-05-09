@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'honcho/core';
-import { APIResource } from 'honcho/resource';
-import { isRequestOptions } from 'honcho/core';
-import * as CollectionsAPI from 'honcho/resources/apps/users/collections/collections';
-import * as DocumentsAPI from 'honcho/resources/apps/users/collections/documents';
-import { Page, type PageParams } from 'honcho/pagination';
+import * as Core from 'honcho-ai/core';
+import { APIResource } from 'honcho-ai/resource';
+import { isRequestOptions } from 'honcho-ai/core';
+import * as CollectionsAPI from 'honcho-ai/resources/apps/users/collections/collections';
+import * as DocumentsAPI from 'honcho-ai/resources/apps/users/collections/documents';
+import { Page, type PageParams } from 'honcho-ai/pagination';
 
 export class Collections extends APIResource {
   documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);

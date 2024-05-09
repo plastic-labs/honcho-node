@@ -1,4 +1,4 @@
-import { APIClient } from 'honcho/core';
+import { APIClient } from 'honcho-ai/core';
 
 const { stringifyQuery } = APIClient.prototype as any;
 
