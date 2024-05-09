@@ -6,9 +6,9 @@
     "rootDir": "./deno",
     "lib": ["es2020", "DOM"],
     "paths": {
-      "honcho/_shims/auto/*": ["deno/_shims/auto/*-deno"],
-      "honcho/*": ["deno/*"],
-      "honcho": ["deno/index.ts"],
+      "honcho-ai/_shims/auto/*": ["deno/_shims/auto/*-deno"],
+      "honcho-ai/*": ["deno/*"],
+      "honcho-ai": ["deno/index.ts"],
     },
     "noEmit": true,
     "declaration": true,

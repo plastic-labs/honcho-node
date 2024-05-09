@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'honcho/core';
-import { APIResource } from 'honcho/resource';
-import * as AppsAPI from 'honcho/resources/apps/apps';
-import * as UsersAPI from 'honcho/resources/apps/users/users';
+import * as Core from 'honcho-ai/core';
+import { APIResource } from 'honcho-ai/resource';
+import * as AppsAPI from 'honcho-ai/resources/apps/apps';
+import * as UsersAPI from 'honcho-ai/resources/apps/users/users';
 
 export class Apps extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
