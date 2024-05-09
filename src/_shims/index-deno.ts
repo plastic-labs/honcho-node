@@ -79,7 +79,7 @@ export function getDefaultAgent(url: string) {
 }
 export function fileFromPath() {
   throw new Error(
-    'The `fileFromPath` function is only supported in Node. See the README for more details: https://www.github.com/stainless-sdks/plastic-labs/honcho-node#file-uploads',
+    'The `fileFromPath` function is only supported in Node. See the README for more details: https://www.github.com/stainless-sdks/honcho-node#file-uploads',
   );
 }
 
