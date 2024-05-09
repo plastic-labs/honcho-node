@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Honcho from 'honcho';
+import Honcho from 'honcho-ai';
 import { Response } from 'node-fetch';
 
 const honcho = new Honcho({
