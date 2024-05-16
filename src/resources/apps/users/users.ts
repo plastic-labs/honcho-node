@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'honcho-ai/core';
-import { APIResource } from 'honcho-ai/resource';
-import { isRequestOptions } from 'honcho-ai/core';
-import * as UsersAPI from 'honcho-ai/resources/apps/users/users';
-import * as CollectionsAPI from 'honcho-ai/resources/apps/users/collections/collections';
-import * as SessionsAPI from 'honcho-ai/resources/apps/users/sessions/sessions';
-import { Page, type PageParams } from 'honcho-ai/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as UsersAPI from './users';
+import * as CollectionsAPI from './collections/collections';
+import * as SessionsAPI from './sessions/sessions';
+import { Page, type PageParams } from '../../../pagination';
 
 export class Users extends APIResource {
   sessions: SessionsAPI.Sessions = new SessionsAPI.Sessions(this._client);
