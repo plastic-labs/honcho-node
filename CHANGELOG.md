@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.0.2 (2024-05-16)
+
+Full Changelog: [v0.0.2-alpha.1...v0.0.2](https://github.com/plastic-labs/honcho-node/compare/v0.0.2-alpha.1...v0.0.2)
+
+### Features
+
+* **api:** update via SDK Studio ([#4](https://github.com/plastic-labs/honcho-node/issues/4)) ([b9223aa](https://github.com/plastic-labs/honcho-node/commit/b9223aad8c83294ee36e3f4ef94bb7e2f28195a6))
+* **api:** update via SDK Studio ([#6](https://github.com/plastic-labs/honcho-node/issues/6)) ([ed38967](https://github.com/plastic-labs/honcho-node/commit/ed3896777309256f7387c2e19471a6b81567fd9a))
+
 ## 0.0.2-alpha.1 (2024-05-09)
 
 Full Changelog: [v0.0.1-alpha.0...v0.0.2-alpha.1](https://github.com/plastic-labs/honcho-node/compare/v0.0.1-alpha.0...v0.0.2-alpha.1)
