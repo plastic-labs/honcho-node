@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'honcho-ai/core';
-import { APIResource } from 'honcho-ai/resource';
-import { isRequestOptions } from 'honcho-ai/core';
-import * as MessagesAPI from 'honcho-ai/resources/apps/users/sessions/messages';
-import { Page, type PageParams } from 'honcho-ai/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as MessagesAPI from './messages';
+import { Page, type PageParams } from '../../../../pagination';
 
 export class Messages extends APIResource {
   /**
