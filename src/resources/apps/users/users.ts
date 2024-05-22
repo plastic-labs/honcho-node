@@ -128,7 +128,7 @@ export interface User {
 
   created_at: string;
 
-  metadata: unknown;
+  metadata: Record<string, unknown>;
 
   name: string;
 }
@@ -136,11 +136,11 @@ export interface User {
 export interface UserCreateParams {
   name: string;
 
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface UserUpdateParams {
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 
   name?: string | null;
 }
