@@ -185,14 +185,14 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['HONCHO_AUTH_TOKEN'] = 'My API Key';
+    process.env['HONCHO_API_KEY'] = 'My API Key';
     const client = new Honcho();
     expect(client.apiKey).toBe('My API Key');
   });
 
   test('with overriden environment variable arguments', () => {
     // set options via env var
-    process.env['HONCHO_AUTH_TOKEN'] = 'another My API Key';
+    process.env['HONCHO_API_KEY'] = 'another My API Key';
     const client = new Honcho({ apiKey: 'My API Key' });
     expect(client.apiKey).toBe('My API Key');
   });

@@ -23,7 +23,7 @@ The full API of this library can be found in [api.md](api.md).
 import Honcho from 'honcho-ai';
 
 const honcho = new Honcho({
-  apiKey: process.env['HONCHO_AUTH_TOKEN'], // This is the default and can be omitted
+  apiKey: process.env['HONCHO_API_KEY'], // This is the default and can be omitted
   environment: 'demo', // defaults to 'local'
 });
 
@@ -45,7 +45,7 @@ This library includes TypeScript definitions for all request params and response
 import Honcho from 'honcho-ai';
 
 const honcho = new Honcho({
-  apiKey: process.env['HONCHO_AUTH_TOKEN'], // This is the default and can be omitted
+  apiKey: process.env['HONCHO_API_KEY'], // This is the default and can be omitted
   environment: 'demo', // defaults to 'local'
 });
 
