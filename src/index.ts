@@ -15,7 +15,7 @@ type Environment = keyof typeof environments;
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['HONCHO_AUTH_TOKEN'].
+   * Defaults to process.env['HONCHO_API_KEY'].
    */
   apiKey?: string | null | undefined;
 
@@ -94,7 +94,7 @@ export class Honcho extends Core.APIClient {
   /**
    * API Client for interfacing with the Honcho API.
    *
-   * @param {string | null | undefined} [opts.apiKey=process.env['HONCHO_AUTH_TOKEN'] ?? null]
+   * @param {string | null | undefined} [opts.apiKey=process.env['HONCHO_API_KEY'] ?? null]
    * @param {Environment} [opts.environment=local] - Specifies the environment URL to use for the API.
    * @param {string} [opts.baseURL=process.env['HONCHO_BASE_URL'] ?? http://localhost:8000] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -106,7 +106,7 @@ export class Honcho extends Core.APIClient {
    */
   constructor({
     baseURL = Core.readEnv('HONCHO_BASE_URL'),
-    apiKey = Core.readEnv('HONCHO_AUTH_TOKEN') ?? null,
+    apiKey = Core.readEnv('HONCHO_API_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {

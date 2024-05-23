@@ -129,7 +129,7 @@ export interface Metamessage {
 
   message_id: string;
 
-  metadata: unknown;
+  metadata: Record<string, unknown>;
 
   metamessage_type: string;
 }
@@ -153,13 +153,13 @@ export interface MetamessageCreateParams {
 
   metamessage_type: string;
 
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface MetamessageUpdateParams {
   message_id: string;
 
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 
   metamessage_type?: string | null;
 }

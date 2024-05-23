@@ -70,7 +70,7 @@ export interface App {
 
   created_at: string;
 
-  metadata: unknown;
+  metadata: Record<string, unknown>;
 
   name: string;
 }
@@ -78,11 +78,11 @@ export interface App {
 export interface AppCreateParams {
   name: string;
 
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface AppUpdateParams {
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 
   name?: string | null;
 }

@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.0.3 (2024-05-23)
+
+Full Changelog: [v0.0.2...v0.0.3](https://github.com/plastic-labs/honcho-node/compare/v0.0.2...v0.0.3)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#10](https://github.com/plastic-labs/honcho-node/issues/10)) ([b523d40](https://github.com/plastic-labs/honcho-node/commit/b523d4033e9aa50a20ba2beb3de697a6caa91ad3))
+* **api:** update via SDK Studio ([#11](https://github.com/plastic-labs/honcho-node/issues/11)) ([5ac8ff6](https://github.com/plastic-labs/honcho-node/commit/5ac8ff630c010182ab7a69e24f57ccd0b345b270))
+* **api:** update via SDK Studio ([#9](https://github.com/plastic-labs/honcho-node/issues/9)) ([3f05b53](https://github.com/plastic-labs/honcho-node/commit/3f05b53412e8fee6e9ac993369c14dcb6a59146d))
+
+
+### Chores
+
+* **internal:** version bump ([#7](https://github.com/plastic-labs/honcho-node/issues/7)) ([917efc4](https://github.com/plastic-labs/honcho-node/commit/917efc407618b3fda49db2b0e429d461b1cca964))
+
 ## 0.0.2 (2024-05-16)
 
 Full Changelog: [v0.0.2-alpha.1...v0.0.2](https://github.com/plastic-labs/honcho-node/compare/v0.0.2-alpha.1...v0.0.2)

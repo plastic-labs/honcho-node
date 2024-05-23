@@ -21,7 +21,7 @@ describe('resource apps', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await honcho.apps.create({ name: 'string', metadata: {} });
+    const response = await honcho.apps.create({ name: 'string', metadata: { foo: 'bar' } });
   });
 
   test('update', async () => {

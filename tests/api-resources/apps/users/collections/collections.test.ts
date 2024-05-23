@@ -28,7 +28,7 @@ describe('resource collections', () => {
     const response = await honcho.apps.users.collections.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { name: 'string', metadata: {} },
+      { name: 'string', metadata: { foo: 'bar' } },
     );
   });
 
@@ -53,7 +53,7 @@ describe('resource collections', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { name: 'string', metadata: {} },
+      { name: 'string', metadata: { foo: 'bar' } },
     );
   });
 
