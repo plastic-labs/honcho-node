@@ -34,7 +34,7 @@ describe('resource metamessages', () => {
         content: 'string',
         message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         metamessage_type: 'string',
-        metadata: {},
+        metadata: { foo: 'bar' },
       },
     );
   });
@@ -62,7 +62,11 @@ describe('resource metamessages', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', metadata: {}, metamessage_type: 'string' },
+      {
+        message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        metadata: { foo: 'bar' },
+        metamessage_type: 'string',
+      },
     );
   });
 

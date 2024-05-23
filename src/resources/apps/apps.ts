@@ -82,7 +82,7 @@ export interface AppCreateParams {
 }
 
 export interface AppUpdateParams {
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 
   name?: string | null;
 }

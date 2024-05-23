@@ -28,7 +28,7 @@ describe('resource sessions', () => {
     const response = await honcho.apps.users.sessions.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { location_id: 'string', metadata: {} },
+      { location_id: 'string', metadata: { foo: 'bar' } },
     );
   });
 

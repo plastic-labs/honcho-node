@@ -133,7 +133,7 @@ export interface Collection {
 
   created_at: string;
 
-  metadata: unknown;
+  metadata: Record<string, unknown>;
 
   name: string;
 
@@ -159,13 +159,13 @@ export type CollectionQueryResponse = Array<DocumentsAPI.Document>;
 export interface CollectionCreateParams {
   name: string;
 
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface CollectionUpdateParams {
   name: string;
 
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface CollectionListParams extends PageParams {

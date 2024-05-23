@@ -120,7 +120,7 @@ export interface Message {
 
   is_user: boolean;
 
-  metadata: unknown;
+  metadata: Record<string, unknown>;
 
   session_id: string;
 }
@@ -142,11 +142,11 @@ export interface MessageCreateParams {
 
   is_user: boolean;
 
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface MessageUpdateParams {
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface MessageListParams extends PageParams {
