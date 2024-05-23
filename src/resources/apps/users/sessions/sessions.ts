@@ -183,7 +183,7 @@ export interface Session {
 
   location_id: string;
 
-  metadata: unknown;
+  metadata: Record<string, unknown>;
 
   user_id: string;
 }
@@ -195,11 +195,11 @@ export type SessionStreamResponse = unknown;
 export interface SessionCreateParams {
   location_id: string;
 
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface SessionUpdateParams {
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface SessionListParams extends PageParams {
