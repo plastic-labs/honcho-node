@@ -117,7 +117,7 @@ export interface Document {
 
   created_at: string;
 
-  metadata: unknown;
+  metadata: Record<string, unknown>;
 }
 
 export interface PageDocument {
@@ -137,13 +137,13 @@ export type DocumentDeleteResponse = unknown;
 export interface DocumentCreateParams {
   content: string;
 
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface DocumentUpdateParams {
   content?: string | null;
 
-  metadata?: unknown | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface DocumentListParams extends PageParams {
