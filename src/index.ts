@@ -171,6 +171,7 @@ export class Honcho extends Core.APIClient {
   }
 
   static Honcho = this;
+  static DEFAULT_TIMEOUT = 60000; // 1 minute
 
   static HonchoError = Errors.HonchoError;
   static APIError = Errors.APIError;
