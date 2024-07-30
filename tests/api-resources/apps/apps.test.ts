@@ -10,7 +10,7 @@ const honcho = new Honcho({
 
 describe('resource apps', () => {
   test('create: only required params', async () => {
-    const responsePromise = honcho.apps.create({ name: 'string' });
+    const responsePromise = honcho.apps.create({ name: 'name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,7 +21,7 @@ describe('resource apps', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await honcho.apps.create({ name: 'string', metadata: { foo: 'bar' } });
+    const response = await honcho.apps.create({ name: 'name', metadata: { foo: 'bar' } });
   });
 
   test('update', async () => {
@@ -54,7 +54,7 @@ describe('resource apps', () => {
   });
 
   test('getByName', async () => {
-    const responsePromise = honcho.apps.getByName('string');
+    const responsePromise = honcho.apps.getByName('name');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,13 +66,13 @@ describe('resource apps', () => {
 
   test('getByName: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(honcho.apps.getByName('string', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(honcho.apps.getByName('name', { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Honcho.NotFoundError,
     );
   });
 
   test('getOrCreate', async () => {
-    const responsePromise = honcho.apps.getOrCreate('string');
+    const responsePromise = honcho.apps.getOrCreate('name');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,7 +84,7 @@ describe('resource apps', () => {
 
   test('getOrCreate: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(honcho.apps.getOrCreate('string', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(honcho.apps.getOrCreate('name', { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Honcho.NotFoundError,
     );
   });

@@ -13,7 +13,7 @@ describe('resource sessions', () => {
     const responsePromise = honcho.apps.users.sessions.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { location_id: 'string' },
+      { location_id: 'location_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,7 +28,7 @@ describe('resource sessions', () => {
     const response = await honcho.apps.users.sessions.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { location_id: 'string', metadata: { foo: 'bar' } },
+      { location_id: 'location_id', metadata: { foo: 'bar' } },
     );
   });
 
@@ -79,7 +79,7 @@ describe('resource sessions', () => {
       honcho.apps.users.sessions.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { filter: 'string', is_active: true, location_id: 'string', page: 1, reverse: true, size: 1 },
+        { filter: 'filter', is_active: true, location_id: 'location_id', page: 1, reverse: true, size: 1 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Honcho.NotFoundError);
@@ -117,7 +117,7 @@ describe('resource sessions', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { query: 'string' },
+      { query: 'query' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -133,7 +133,7 @@ describe('resource sessions', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { query: 'string' },
+      { query: 'query' },
     );
   });
 
@@ -169,7 +169,7 @@ describe('resource sessions', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { query: 'string' },
+      { query: 'query' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -185,7 +185,7 @@ describe('resource sessions', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { query: 'string' },
+      { query: 'query' },
     );
   });
 });

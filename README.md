@@ -1,10 +1,10 @@
 # Honcho Node API Library
 
-[![NPM version](https://img.shields.io/npm/v/honcho-ai.svg)](https://npmjs.org/package/honcho-ai)
+[![NPM version](https://img.shields.io/npm/v/honcho-ai.svg)](https://npmjs.org/package/honcho-ai) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/honcho-ai)
 
 This library provides convenient access to the Honcho REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found [on docs.honcho.dev](https://docs.honcho.dev). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.honcho.dev](https://docs.honcho.dev). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainlessapi.com/).
 
@@ -22,13 +22,13 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Honcho from 'honcho-ai';
 
-const honcho = new Honcho({
+const client = new Honcho({
   apiKey: process.env['HONCHO_API_KEY'], // This is the default and can be omitted
   environment: 'demo', // defaults to 'local'
 });
 
 async function main() {
-  const app = await honcho.apps.create({ name: 'string' });
+  const app = await honcho.apps.create({ name: 'name' });
 
   console.log(app.id);
 }
@@ -44,13 +44,13 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Honcho from 'honcho-ai';
 
-const honcho = new Honcho({
+const client = new Honcho({
   apiKey: process.env['HONCHO_API_KEY'], // This is the default and can be omitted
   environment: 'demo', // defaults to 'local'
 });
 
 async function main() {
-  const params: Honcho.AppCreateParams = { name: 'string' };
+  const params: Honcho.AppCreateParams = { name: 'name' };
   const app: Honcho.App = await honcho.apps.create(params);
 }
 
@@ -68,7 +68,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const app = await honcho.apps.create({ name: 'string' }).catch(async (err) => {
+  const app = await honcho.apps.create({ name: 'name' }).catch(async (err) => {
     if (err instanceof Honcho.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -106,12 +106,12 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const honcho = new Honcho({
+const client = new Honcho({
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await honcho.apps.create({ name: 'string' }, {
+await honcho.apps.create({ name: 'name' }, {
   maxRetries: 5,
 });
 ```
@@ -123,12 +123,12 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const honcho = new Honcho({
+const client = new Honcho({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await honcho.apps.create({ name: 'string' }, {
+await honcho.apps.create({ name: 'name' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -178,13 +178,13 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 
 <!-- prettier-ignore -->
 ```ts
-const honcho = new Honcho();
+const client = new Honcho();
 
-const response = await honcho.apps.create({ name: 'string' }).asResponse();
+const response = await honcho.apps.create({ name: 'name' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: app, response: raw } = await honcho.apps.create({ name: 'string' }).withResponse();
+const { data: app, response: raw } = await honcho.apps.create({ name: 'name' }).withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(app.id);
 ```
@@ -285,13 +285,13 @@ import http from 'http';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
 // Configure the default for all requests:
-const honcho = new Honcho({
+const client = new Honcho({
   httpAgent: new HttpsProxyAgent(process.env.PROXY_URL),
 });
 
 // Override per-request:
 await honcho.apps.create(
-  { name: 'string' },
+  { name: 'name' },
   {
     httpAgent: new http.Agent({ keepAlive: false }),
   },
@@ -315,14 +315,6 @@ We are keen for your feedback; please open an [issue](https://www.github.com/pla
 TypeScript >= 4.5 is supported.
 
 The following runtimes are supported:
-
-- Node.js 18 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
-- Deno v1.28.0 or higher, using `import Honcho from "npm:honcho-ai"`.
-- Bun 1.0 or later.
-- Cloudflare Workers.
-- Vercel Edge Runtime.
-- Jest 28 or greater with the `"node"` environment (`"jsdom"` is not supported at this time).
-- Nitro v2.6 or greater.
 
 Note that React Native is not supported at this time.
 
