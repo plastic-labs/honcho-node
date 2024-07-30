@@ -55,12 +55,12 @@ cd honcho-node
 # With yarn
 yarn link
 cd ../my-package
-yarn link honcho-ai
+yarn link honcho
 
 # With pnpm
 pnpm link --global
 cd ../my-package
-pnpm link -—global honcho-ai
+pnpm link -—global honcho
 ```
 
 ## Running tests

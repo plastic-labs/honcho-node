@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Honcho from 'honcho-ai';
-import { APIUserAbortError } from 'honcho-ai';
-import { Headers } from 'honcho-ai/core';
+import Honcho from 'honcho';
+import { APIUserAbortError } from 'honcho';
+import { Headers } from 'honcho/core';
 import defaultFetch, { Response, type RequestInit, type RequestInfo } from 'node-fetch';
 
 describe('instantiate client', () => {
@@ -151,26 +151,26 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['HONCHO_BASE_URL'] = ''; // empty
       const client = new Honcho({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('http://localhost:8000');
+      expect(client.baseURL).toEqual('https://demo.honcho.dev');
     });
 
     test('blank env variable', () => {
       process.env['HONCHO_BASE_URL'] = '  '; // blank
       const client = new Honcho({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('http://localhost:8000');
+      expect(client.baseURL).toEqual('https://demo.honcho.dev');
     });
 
     test('env variable with environment', () => {
       process.env['HONCHO_BASE_URL'] = 'https://example.com/from_env';
 
       expect(
-        () => new Honcho({ apiKey: 'My API Key', environment: 'local' }),
+        () => new Honcho({ apiKey: 'My API Key', environment: 'demo' }),
       ).toThrowErrorMatchingInlineSnapshot(
         `"Ambiguous URL; The \`baseURL\` option (or HONCHO_BASE_URL env var) and the \`environment\` option are given. If you want to use the environment you must pass baseURL: null"`,
       );
 
-      const client = new Honcho({ apiKey: 'My API Key', baseURL: null, environment: 'local' });
-      expect(client.baseURL).toEqual('http://localhost:8000');
+      const client = new Honcho({ apiKey: 'My API Key', baseURL: null, environment: 'demo' });
+      expect(client.baseURL).toEqual('https://demo.honcho.dev');
     });
   });
 
