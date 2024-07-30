@@ -28,7 +28,7 @@ const client = new Honcho({
 });
 
 async function main() {
-  const app = await honcho.apps.create({ name: 'name' });
+  const app = await client.apps.create({ name: 'name' });
 
   console.log(app.id);
 }
@@ -51,7 +51,7 @@ const client = new Honcho({
 
 async function main() {
   const params: Honcho.AppCreateParams = { name: 'name' };
-  const app: Honcho.App = await honcho.apps.create(params);
+  const app: Honcho.App = await client.apps.create(params);
 }
 
 main();
@@ -68,7 +68,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const app = await honcho.apps.create({ name: 'name' }).catch(async (err) => {
+  const app = await client.apps.create({ name: 'name' }).catch(async (err) => {
     if (err instanceof Honcho.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -111,7 +111,7 @@ const client = new Honcho({
 });
 
 // Or, configure per-request:
-await honcho.apps.create({ name: 'name' }, {
+await client.apps.create({ name: 'name' }, {
   maxRetries: 5,
 });
 ```
@@ -128,7 +128,7 @@ const client = new Honcho({
 });
 
 // Override per-request:
-await honcho.apps.create({ name: 'name' }, {
+await client.apps.create({ name: 'name' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -146,7 +146,7 @@ You can use `for await … of` syntax to iterate through items across all pages:
 async function fetchAllAppsUsers(params) {
   const allAppsUsers = [];
   // Automatically fetches more pages as needed.
-  for await (const user of honcho.apps.users.list('REPLACE_ME')) {
+  for await (const user of client.apps.users.list('REPLACE_ME')) {
     allAppsUsers.push(user);
   }
   return allAppsUsers;
@@ -156,7 +156,7 @@ async function fetchAllAppsUsers(params) {
 Alternatively, you can make request a single page at a time:
 
 ```ts
-let page = await honcho.apps.users.list('REPLACE_ME');
+let page = await client.apps.users.list('REPLACE_ME');
 for (const user of page.items) {
   console.log(user);
 }
@@ -180,11 +180,11 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Honcho();
 
-const response = await honcho.apps.create({ name: 'name' }).asResponse();
+const response = await client.apps.create({ name: 'name' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: app, response: raw } = await honcho.apps.create({ name: 'name' }).withResponse();
+const { data: app, response: raw } = await client.apps.create({ name: 'name' }).withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(app.id);
 ```
@@ -290,7 +290,7 @@ const client = new Honcho({
 });
 
 // Override per-request:
-await honcho.apps.create(
+await client.apps.create(
   { name: 'name' },
   {
     httpAgent: new http.Agent({ keepAlive: false }),

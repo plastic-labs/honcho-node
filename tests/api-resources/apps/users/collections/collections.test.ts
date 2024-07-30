@@ -3,14 +3,14 @@
 import Honcho from 'honcho';
 import { Response } from 'node-fetch';
 
-const honcho = new Honcho({
+const client = new Honcho({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource collections', () => {
   test('create: only required params', async () => {
-    const responsePromise = honcho.apps.users.collections.create(
+    const responsePromise = client.apps.users.collections.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { name: 'name' },
@@ -25,7 +25,7 @@ describe('resource collections', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await honcho.apps.users.collections.create(
+    const response = await client.apps.users.collections.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { name: 'name', metadata: { foo: 'bar' } },
@@ -33,7 +33,7 @@ describe('resource collections', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = honcho.apps.users.collections.update(
+    const responsePromise = client.apps.users.collections.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -49,7 +49,7 @@ describe('resource collections', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await honcho.apps.users.collections.update(
+    const response = await client.apps.users.collections.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -58,7 +58,7 @@ describe('resource collections', () => {
   });
 
   test('list', async () => {
-    const responsePromise = honcho.apps.users.collections.list(
+    const responsePromise = client.apps.users.collections.list(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     );
@@ -74,7 +74,7 @@ describe('resource collections', () => {
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.collections.list(
+      client.apps.users.collections.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         { path: '/_stainless_unknown_path' },
@@ -85,7 +85,7 @@ describe('resource collections', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.collections.list(
+      client.apps.users.collections.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         { filter: 'filter', page: 1, reverse: true, size: 1 },
@@ -95,7 +95,7 @@ describe('resource collections', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = honcho.apps.users.collections.delete(
+    const responsePromise = client.apps.users.collections.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -112,7 +112,7 @@ describe('resource collections', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.collections.delete(
+      client.apps.users.collections.delete(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -122,7 +122,7 @@ describe('resource collections', () => {
   });
 
   test('get', async () => {
-    const responsePromise = honcho.apps.users.collections.get(
+    const responsePromise = client.apps.users.collections.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -139,7 +139,7 @@ describe('resource collections', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.collections.get(
+      client.apps.users.collections.get(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -149,7 +149,7 @@ describe('resource collections', () => {
   });
 
   test('getByName', async () => {
-    const responsePromise = honcho.apps.users.collections.getByName(
+    const responsePromise = client.apps.users.collections.getByName(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       'name',
@@ -166,7 +166,7 @@ describe('resource collections', () => {
   test('getByName: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.collections.getByName(
+      client.apps.users.collections.getByName(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         'name',
@@ -176,7 +176,7 @@ describe('resource collections', () => {
   });
 
   test('query: only required params', async () => {
-    const responsePromise = honcho.apps.users.collections.query(
+    const responsePromise = client.apps.users.collections.query(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -192,7 +192,7 @@ describe('resource collections', () => {
   });
 
   test('query: required and optional params', async () => {
-    const response = await honcho.apps.users.collections.query(
+    const response = await client.apps.users.collections.query(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

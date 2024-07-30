@@ -3,14 +3,14 @@
 import Honcho from 'honcho';
 import { Response } from 'node-fetch';
 
-const honcho = new Honcho({
+const client = new Honcho({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource metamessages', () => {
   test('create: only required params', async () => {
-    const responsePromise = honcho.apps.users.sessions.metamessages.create(
+    const responsePromise = client.apps.users.sessions.metamessages.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -30,7 +30,7 @@ describe('resource metamessages', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await honcho.apps.users.sessions.metamessages.create(
+    const response = await client.apps.users.sessions.metamessages.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -44,7 +44,7 @@ describe('resource metamessages', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = honcho.apps.users.sessions.metamessages.update(
+    const responsePromise = client.apps.users.sessions.metamessages.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -61,7 +61,7 @@ describe('resource metamessages', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await honcho.apps.users.sessions.metamessages.update(
+    const response = await client.apps.users.sessions.metamessages.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -75,7 +75,7 @@ describe('resource metamessages', () => {
   });
 
   test('list', async () => {
-    const responsePromise = honcho.apps.users.sessions.metamessages.list(
+    const responsePromise = client.apps.users.sessions.metamessages.list(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -92,7 +92,7 @@ describe('resource metamessages', () => {
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.sessions.metamessages.list(
+      client.apps.users.sessions.metamessages.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -104,7 +104,7 @@ describe('resource metamessages', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.sessions.metamessages.list(
+      client.apps.users.sessions.metamessages.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -122,7 +122,7 @@ describe('resource metamessages', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = honcho.apps.users.sessions.metamessages.get(
+    const responsePromise = client.apps.users.sessions.metamessages.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -139,7 +139,7 @@ describe('resource metamessages', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await honcho.apps.users.sessions.metamessages.get(
+    const response = await client.apps.users.sessions.metamessages.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
