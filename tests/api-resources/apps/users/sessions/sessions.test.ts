@@ -3,14 +3,14 @@
 import Honcho from 'honcho';
 import { Response } from 'node-fetch';
 
-const honcho = new Honcho({
+const client = new Honcho({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource sessions', () => {
   test('create: only required params', async () => {
-    const responsePromise = honcho.apps.users.sessions.create(
+    const responsePromise = client.apps.users.sessions.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { location_id: 'location_id' },
@@ -25,7 +25,7 @@ describe('resource sessions', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await honcho.apps.users.sessions.create(
+    const response = await client.apps.users.sessions.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { location_id: 'location_id', metadata: { foo: 'bar' } },
@@ -33,7 +33,7 @@ describe('resource sessions', () => {
   });
 
   test('update', async () => {
-    const responsePromise = honcho.apps.users.sessions.update(
+    const responsePromise = client.apps.users.sessions.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -49,7 +49,7 @@ describe('resource sessions', () => {
   });
 
   test('list', async () => {
-    const responsePromise = honcho.apps.users.sessions.list(
+    const responsePromise = client.apps.users.sessions.list(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     );
@@ -65,7 +65,7 @@ describe('resource sessions', () => {
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.sessions.list(
+      client.apps.users.sessions.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         { path: '/_stainless_unknown_path' },
@@ -76,7 +76,7 @@ describe('resource sessions', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.sessions.list(
+      client.apps.users.sessions.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         { filter: 'filter', is_active: true, location_id: 'location_id', page: 1, reverse: true, size: 1 },
@@ -86,7 +86,7 @@ describe('resource sessions', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = honcho.apps.users.sessions.delete(
+    const responsePromise = client.apps.users.sessions.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -103,7 +103,7 @@ describe('resource sessions', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.sessions.delete(
+      client.apps.users.sessions.delete(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -113,7 +113,7 @@ describe('resource sessions', () => {
   });
 
   test('chat: only required params', async () => {
-    const responsePromise = honcho.apps.users.sessions.chat(
+    const responsePromise = client.apps.users.sessions.chat(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -129,7 +129,7 @@ describe('resource sessions', () => {
   });
 
   test('chat: required and optional params', async () => {
-    const response = await honcho.apps.users.sessions.chat(
+    const response = await client.apps.users.sessions.chat(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -138,7 +138,7 @@ describe('resource sessions', () => {
   });
 
   test('get', async () => {
-    const responsePromise = honcho.apps.users.sessions.get(
+    const responsePromise = client.apps.users.sessions.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -155,7 +155,7 @@ describe('resource sessions', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.sessions.get(
+      client.apps.users.sessions.get(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -165,7 +165,7 @@ describe('resource sessions', () => {
   });
 
   test('stream: only required params', async () => {
-    const responsePromise = honcho.apps.users.sessions.stream(
+    const responsePromise = client.apps.users.sessions.stream(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -181,7 +181,7 @@ describe('resource sessions', () => {
   });
 
   test('stream: required and optional params', async () => {
-    const response = await honcho.apps.users.sessions.stream(
+    const response = await client.apps.users.sessions.stream(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
