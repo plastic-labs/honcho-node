@@ -11,7 +11,7 @@ const honcho = new Honcho({
 describe('resource users', () => {
   test('create: only required params', async () => {
     const responsePromise = honcho.apps.users.create('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      name: 'string',
+      name: 'name',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,7 +24,7 @@ describe('resource users', () => {
 
   test('create: required and optional params', async () => {
     const response = await honcho.apps.users.create('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      name: 'string',
+      name: 'name',
       metadata: { foo: 'bar' },
     });
   });
@@ -67,7 +67,7 @@ describe('resource users', () => {
     await expect(
       honcho.apps.users.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { filter: 'string', page: 1, reverse: true, size: 1 },
+        { filter: 'filter', page: 1, reverse: true, size: 1 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Honcho.NotFoundError);
@@ -97,7 +97,7 @@ describe('resource users', () => {
   });
 
   test('getByName', async () => {
-    const responsePromise = honcho.apps.users.getByName('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'string');
+    const responsePromise = honcho.apps.users.getByName('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'name');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -110,14 +110,14 @@ describe('resource users', () => {
   test('getByName: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.getByName('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'string', {
+      honcho.apps.users.getByName('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'name', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Honcho.NotFoundError);
   });
 
   test('getOrCreate', async () => {
-    const responsePromise = honcho.apps.users.getOrCreate('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'string');
+    const responsePromise = honcho.apps.users.getOrCreate('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'name');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -130,7 +130,7 @@ describe('resource users', () => {
   test('getOrCreate: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      honcho.apps.users.getOrCreate('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'string', {
+      honcho.apps.users.getOrCreate('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'name', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Honcho.NotFoundError);

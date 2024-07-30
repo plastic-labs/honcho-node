@@ -13,7 +13,7 @@ describe('resource collections', () => {
     const responsePromise = honcho.apps.users.collections.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { name: 'string' },
+      { name: 'name' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,7 +28,7 @@ describe('resource collections', () => {
     const response = await honcho.apps.users.collections.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { name: 'string', metadata: { foo: 'bar' } },
+      { name: 'name', metadata: { foo: 'bar' } },
     );
   });
 
@@ -37,7 +37,7 @@ describe('resource collections', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { name: 'string' },
+      { name: 'name' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -53,7 +53,7 @@ describe('resource collections', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { name: 'string', metadata: { foo: 'bar' } },
+      { name: 'name', metadata: { foo: 'bar' } },
     );
   });
 
@@ -88,7 +88,7 @@ describe('resource collections', () => {
       honcho.apps.users.collections.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { filter: 'string', page: 1, reverse: true, size: 1 },
+        { filter: 'filter', page: 1, reverse: true, size: 1 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Honcho.NotFoundError);
@@ -152,7 +152,7 @@ describe('resource collections', () => {
     const responsePromise = honcho.apps.users.collections.getByName(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      'string',
+      'name',
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -169,7 +169,7 @@ describe('resource collections', () => {
       honcho.apps.users.collections.getByName(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        'string',
+        'name',
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Honcho.NotFoundError);
@@ -180,7 +180,7 @@ describe('resource collections', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { query: 'string' },
+      { query: 'query' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -196,7 +196,7 @@ describe('resource collections', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { query: 'string', filter: 'string', top_k: 0 },
+      { query: 'query', filter: 'filter', top_k: 0 },
     );
   });
 });
