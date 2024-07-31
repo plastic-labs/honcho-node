@@ -163,9 +163,9 @@ export interface CollectionCreateParams {
 }
 
 export interface CollectionUpdateParams {
-  name: string;
-
   metadata?: Record<string, unknown> | null;
+
+  name?: string | null;
 }
 
 export interface CollectionListParams extends PageParams {

@@ -1,4 +1,4 @@
-# Honcho API Library
+# honcho-ai API Library
 
 [![NPM version](https://img.shields.io/npm/v/honcho.svg)](https://npmjs.org/package/honcho) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/honcho)
 
