@@ -15,7 +15,7 @@ type Environment = keyof typeof environments;
 
 export interface ClientOptions {
   /**
-   * API Key
+   * Defaults to process.env['HONCHO_API_KEY'].
    */
   apiKey?: string | null | undefined;
 

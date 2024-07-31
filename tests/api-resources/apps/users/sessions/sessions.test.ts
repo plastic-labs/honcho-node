@@ -9,11 +9,11 @@ const client = new Honcho({
 });
 
 describe('resource sessions', () => {
-  test('create: only required params', async () => {
+  test('create', async () => {
     const responsePromise = client.apps.users.sessions.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { location_id: 'location_id' },
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,14 +22,6 @@ describe('resource sessions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('create: required and optional params', async () => {
-    const response = await client.apps.users.sessions.create(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { location_id: 'location_id', metadata: { foo: 'bar' } },
-    );
   });
 
   test('update', async () => {
@@ -79,7 +71,7 @@ describe('resource sessions', () => {
       client.apps.users.sessions.list(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { filter: 'filter', is_active: true, location_id: 'location_id', page: 1, reverse: true, size: 1 },
+        { filter: 'filter', is_active: true, page: 1, reverse: true, size: 1 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Honcho.NotFoundError);
