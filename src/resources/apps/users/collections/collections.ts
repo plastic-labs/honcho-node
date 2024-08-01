@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../../core';
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import * as Core from '../../../../core';
 import * as CollectionsAPI from './collections';
 import * as DocumentsAPI from './documents';
 import { Page, type PageParams } from '../../../../pagination';
@@ -163,9 +163,9 @@ export interface CollectionCreateParams {
 }
 
 export interface CollectionUpdateParams {
-  name: string;
-
   metadata?: Record<string, unknown> | null;
+
+  name?: string | null;
 }
 
 export interface CollectionListParams extends PageParams {

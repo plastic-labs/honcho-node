@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../../core';
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import * as Core from '../../../../core';
 import * as SessionsAPI from './sessions';
 import * as MessagesAPI from './messages';
 import * as MetamessagesAPI from './metamessages';
@@ -18,7 +18,7 @@ export class Sessions extends APIResource {
    * Args: app_id (uuid.UUID): The ID of the app representing the client application
    * using honcho user_id (uuid.UUID): The User ID representing the user, managed by
    * the user session (schemas.SessionCreate): The Session object containing any
-   * metadata and a location ID
+   * metadata
    *
    * Returns: schemas.Session: The Session object of the new Session
    */
@@ -56,8 +56,7 @@ export class Sessions extends APIResource {
    *
    * Args: app_id (uuid.UUID): The ID of the app representing the client application
    * using honcho user_id (uuid.UUID): The User ID representing the user, managed by
-   * the user location_id (str, optional): Optional Location ID representing the
-   * location of a session
+   * the user
    *
    * Returns: list[schemas.Session]: List of Session objects
    */
@@ -181,8 +180,6 @@ export interface Session {
 
   is_active: boolean;
 
-  location_id: string;
-
   metadata: Record<string, unknown>;
 
   user_id: string;
@@ -193,8 +190,6 @@ export type SessionDeleteResponse = unknown;
 export type SessionStreamResponse = unknown;
 
 export interface SessionCreateParams {
-  location_id: string;
-
   metadata?: Record<string, unknown> | null;
 }
 
@@ -206,8 +201,6 @@ export interface SessionListParams extends PageParams {
   filter?: string | null;
 
   is_active?: boolean | null;
-
-  location_id?: string | null;
 
   reverse?: boolean | null;
 }

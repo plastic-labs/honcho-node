@@ -1,22 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../../core';
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import * as Core from '../../../../core';
 import * as MetamessagesAPI from './metamessages';
 import { Page, type PageParams } from '../../../../pagination';
 
 export class Metamessages extends APIResource {
   /**
-   * Adds a message to a session
+   * Adds a metamessage to a session
    *
    * Args: app_id (uuid.UUID): The ID of the app representing the client application
    * using honcho user_id (str): The User ID representing the user, managed by the
-   * user session_id (int): The ID of the Session to add the message to message
-   * (schemas.MessageCreate): The Message object to add containing the message
-   * content and type
+   * user session_id (int): The ID of the Session to add the metamessage to
+   * metamessage (schemas.MetamessageCreate): The Metamessage object to add
+   * containing the metamessage content and type
    *
-   * Returns: schemas.Message: The Message object of the added message
+   * Returns: schemas.Metamessage: The Metamessage object of the added metamessage
    *
    * Raises: HTTPException: If the session is not found
    */

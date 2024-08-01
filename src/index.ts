@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from './core';
 import * as Errors from './error';
-import { type Agent } from './_shims/index';
 import * as Uploads from './uploads';
+import { type Agent } from './_shims/index';
+import * as Core from './core';
 import * as Pagination from './pagination';
 import * as API from './resources/index';
 
 const environments = {
-  local: 'http://localhost:8000',
   demo: 'https://demo.honcho.dev',
+  local: 'http://localhost:8000',
 };
 type Environment = keyof typeof environments;
 
@@ -23,8 +23,8 @@ export interface ClientOptions {
    * Specifies the environment to use for the API.
    *
    * Each environment maps to a different base URL:
-   * - `local` corresponds to `http://localhost:8000`
    * - `demo` corresponds to `https://demo.honcho.dev`
+   * - `local` corresponds to `http://localhost:8000`
    */
   environment?: Environment;
 
@@ -85,7 +85,9 @@ export interface ClientOptions {
   defaultQuery?: Core.DefaultQuery;
 }
 
-/** API Client for interfacing with the Honcho API. */
+/**
+ * API Client for interfacing with the Honcho API.
+ */
 export class Honcho extends Core.APIClient {
   apiKey: string | null;
 
@@ -95,8 +97,8 @@ export class Honcho extends Core.APIClient {
    * API Client for interfacing with the Honcho API.
    *
    * @param {string | null | undefined} [opts.apiKey=process.env['HONCHO_API_KEY'] ?? null]
-   * @param {Environment} [opts.environment=local] - Specifies the environment URL to use for the API.
-   * @param {string} [opts.baseURL=process.env['HONCHO_BASE_URL'] ?? http://localhost:8000] - Override the default base URL for the API.
+   * @param {Environment} [opts.environment=demo] - Specifies the environment URL to use for the API.
+   * @param {string} [opts.baseURL=process.env['HONCHO_BASE_URL'] ?? https://demo.honcho.dev] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -113,7 +115,7 @@ export class Honcho extends Core.APIClient {
       apiKey,
       ...opts,
       baseURL,
-      environment: opts.environment ?? 'local',
+      environment: opts.environment ?? 'demo',
     };
 
     if (baseURL && opts.environment) {
@@ -123,12 +125,13 @@ export class Honcho extends Core.APIClient {
     }
 
     super({
-      baseURL: options.baseURL || environments[options.environment || 'local'],
+      baseURL: options.baseURL || environments[options.environment || 'demo'],
       timeout: options.timeout ?? 60000 /* 1 minute */,
       httpAgent: options.httpAgent,
       maxRetries: options.maxRetries,
       fetch: options.fetch,
     });
+
     this._options = options;
 
     this.apiKey = apiKey;
@@ -147,6 +150,19 @@ export class Honcho extends Core.APIClient {
     };
   }
 
+  protected override validateHeaders(headers: Core.Headers, customHeaders: Core.Headers) {
+    if (this.apiKey && headers['authorization']) {
+      return;
+    }
+    if (customHeaders['authorization'] === null) {
+      return;
+    }
+
+    throw new Error(
+      'Could not resolve authentication method. Expected the apiKey to be set. Or for the "Authorization" headers to be explicitly omitted',
+    );
+  }
+
   protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
     if (this.apiKey == null) {
       return {};
@@ -155,6 +171,7 @@ export class Honcho extends Core.APIClient {
   }
 
   static Honcho = this;
+  static DEFAULT_TIMEOUT = 60000; // 1 minute
 
   static HonchoError = Errors.HonchoError;
   static APIError = Errors.APIError;
