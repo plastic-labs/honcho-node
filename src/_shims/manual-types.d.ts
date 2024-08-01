@@ -4,8 +4,8 @@
 /**
  * Types will get added to this namespace when you import one of the following:
  *
- *   import 'honcho/shims/node'
- *   import 'honcho/shims/web'
+ *   import 'honcho-ai/shims/node'
+ *   import 'honcho-ai/shims/web'
  *
  * Importing more than one will cause type and runtime errors.
  */
