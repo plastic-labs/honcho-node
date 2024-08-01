@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.1.0 (2024-08-01)
+
+Full Changelog: [v0.0.4...v0.1.0](https://github.com/plastic-labs/honcho-node/compare/v0.0.4...v0.1.0)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#24](https://github.com/plastic-labs/honcho-node/issues/24)) ([f1760b0](https://github.com/plastic-labs/honcho-node/commit/f1760b014808b25acacea1dbe58d0e67e78b0709))
+* **api:** update via SDK Studio ([#19](https://github.com/plastic-labs/honcho-node/issues/19)) ([d58ce64](https://github.com/plastic-labs/honcho-node/commit/d58ce641232a10967d41d45be9ff159f3c6f1583))
+* **api:** update via SDK Studio ([#25](https://github.com/plastic-labs/honcho-node/issues/25)) ([d2b2c76](https://github.com/plastic-labs/honcho-node/commit/d2b2c76c4a28c3f2452492aedb240d563f33238c))
+
+
+### Bug Fixes
+
+* **compat:** remove ReadableStream polyfill redundant since node v16 ([#21](https://github.com/plastic-labs/honcho-node/issues/21)) ([697784b](https://github.com/plastic-labs/honcho-node/commit/697784bdd6d64b700cdc6ab1572a4ad130725d6b))
+
+
+### Chores
+
+* **docs:** fix incorrect client var names ([#22](https://github.com/plastic-labs/honcho-node/issues/22)) ([b19d486](https://github.com/plastic-labs/honcho-node/commit/b19d4865708dee7c6f5ac0af9ad74487709554e7))
+* **internal:** add constant for default timeout ([#23](https://github.com/plastic-labs/honcho-node/issues/23)) ([67519e0](https://github.com/plastic-labs/honcho-node/commit/67519e0ebfbf52350f0dcbfd4b699285d5b765ec))
+* **internal:** codegen related update ([#16](https://github.com/plastic-labs/honcho-node/issues/16)) ([8fd8961](https://github.com/plastic-labs/honcho-node/commit/8fd89613e59d87ecd9bf6822d69dc01e17cba411))
+* **tests:** update prism version ([#18](https://github.com/plastic-labs/honcho-node/issues/18)) ([09748fe](https://github.com/plastic-labs/honcho-node/commit/09748fe2cec34eb7c7d7ed1f839212e4c65642ea))
+
 ## 0.0.4 (2024-05-23)
 
 Full Changelog: [v0.0.3...v0.0.4](https://github.com/plastic-labs/honcho-node/compare/v0.0.3...v0.0.4)
