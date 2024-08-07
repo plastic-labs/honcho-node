@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.6 (2024-08-07)
+
+Full Changelog: [v0.0.5...v0.0.6](https://github.com/plastic-labs/honcho-node/compare/v0.0.5...v0.0.6)
+
+### Chores
+
+* **internal:** codegen related update ([#30](https://github.com/plastic-labs/honcho-node/issues/30)) ([42b6a61](https://github.com/plastic-labs/honcho-node/commit/42b6a616180b26771390f681c2c3d68c8c60ac50))
+
 ## 0.0.5 (2024-08-01)
 
 Full Changelog: [v0.0.4...v0.0.5](https://github.com/plastic-labs/honcho-node/compare/v0.0.4...v0.0.5)
