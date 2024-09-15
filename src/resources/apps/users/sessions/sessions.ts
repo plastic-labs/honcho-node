@@ -103,17 +103,17 @@ export class Sessions extends APIResource {
   }
 
   /**
-   * Get Chat
+   * Chat
    */
   chat(
     appId: string,
     userId: string,
     sessionId: string,
-    query: SessionChatParams,
+    body: SessionChatParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AgentChat> {
-    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}/chat`, {
-      query,
+    return this._client.post(`/apps/${appId}/users/${userId}/sessions/${sessionId}/chat`, {
+      body,
       ...options,
     });
   }
@@ -145,11 +145,11 @@ export class Sessions extends APIResource {
     appId: string,
     userId: string,
     sessionId: string,
-    query: SessionStreamParams,
+    body: SessionStreamParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}/chat/stream`, {
-      query,
+    return this._client.post(`/apps/${appId}/users/${userId}/sessions/${sessionId}/chat/stream`, {
+      body,
       ...options,
     });
   }
@@ -206,11 +206,15 @@ export interface SessionListParams extends PageParams {
 }
 
 export interface SessionChatParams {
-  query: string;
+  queries: string | Array<string>;
+
+  collections?: string | Array<string>;
 }
 
 export interface SessionStreamParams {
-  query: string;
+  queries: string | Array<string>;
+
+  collections?: string | Array<string>;
 }
 
 export namespace Sessions {

@@ -8,13 +8,12 @@ import { Page, type PageParams } from '../../../../pagination';
 
 export class Metamessages extends APIResource {
   /**
-   * Adds a metamessage to a session
+   * Adds a message to a session
    *
    * Args: app_id (uuid.UUID): The ID of the app representing the client application
    * using honcho user_id (str): The User ID representing the user, managed by the
-   * user session_id (int): The ID of the Session to add the metamessage to
-   * metamessage (schemas.MetamessageCreate): The Metamessage object to add
-   * containing the metamessage content and type
+   * user session_id (int): The ID of the Session to add the message to metamessage
+   * (schemas.MeteamessageCreate): The metamessage creation object
    *
    * Returns: schemas.Metamessage: The Metamessage object of the added metamessage
    *

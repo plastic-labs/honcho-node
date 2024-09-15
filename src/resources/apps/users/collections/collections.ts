@@ -119,7 +119,7 @@ export class Collections extends APIResource {
     query: CollectionQueryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CollectionQueryResponse> {
-    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}/query`, {
+    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}/documents/query`, {
       query,
       ...options,
     });
