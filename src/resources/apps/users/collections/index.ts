@@ -14,9 +14,11 @@ export {
   Document,
   PageDocument,
   DocumentDeleteResponse,
+  DocumentQueryResponse,
   DocumentCreateParams,
   DocumentUpdateParams,
   DocumentListParams,
+  DocumentQueryParams,
   DocumentsPage,
   Documents,
 } from './documents';
