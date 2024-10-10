@@ -28,6 +28,16 @@ Methods:
 - <code title="get /apps/{app_id}/users/name/{name}">client.apps.users.<a href="./src/resources/apps/users/users.ts">getByName</a>(appId, name) -> User</code>
 - <code title="get /apps/{app_id}/users/get_or_create/{name}">client.apps.users.<a href="./src/resources/apps/users/users.ts">getOrCreate</a>(appId, name) -> User</code>
 
+### Metamessages
+
+Types:
+
+- <code><a href="./src/resources/apps/users/metamessages.ts">PageMetamessage</a></code>
+
+Methods:
+
+- <code title="get /apps/{app_id}/users/{user_id}/metamessages">client.apps.users.metamessages.<a href="./src/resources/apps/users/metamessages.ts">list</a>(appId, userId, { ...params }) -> MetamessagesPage</code>
+
 ### Sessions
 
 Types:
@@ -36,7 +46,6 @@ Types:
 - <code><a href="./src/resources/apps/users/sessions/sessions.ts">PageSession</a></code>
 - <code><a href="./src/resources/apps/users/sessions/sessions.ts">Session</a></code>
 - <code><a href="./src/resources/apps/users/sessions/sessions.ts">SessionDeleteResponse</a></code>
-- <code><a href="./src/resources/apps/users/sessions/sessions.ts">SessionStreamResponse</a></code>
 
 Methods:
 
@@ -44,9 +53,7 @@ Methods:
 - <code title="put /apps/{app_id}/users/{user_id}/sessions/{session_id}">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">update</a>(appId, userId, sessionId, { ...params }) -> Session</code>
 - <code title="get /apps/{app_id}/users/{user_id}/sessions">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">list</a>(appId, userId, { ...params }) -> SessionsPage</code>
 - <code title="delete /apps/{app_id}/users/{user_id}/sessions/{session_id}">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">delete</a>(appId, userId, sessionId) -> unknown</code>
-- <code title="post /apps/{app_id}/users/{user_id}/sessions/{session_id}/chat">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">chat</a>(appId, userId, sessionId, { ...params }) -> AgentChat</code>
 - <code title="get /apps/{app_id}/users/{user_id}/sessions/{session_id}">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">get</a>(appId, userId, sessionId) -> Session</code>
-- <code title="post /apps/{app_id}/users/{user_id}/sessions/{session_id}/chat/stream">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">stream</a>(appId, userId, sessionId, { ...params }) -> unknown</code>
 
 #### Messages
 
@@ -83,7 +90,6 @@ Types:
 - <code><a href="./src/resources/apps/users/collections/collections.ts">Collection</a></code>
 - <code><a href="./src/resources/apps/users/collections/collections.ts">PageCollection</a></code>
 - <code><a href="./src/resources/apps/users/collections/collections.ts">CollectionDeleteResponse</a></code>
-- <code><a href="./src/resources/apps/users/collections/collections.ts">CollectionQueryResponse</a></code>
 
 Methods:
 
@@ -93,7 +99,6 @@ Methods:
 - <code title="delete /apps/{app_id}/users/{user_id}/collections/{collection_id}">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">delete</a>(appId, userId, collectionId) -> unknown</code>
 - <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">get</a>(appId, userId, collectionId) -> Collection</code>
 - <code title="get /apps/{app_id}/users/{user_id}/collections/name/{name}">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">getByName</a>(appId, userId, name) -> Collection</code>
-- <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}/documents/query">client.apps.users.collections.<a href="./src/resources/apps/users/collections/collections.ts">query</a>(appId, userId, collectionId, { ...params }) -> CollectionQueryResponse</code>
 
 #### Documents
 

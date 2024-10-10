@@ -5,12 +5,9 @@ export {
   PageSession,
   Session,
   SessionDeleteResponse,
-  SessionStreamResponse,
   SessionCreateParams,
   SessionUpdateParams,
   SessionListParams,
-  SessionChatParams,
-  SessionStreamParams,
   SessionsPage,
   Sessions,
 } from './sessions';
