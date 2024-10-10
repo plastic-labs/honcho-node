@@ -103,22 +103,6 @@ export class Sessions extends APIResource {
   }
 
   /**
-   * Chat
-   */
-  chat(
-    appId: string,
-    userId: string,
-    sessionId: string,
-    body: SessionChatParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AgentChat> {
-    return this._client.post(`/apps/${appId}/users/${userId}/sessions/${sessionId}/chat`, {
-      body,
-      ...options,
-    });
-  }
-
-  /**
    * Get a specific session for a user by ID
    *
    * Args: app_id (uuid.UUID): The ID of the app representing the client application
@@ -136,22 +120,6 @@ export class Sessions extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<Session> {
     return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}`, options);
-  }
-
-  /**
-   * Get Chat Stream
-   */
-  stream(
-    appId: string,
-    userId: string,
-    sessionId: string,
-    body: SessionStreamParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
-    return this._client.post(`/apps/${appId}/users/${userId}/sessions/${sessionId}/chat/stream`, {
-      body,
-      ...options,
-    });
   }
 }
 
@@ -187,8 +155,6 @@ export interface Session {
 
 export type SessionDeleteResponse = unknown;
 
-export type SessionStreamResponse = unknown;
-
 export interface SessionCreateParams {
   metadata?: Record<string, unknown> | null;
 }
@@ -205,30 +171,15 @@ export interface SessionListParams extends PageParams {
   reverse?: boolean | null;
 }
 
-export interface SessionChatParams {
-  queries: string | Array<string>;
-
-  collections?: string | Array<string>;
-}
-
-export interface SessionStreamParams {
-  queries: string | Array<string>;
-
-  collections?: string | Array<string>;
-}
-
 export namespace Sessions {
   export import AgentChat = SessionsAPI.AgentChat;
   export import PageSession = SessionsAPI.PageSession;
   export import Session = SessionsAPI.Session;
   export import SessionDeleteResponse = SessionsAPI.SessionDeleteResponse;
-  export import SessionStreamResponse = SessionsAPI.SessionStreamResponse;
   export import SessionsPage = SessionsAPI.SessionsPage;
   export import SessionCreateParams = SessionsAPI.SessionCreateParams;
   export import SessionUpdateParams = SessionsAPI.SessionUpdateParams;
   export import SessionListParams = SessionsAPI.SessionListParams;
-  export import SessionChatParams = SessionsAPI.SessionChatParams;
-  export import SessionStreamParams = SessionsAPI.SessionStreamParams;
   export import Messages = MessagesAPI.Messages;
   export import Message = MessagesAPI.Message;
   export import PageMessage = MessagesAPI.PageMessage;
