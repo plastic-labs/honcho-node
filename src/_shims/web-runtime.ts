@@ -9,9 +9,9 @@ export function getRuntime({ manuallyImported }: { manuallyImported?: boolean } 
   const recommendation =
     manuallyImported ?
       `You may need to use polyfills`
-    : `Add one of these imports before your first \`import … from 'honcho-ai'\`:
-- \`import 'honcho-ai/shims/node'\` (if you're running on Node)
-- \`import 'honcho-ai/shims/web'\` (otherwise)
+    : `Add one of these imports before your first \`import … from 'honcho'\`:
+- \`import 'honcho/shims/node'\` (if you're running on Node)
+- \`import 'honcho/shims/web'\` (otherwise)
 `;
 
   let _fetch, _Request, _Response, _Headers;

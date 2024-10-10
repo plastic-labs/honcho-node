@@ -97,9 +97,9 @@ export class APIPromise<T> extends Promise<T> {
    *
    * 👋 Getting the wrong TypeScript type for `Response`?
    * Try setting `"moduleResolution": "NodeNext"` if you can,
-   * or add one of these imports before your first `import … from 'honcho-ai'`:
-   * - `import 'honcho-ai/shims/node'` (if you're running on Node)
-   * - `import 'honcho-ai/shims/web'` (otherwise)
+   * or add one of these imports before your first `import … from 'honcho'`:
+   * - `import 'honcho/shims/node'` (if you're running on Node)
+   * - `import 'honcho/shims/web'` (otherwise)
    */
   asResponse(): Promise<Response> {
     return this.responsePromise.then((p) => p.response);
@@ -113,9 +113,9 @@ export class APIPromise<T> extends Promise<T> {
    *
    * 👋 Getting the wrong TypeScript type for `Response`?
    * Try setting `"moduleResolution": "NodeNext"` if you can,
-   * or add one of these imports before your first `import … from 'honcho-ai'`:
-   * - `import 'honcho-ai/shims/node'` (if you're running on Node)
-   * - `import 'honcho-ai/shims/web'` (otherwise)
+   * or add one of these imports before your first `import … from 'honcho'`:
+   * - `import 'honcho/shims/node'` (if you're running on Node)
+   * - `import 'honcho/shims/web'` (otherwise)
    */
   async withResponse(): Promise<{ data: T; response: Response }> {
     const [data, response] = await Promise.all([this.parse(), this.asResponse()]);
@@ -978,6 +978,11 @@ const validatePositiveInteger = (name: string, n: unknown): number => {
 
 export const castToError = (err: any): Error => {
   if (err instanceof Error) return err;
+  if (typeof err === 'object' && err !== null) {
+    try {
+      return new Error(JSON.stringify(err));
+    } catch {}
+  }
   return new Error(err);
 };
 

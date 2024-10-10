@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "honcho-ai/_shims/auto/*": ["src/_shims/auto/*-node"],
-      "honcho-ai/*": ["src/*"],
-      "honcho-ai": ["src/index.ts"],
+      "honcho/_shims/auto/*": ["src/_shims/auto/*-node"],
+      "honcho/*": ["src/*"],
+      "honcho": ["src/index.ts"],
     },
     "noEmit": true,
 
