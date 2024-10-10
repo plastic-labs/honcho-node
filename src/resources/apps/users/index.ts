@@ -5,12 +5,9 @@ export {
   PageSession,
   Session,
   SessionDeleteResponse,
-  SessionStreamResponse,
   SessionCreateParams,
   SessionUpdateParams,
   SessionListParams,
-  SessionChatParams,
-  SessionStreamParams,
   SessionsPage,
   Sessions,
 } from './sessions/index';
@@ -18,14 +15,13 @@ export {
   Collection,
   PageCollection,
   CollectionDeleteResponse,
-  CollectionQueryResponse,
   CollectionCreateParams,
   CollectionUpdateParams,
   CollectionListParams,
-  CollectionQueryParams,
   CollectionsPage,
   Collections,
 } from './collections/index';
+export { PageMetamessage, MetamessageListParams, Metamessages } from './metamessages';
 export {
   PageUser,
   User,

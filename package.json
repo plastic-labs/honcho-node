@@ -1,5 +1,5 @@
 {
-  "name": "honcho-ai",
+  "name": "honcho",
   "version": "0.0.6",
   "description": "The official TypeScript library for the Honcho API",
   "author": "Honcho <hello@plasticlabs.ai>",
@@ -59,8 +59,8 @@
     "./shims/web.mjs"
   ],
   "imports": {
-    "honcho-ai": ".",
-    "honcho-ai/*": "./src/*"
+    "honcho": ".",
+    "honcho/*": "./src/*"
   },
   "exports": {
     "./_shims/auto/*": {

@@ -4,11 +4,9 @@ export {
   Collection,
   PageCollection,
   CollectionDeleteResponse,
-  CollectionQueryResponse,
   CollectionCreateParams,
   CollectionUpdateParams,
   CollectionListParams,
-  CollectionQueryParams,
   CollectionsPage,
   Collections,
 } from './collections';

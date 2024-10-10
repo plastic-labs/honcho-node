@@ -4,11 +4,13 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as UsersAPI from './users';
+import * as MetamessagesAPI from './metamessages';
 import * as CollectionsAPI from './collections/collections';
 import * as SessionsAPI from './sessions/sessions';
 import { Page, type PageParams } from '../../../pagination';
 
 export class Users extends APIResource {
+  metamessages: MetamessagesAPI.Metamessages = new MetamessagesAPI.Metamessages(this._client);
   sessions: SessionsAPI.Sessions = new SessionsAPI.Sessions(this._client);
   collections: CollectionsAPI.Collections = new CollectionsAPI.Collections(this._client);
 
@@ -158,26 +160,24 @@ export namespace Users {
   export import UserCreateParams = UsersAPI.UserCreateParams;
   export import UserUpdateParams = UsersAPI.UserUpdateParams;
   export import UserListParams = UsersAPI.UserListParams;
+  export import Metamessages = MetamessagesAPI.Metamessages;
+  export import PageMetamessage = MetamessagesAPI.PageMetamessage;
+  export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;
   export import Sessions = SessionsAPI.Sessions;
   export import AgentChat = SessionsAPI.AgentChat;
   export import PageSession = SessionsAPI.PageSession;
   export import Session = SessionsAPI.Session;
   export import SessionDeleteResponse = SessionsAPI.SessionDeleteResponse;
-  export import SessionStreamResponse = SessionsAPI.SessionStreamResponse;
   export import SessionsPage = SessionsAPI.SessionsPage;
   export import SessionCreateParams = SessionsAPI.SessionCreateParams;
   export import SessionUpdateParams = SessionsAPI.SessionUpdateParams;
   export import SessionListParams = SessionsAPI.SessionListParams;
-  export import SessionChatParams = SessionsAPI.SessionChatParams;
-  export import SessionStreamParams = SessionsAPI.SessionStreamParams;
   export import Collections = CollectionsAPI.Collections;
   export import Collection = CollectionsAPI.Collection;
   export import PageCollection = CollectionsAPI.PageCollection;
   export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
-  export import CollectionQueryResponse = CollectionsAPI.CollectionQueryResponse;
   export import CollectionsPage = CollectionsAPI.CollectionsPage;
   export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
   export import CollectionListParams = CollectionsAPI.CollectionListParams;
-  export import CollectionQueryParams = CollectionsAPI.CollectionQueryParams;
 }
