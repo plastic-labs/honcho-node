@@ -106,6 +106,7 @@ Types:
 - <code><a href="./src/resources/apps/users/collections/documents.ts">Document</a></code>
 - <code><a href="./src/resources/apps/users/collections/documents.ts">PageDocument</a></code>
 - <code><a href="./src/resources/apps/users/collections/documents.ts">DocumentDeleteResponse</a></code>
+- <code><a href="./src/resources/apps/users/collections/documents.ts">DocumentQueryResponse</a></code>
 
 Methods:
 
@@ -114,3 +115,4 @@ Methods:
 - <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}/documents">client.apps.users.collections.documents.<a href="./src/resources/apps/users/collections/documents.ts">list</a>(appId, userId, collectionId, { ...params }) -> DocumentsPage</code>
 - <code title="delete /apps/{app_id}/users/{user_id}/collections/{collection_id}/documents/{document_id}">client.apps.users.collections.documents.<a href="./src/resources/apps/users/collections/documents.ts">delete</a>(appId, userId, collectionId, documentId) -> unknown</code>
 - <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}/documents/{document_id}">client.apps.users.collections.documents.<a href="./src/resources/apps/users/collections/documents.ts">get</a>(appId, userId, collectionId, documentId) -> Document</code>
+- <code title="get /apps/{app_id}/users/{user_id}/collections/{collection_id}/documents/query">client.apps.users.collections.documents.<a href="./src/resources/apps/users/collections/documents.ts">query</a>(appId, userId, collectionId, { ...params }) -> DocumentQueryResponse</code>
