@@ -47,18 +47,6 @@ export class Metamessages extends APIResource {
   }
 }
 
-export interface PageMetamessage {
-  items: Array<SessionsMetamessagesAPI.Metamessage>;
-
-  page: number;
-
-  size: number;
-
-  total: number;
-
-  pages?: number;
-}
-
 export interface MetamessageListParams extends PageParams {
   filter?: string | null;
 
@@ -68,7 +56,6 @@ export interface MetamessageListParams extends PageParams {
 }
 
 export namespace Metamessages {
-  export import PageMetamessage = MetamessagesAPI.PageMetamessage;
   export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;
 }
 
