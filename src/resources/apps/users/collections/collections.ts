@@ -168,8 +168,10 @@ export namespace Collections {
   export import Document = DocumentsAPI.Document;
   export import PageDocument = DocumentsAPI.PageDocument;
   export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
+  export import DocumentQueryResponse = DocumentsAPI.DocumentQueryResponse;
   export import DocumentsPage = DocumentsAPI.DocumentsPage;
   export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
   export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
   export import DocumentListParams = DocumentsAPI.DocumentListParams;
+  export import DocumentQueryParams = DocumentsAPI.DocumentQueryParams;
 }
