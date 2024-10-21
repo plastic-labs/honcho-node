@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as MessagesAPI from './messages';
 import { Page, type PageParams } from '../../../../pagination';
@@ -10,9 +9,9 @@ export class Messages extends APIResource {
   /**
    * Adds a message to a session
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user session_id (int): The ID of the Session to add the message to message
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
+   * session_id (int): The ID of the Session to add the message to message
    * (schemas.MessageCreate): The Message object to add containing the message
    * content and type
    *
@@ -27,7 +26,7 @@ export class Messages extends APIResource {
     body: MessageCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Message> {
-    return this._client.post(`/apps/${appId}/users/${userId}/sessions/${sessionId}/messages`, {
+    return this._client.post(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/messages`, {
       body,
       ...options,
     });
@@ -44,7 +43,7 @@ export class Messages extends APIResource {
     body: MessageUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Message> {
-    return this._client.put(`/apps/${appId}/users/${userId}/sessions/${sessionId}/messages/${messageId}`, {
+    return this._client.put(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/messages/${messageId}`, {
       body,
       ...options,
     });
@@ -53,10 +52,10 @@ export class Messages extends APIResource {
   /**
    * Get all messages for a session
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user session_id (int): The ID of the Session to retrieve reverse (bool): Whether
-   * to reverse the order of the messages
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
+   * session_id (int): The ID of the Session to retrieve reverse (bool): Whether to
+   * reverse the order of the messages
    *
    * Returns: list[schemas.Message]: List of Message objects
    *
@@ -66,29 +65,14 @@ export class Messages extends APIResource {
     appId: string,
     userId: string,
     sessionId: string,
-    query?: MessageListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MessagesPage, Message>;
-  list(
-    appId: string,
-    userId: string,
-    sessionId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MessagesPage, Message>;
-  list(
-    appId: string,
-    userId: string,
-    sessionId: string,
-    query: MessageListParams | Core.RequestOptions = {},
+    params: MessageListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MessagesPage, Message> {
-    if (isRequestOptions(query)) {
-      return this.list(appId, userId, sessionId, {}, query);
-    }
+    const { page, reverse, size, ...body } = params;
     return this._client.getAPIList(
-      `/apps/${appId}/users/${userId}/sessions/${sessionId}/messages`,
+      `/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/messages/list`,
       MessagesPage,
-      { query, ...options },
+      { query: { page, reverse, size }, body, method: 'post', ...options },
     );
   }
 
@@ -103,7 +87,7 @@ export class Messages extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<Message> {
     return this._client.get(
-      `/apps/${appId}/users/${userId}/sessions/${sessionId}/messages/${messageId}`,
+      `/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/messages/${messageId}`,
       options,
     );
   }
@@ -142,7 +126,7 @@ export interface MessageCreateParams {
 
   is_user: boolean;
 
-  metadata?: Record<string, unknown> | null;
+  metadata?: Record<string, unknown>;
 }
 
 export interface MessageUpdateParams {
@@ -150,9 +134,15 @@ export interface MessageUpdateParams {
 }
 
 export interface MessageListParams extends PageParams {
-  filter?: string | null;
-
+  /**
+   * Query param:
+   */
   reverse?: boolean | null;
+
+  /**
+   * Body param:
+   */
+  filter?: Record<string, unknown> | null;
 }
 
 export namespace Messages {

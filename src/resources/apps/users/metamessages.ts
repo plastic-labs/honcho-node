@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as MetamessagesAPI from './metamessages';
 import * as SessionsMetamessagesAPI from './sessions/metamessages';
@@ -12,9 +11,9 @@ export class Metamessages extends APIResource {
   /**
    * Paginate through the user metamessages for a user
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user reverse (bool): Whether to reverse the order of the metamessages
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
+   * reverse (bool): Whether to reverse the order of the metamessages
    *
    * Returns: list[schemas.Message]: List of Message objects
    *
@@ -23,36 +22,34 @@ export class Metamessages extends APIResource {
   list(
     appId: string,
     userId: string,
-    query?: MetamessageListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MetamessagesPage, SessionsMetamessagesAPI.Metamessage>;
-  list(
-    appId: string,
-    userId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MetamessagesPage, SessionsMetamessagesAPI.Metamessage>;
-  list(
-    appId: string,
-    userId: string,
-    query: MetamessageListParams | Core.RequestOptions = {},
+    params: MetamessageListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MetamessagesPage, SessionsMetamessagesAPI.Metamessage> {
-    if (isRequestOptions(query)) {
-      return this.list(appId, userId, {}, query);
-    }
-    return this._client.getAPIList(`/apps/${appId}/users/${userId}/metamessages`, MetamessagesPage, {
-      query,
+    const { page, reverse, size, ...body } = params;
+    return this._client.getAPIList(`/v1/apps/${appId}/users/${userId}/metamessages/list`, MetamessagesPage, {
+      query: { page, reverse, size },
+      body,
+      method: 'post',
       ...options,
     });
   }
 }
 
 export interface MetamessageListParams extends PageParams {
-  filter?: string | null;
-
-  metamessage_type?: string | null;
-
+  /**
+   * Query param:
+   */
   reverse?: boolean | null;
+
+  /**
+   * Body param:
+   */
+  filter?: Record<string, unknown> | null;
+
+  /**
+   * Body param:
+   */
+  metamessage_type?: string | null;
 }
 
 export namespace Metamessages {

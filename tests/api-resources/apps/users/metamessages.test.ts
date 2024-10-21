@@ -10,10 +10,7 @@ const client = new Honcho({
 
 describe('resource metamessages', () => {
   test('list', async () => {
-    const responsePromise = client.apps.users.metamessages.list(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
+    const responsePromise = client.apps.users.metamessages.list('app_id', 'user_id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,28 +18,5 @@ describe('resource metamessages', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.apps.users.metamessages.list(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Honcho.NotFoundError);
-  });
-
-  test('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.apps.users.metamessages.list(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { filter: 'filter', metamessage_type: 'metamessage_type', page: 1, reverse: true, size: 1 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Honcho.NotFoundError);
   });
 });
