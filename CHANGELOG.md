@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.0.7 (2024-10-21)
+
+Full Changelog: [v0.0.6...v0.0.7](https://github.com/plastic-labs/honcho-node/compare/v0.0.6...v0.0.7)
+
+### Features
+
+* **api:** api update ([#40](https://github.com/plastic-labs/honcho-node/issues/40)) ([404f89c](https://github.com/plastic-labs/honcho-node/commit/404f89cd152afcdd9a482ff9487c852298ff3ab9))
+* **api:** api update ([#42](https://github.com/plastic-labs/honcho-node/issues/42)) ([d937f2d](https://github.com/plastic-labs/honcho-node/commit/d937f2dc21350a2f04f4385fc0e42b93c2f9acc2))
+* **api:** api update ([#43](https://github.com/plastic-labs/honcho-node/issues/43)) ([4094526](https://github.com/plastic-labs/honcho-node/commit/4094526e55badf52050a5d486d7583ca2f489753))
+* **api:** api update ([#44](https://github.com/plastic-labs/honcho-node/issues/44)) ([f36f035](https://github.com/plastic-labs/honcho-node/commit/f36f035b23769442fc8cb9102654d6494e1119a1))
+* **api:** update via SDK Studio ([#35](https://github.com/plastic-labs/honcho-node/issues/35)) ([0fe4e34](https://github.com/plastic-labs/honcho-node/commit/0fe4e34b9adb0c6aefb97a7f86255f17ef07a605))
+
+
+### Bug Fixes
+
+* **errors:** pass message through to APIConnectionError ([#37](https://github.com/plastic-labs/honcho-node/issues/37)) ([099c25b](https://github.com/plastic-labs/honcho-node/commit/099c25b0a9bdfde9404f2760027c868f99565e3c))
+
+
+### Chores
+
+* better object fallback behaviour for casting errors ([#38](https://github.com/plastic-labs/honcho-node/issues/38)) ([3e16bc1](https://github.com/plastic-labs/honcho-node/commit/3e16bc162793c14e925f40868f85ec89bfda9c8f))
+* **internal:** codegen related update ([#33](https://github.com/plastic-labs/honcho-node/issues/33)) ([9d50dfc](https://github.com/plastic-labs/honcho-node/commit/9d50dfc7b638295f9af0a11869fd47f4f319c4e5))
+* **internal:** codegen related update ([#36](https://github.com/plastic-labs/honcho-node/issues/36)) ([dbade17](https://github.com/plastic-labs/honcho-node/commit/dbade177ef333f740138ff026a346a6e25bec229))
+
+
+### Documentation
+
+* update CONTRIBUTING.md ([#39](https://github.com/plastic-labs/honcho-node/issues/39)) ([0b370d5](https://github.com/plastic-labs/honcho-node/commit/0b370d587c6a73a78563f2faf807e2844fe9dc8f))
+
 ## 0.0.6 (2024-08-07)
 
 Full Changelog: [v0.0.5...v0.0.6](https://github.com/plastic-labs/honcho-node/compare/v0.0.5...v0.0.6)
