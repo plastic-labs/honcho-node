@@ -137,37 +137,6 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
-## Auto-pagination
-
-List methods in the Honcho API are paginated.
-You can use `for await … of` syntax to iterate through items across all pages:
-
-```ts
-async function fetchAllAppsUsers(params) {
-  const allAppsUsers = [];
-  // Automatically fetches more pages as needed.
-  for await (const user of client.apps.users.list('REPLACE_ME')) {
-    allAppsUsers.push(user);
-  }
-  return allAppsUsers;
-}
-```
-
-Alternatively, you can make request a single page at a time:
-
-```ts
-let page = await client.apps.users.list('REPLACE_ME');
-for (const user of page.items) {
-  console.log(user);
-}
-
-// Convenience methods are provided for manually paginating:
-while (page.hasNextPage()) {
-  page = page.getNextPage();
-  // ...
-}
-```
-
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)
@@ -319,3 +288,7 @@ The following runtimes are supported:
 Note that React Native is not supported at this time.
 
 If you are interested in other runtime environments, please open or upvote an issue on GitHub.
+
+## Contributing
+
+See [the contributing documentation](./CONTRIBUTING.md).

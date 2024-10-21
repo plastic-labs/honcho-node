@@ -16,30 +16,30 @@ export class Apps extends APIResource {
    * Returns: schemas.App: Created App object
    */
   create(body: AppCreateParams, options?: Core.RequestOptions): Core.APIPromise<App> {
-    return this._client.post('/apps', { body, ...options });
+    return this._client.post('/v1/apps', { body, ...options });
   }
 
   /**
    * Update an App
    *
-   * Args: app_id (uuid.UUID): The ID of the app to update app (schemas.AppUpdate):
-   * The App object containing any new metadata
+   * Args: app_id (str): The ID of the app to update app (schemas.AppUpdate): The App
+   * object containing any new metadata
    *
    * Returns: schemas.App: The App object of the updated App
    */
   update(appId: string, body: AppUpdateParams, options?: Core.RequestOptions): Core.APIPromise<App> {
-    return this._client.put(`/apps/${appId}`, { body, ...options });
+    return this._client.put(`/v1/apps/${appId}`, { body, ...options });
   }
 
   /**
    * Get an App by ID
    *
-   * Args: app_id (uuid.UUID): The ID of the app
+   * Args: app_id (str): The ID of the app
    *
    * Returns: schemas.App: App object
    */
   get(appId: string, options?: Core.RequestOptions): Core.APIPromise<App> {
-    return this._client.get(`/apps/${appId}`, options);
+    return this._client.get(`/v1/apps/${appId}`, options);
   }
 
   /**
@@ -50,7 +50,7 @@ export class Apps extends APIResource {
    * Returns: schemas.App: App object
    */
   getByName(name: string, options?: Core.RequestOptions): Core.APIPromise<App> {
-    return this._client.get(`/apps/name/${name}`, options);
+    return this._client.get(`/v1/apps/name/${name}`, options);
   }
 
   /**
@@ -61,7 +61,7 @@ export class Apps extends APIResource {
    * Returns: schemas.App: App object
    */
   getOrCreate(name: string, options?: Core.RequestOptions): Core.APIPromise<App> {
-    return this._client.get(`/apps/get_or_create/${name}`, options);
+    return this._client.get(`/v1/apps/get_or_create/${name}`, options);
   }
 }
 
@@ -78,7 +78,7 @@ export interface App {
 export interface AppCreateParams {
   name: string;
 
-  metadata?: Record<string, unknown> | null;
+  metadata?: Record<string, unknown>;
 }
 
 export interface AppUpdateParams {

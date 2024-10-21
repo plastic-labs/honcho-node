@@ -11,9 +11,9 @@ const client = new Honcho({
 describe('resource documents', () => {
   test('create: only required params', async () => {
     const responsePromise = client.apps.users.collections.documents.create(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'app_id',
+      'user_id',
+      'collection_id',
       { content: 'content' },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -27,19 +27,19 @@ describe('resource documents', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.apps.users.collections.documents.create(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'app_id',
+      'user_id',
+      'collection_id',
       { content: 'content', metadata: { foo: 'bar' } },
     );
   });
 
   test('update', async () => {
     const responsePromise = client.apps.users.collections.documents.update(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'app_id',
+      'user_id',
+      'collection_id',
+      'document_id',
       {},
     );
     const rawResponse = await responsePromise.asResponse();
@@ -53,9 +53,10 @@ describe('resource documents', () => {
 
   test('list', async () => {
     const responsePromise = client.apps.users.collections.documents.list(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'app_id',
+      'user_id',
+      'collection_id',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -66,37 +67,12 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.apps.users.collections.documents.list(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Honcho.NotFoundError);
-  });
-
-  test('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.apps.users.collections.documents.list(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { filter: 'filter', page: 1, reverse: true, size: 1 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Honcho.NotFoundError);
-  });
-
   test('delete', async () => {
     const responsePromise = client.apps.users.collections.documents.delete(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'app_id',
+      'user_id',
+      'collection_id',
+      'document_id',
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -110,22 +86,18 @@ describe('resource documents', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apps.users.collections.documents.delete(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.apps.users.collections.documents.delete('app_id', 'user_id', 'collection_id', 'document_id', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Honcho.NotFoundError);
   });
 
   test('get', async () => {
     const responsePromise = client.apps.users.collections.documents.get(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'app_id',
+      'user_id',
+      'collection_id',
+      'document_id',
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -139,21 +111,17 @@ describe('resource documents', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apps.users.collections.documents.get(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.apps.users.collections.documents.get('app_id', 'user_id', 'collection_id', 'document_id', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Honcho.NotFoundError);
   });
 
   test('query: only required params', async () => {
     const responsePromise = client.apps.users.collections.documents.query(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'app_id',
+      'user_id',
+      'collection_id',
       { query: 'query' },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -167,9 +135,9 @@ describe('resource documents', () => {
 
   test('query: required and optional params', async () => {
     const response = await client.apps.users.collections.documents.query(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'app_id',
+      'user_id',
+      'collection_id',
       { query: 'query', filter: 'filter', top_k: 0 },
     );
   });

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as DocumentsAPI from './documents';
 import { Page, type PageParams } from '../../../../pagination';
@@ -17,7 +16,7 @@ export class Documents extends APIResource {
     body: DocumentCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Document> {
-    return this._client.post(`/apps/${appId}/users/${userId}/collections/${collectionId}/documents`, {
+    return this._client.post(`/v1/apps/${appId}/users/${userId}/collections/${collectionId}/documents`, {
       body,
       ...options,
     });
@@ -35,7 +34,7 @@ export class Documents extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<Document> {
     return this._client.put(
-      `/apps/${appId}/users/${userId}/collections/${collectionId}/documents/${documentId}`,
+      `/v1/apps/${appId}/users/${userId}/collections/${collectionId}/documents/${documentId}`,
       { body, ...options },
     );
   }
@@ -47,29 +46,14 @@ export class Documents extends APIResource {
     appId: string,
     userId: string,
     collectionId: string,
-    query?: DocumentListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DocumentsPage, Document>;
-  list(
-    appId: string,
-    userId: string,
-    collectionId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DocumentsPage, Document>;
-  list(
-    appId: string,
-    userId: string,
-    collectionId: string,
-    query: DocumentListParams | Core.RequestOptions = {},
+    params: DocumentListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DocumentsPage, Document> {
-    if (isRequestOptions(query)) {
-      return this.list(appId, userId, collectionId, {}, query);
-    }
+    const { page, reverse, size, ...body } = params;
     return this._client.getAPIList(
-      `/apps/${appId}/users/${userId}/collections/${collectionId}/documents`,
+      `/v1/apps/${appId}/users/${userId}/collections/${collectionId}/documents/list`,
       DocumentsPage,
-      { query, ...options },
+      { query: { page, reverse, size }, body, method: 'post', ...options },
     );
   }
 
@@ -84,7 +68,7 @@ export class Documents extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
     return this._client.delete(
-      `/apps/${appId}/users/${userId}/collections/${collectionId}/documents/${documentId}`,
+      `/v1/apps/${appId}/users/${userId}/collections/${collectionId}/documents/${documentId}`,
       options,
     );
   }
@@ -100,7 +84,7 @@ export class Documents extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<Document> {
     return this._client.get(
-      `/apps/${appId}/users/${userId}/collections/${collectionId}/documents/${documentId}`,
+      `/v1/apps/${appId}/users/${userId}/collections/${collectionId}/documents/${documentId}`,
       options,
     );
   }
@@ -115,7 +99,7 @@ export class Documents extends APIResource {
     query: DocumentQueryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DocumentQueryResponse> {
-    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}/documents/query`, {
+    return this._client.get(`/v1/apps/${appId}/users/${userId}/collections/${collectionId}/documents/query`, {
       query,
       ...options,
     });
@@ -165,9 +149,15 @@ export interface DocumentUpdateParams {
 }
 
 export interface DocumentListParams extends PageParams {
-  filter?: string | null;
-
+  /**
+   * Query param:
+   */
   reverse?: boolean | null;
+
+  /**
+   * Body param:
+   */
+  filter?: Record<string, unknown> | null;
 }
 
 export interface DocumentQueryParams {
