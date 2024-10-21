@@ -1,20 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as MetamessagesAPI from './metamessages';
 import { Page, type PageParams } from '../../../../pagination';
 
 export class Metamessages extends APIResource {
   /**
-   * Adds a metamessage to a session
+   * Adds a message to a session
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user session_id (int): The ID of the Session to add the metamessage to
-   * metamessage (schemas.MetamessageCreate): The Metamessage object to add
-   * containing the metamessage content and type
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
+   * session_id (int): The ID of the Session to add the message to metamessage
+   * (schemas.MeteamessageCreate): The metamessage creation object
    *
    * Returns: schemas.Metamessage: The Metamessage object of the added metamessage
    *
@@ -27,7 +25,7 @@ export class Metamessages extends APIResource {
     body: MetamessageCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Metamessage> {
-    return this._client.post(`/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages`, {
+    return this._client.post(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages`, {
       body,
       ...options,
     });
@@ -45,7 +43,7 @@ export class Metamessages extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<Metamessage> {
     return this._client.put(
-      `/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages/${metamessageId}`,
+      `/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages/${metamessageId}`,
       { body, ...options },
     );
   }
@@ -53,10 +51,10 @@ export class Metamessages extends APIResource {
   /**
    * Get all messages for a session
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user session_id (int): The ID of the Session to retrieve reverse (bool): Whether
-   * to reverse the order of the metamessages
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
+   * session_id (int): The ID of the Session to retrieve reverse (bool): Whether to
+   * reverse the order of the metamessages
    *
    * Returns: list[schemas.Message]: List of Message objects
    *
@@ -66,38 +64,23 @@ export class Metamessages extends APIResource {
     appId: string,
     userId: string,
     sessionId: string,
-    query?: MetamessageListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MetamessagesPage, Metamessage>;
-  list(
-    appId: string,
-    userId: string,
-    sessionId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MetamessagesPage, Metamessage>;
-  list(
-    appId: string,
-    userId: string,
-    sessionId: string,
-    query: MetamessageListParams | Core.RequestOptions = {},
+    params: MetamessageListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MetamessagesPage, Metamessage> {
-    if (isRequestOptions(query)) {
-      return this.list(appId, userId, sessionId, {}, query);
-    }
+    const { page, reverse, size, ...body } = params;
     return this._client.getAPIList(
-      `/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages`,
+      `/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages/list`,
       MetamessagesPage,
-      { query, ...options },
+      { query: { page, reverse, size }, body, method: 'post', ...options },
     );
   }
 
   /**
    * Get a specific Metamessage by ID
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user session_id (int): The ID of the Session to retrieve
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
+   * session_id (int): The ID of the Session to retrieve
    *
    * Returns: schemas.Session: The Session object of the requested Session
    *
@@ -112,7 +95,7 @@ export class Metamessages extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<Metamessage> {
     return this._client.get(
-      `/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages/${metamessageId}`,
+      `/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/metamessages/${metamessageId}`,
       { query, ...options },
     );
   }
@@ -165,13 +148,25 @@ export interface MetamessageUpdateParams {
 }
 
 export interface MetamessageListParams extends PageParams {
-  filter?: string | null;
+  /**
+   * Query param:
+   */
+  reverse?: boolean | null;
 
+  /**
+   * Body param:
+   */
+  filter?: Record<string, unknown> | null;
+
+  /**
+   * Body param:
+   */
   message_id?: string | null;
 
+  /**
+   * Body param:
+   */
   metamessage_type?: string | null;
-
-  reverse?: boolean | null;
 }
 
 export interface MetamessageGetParams {

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as SessionsAPI from './sessions';
 import * as MessagesAPI from './messages';
@@ -15,10 +14,9 @@ export class Sessions extends APIResource {
   /**
    * Create a Session for a User
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (uuid.UUID): The User ID representing the user, managed by
-   * the user session (schemas.SessionCreate): The Session object containing any
-   * metadata
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
+   * session (schemas.SessionCreate): The Session object containing any metadata
    *
    * Returns: schemas.Session: The Session object of the new Session
    */
@@ -28,15 +26,15 @@ export class Sessions extends APIResource {
     body: SessionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Session> {
-    return this._client.post(`/apps/${appId}/users/${userId}/sessions`, { body, ...options });
+    return this._client.post(`/v1/apps/${appId}/users/${userId}/sessions`, { body, ...options });
   }
 
   /**
    * Update the metadata of a Session
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (uuid.UUID): The User ID representing the user, managed by
-   * the user session_id (uuid.UUID): The ID of the Session to update session
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
+   * session_id (str): The ID of the Session to update session
    * (schemas.SessionUpdate): The Session object containing any new metadata
    *
    * Returns: schemas.Session: The Session object of the updated Session
@@ -48,36 +46,28 @@ export class Sessions extends APIResource {
     body: SessionUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Session> {
-    return this._client.put(`/apps/${appId}/users/${userId}/sessions/${sessionId}`, { body, ...options });
+    return this._client.put(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}`, { body, ...options });
   }
 
   /**
    * Get All Sessions for a User
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (uuid.UUID): The User ID representing the user, managed by
-   * the user
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
    *
    * Returns: list[schemas.Session]: List of Session objects
    */
   list(
     appId: string,
     userId: string,
-    query?: SessionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionsPage, Session>;
-  list(appId: string, userId: string, options?: Core.RequestOptions): Core.PagePromise<SessionsPage, Session>;
-  list(
-    appId: string,
-    userId: string,
-    query: SessionListParams | Core.RequestOptions = {},
+    params: SessionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SessionsPage, Session> {
-    if (isRequestOptions(query)) {
-      return this.list(appId, userId, {}, query);
-    }
-    return this._client.getAPIList(`/apps/${appId}/users/${userId}/sessions`, SessionsPage, {
-      query,
+    const { page, reverse, size, ...body } = params;
+    return this._client.getAPIList(`/v1/apps/${appId}/users/${userId}/sessions/list`, SessionsPage, {
+      query: { page, reverse, size },
+      body,
+      method: 'post',
       ...options,
     });
   }
@@ -85,9 +75,9 @@ export class Sessions extends APIResource {
   /**
    * Delete a session by marking it as inactive
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (uuid.UUID): The User ID representing the user, managed by
-   * the user session_id (uuid.UUID): The ID of the Session to delete
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
+   * session_id (str): The ID of the Session to delete
    *
    * Returns: dict: A message indicating that the session was deleted
    *
@@ -99,21 +89,21 @@ export class Sessions extends APIResource {
     sessionId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    return this._client.delete(`/apps/${appId}/users/${userId}/sessions/${sessionId}`, options);
+    return this._client.delete(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}`, options);
   }
 
   /**
-   * Get Chat
+   * Chat
    */
   chat(
     appId: string,
     userId: string,
     sessionId: string,
-    query: SessionChatParams,
+    body: SessionChatParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AgentChat> {
-    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}/chat`, {
-      query,
+    return this._client.post(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/chat`, {
+      body,
       ...options,
     });
   }
@@ -121,9 +111,9 @@ export class Sessions extends APIResource {
   /**
    * Get a specific session for a user by ID
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (uuid.UUID): The User ID representing the user, managed by
-   * the user session_id (uuid.UUID): The ID of the Session to retrieve
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
+   * session_id (str): The ID of the Session to retrieve
    *
    * Returns: schemas.Session: The Session object of the requested Session
    *
@@ -135,7 +125,7 @@ export class Sessions extends APIResource {
     sessionId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Session> {
-    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}`, options);
+    return this._client.get(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}`, options);
   }
 
   /**
@@ -145,11 +135,11 @@ export class Sessions extends APIResource {
     appId: string,
     userId: string,
     sessionId: string,
-    query: SessionStreamParams,
+    body: SessionStreamParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    return this._client.get(`/apps/${appId}/users/${userId}/sessions/${sessionId}/chat/stream`, {
-      query,
+    return this._client.post(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/chat/stream`, {
+      body,
       ...options,
     });
   }
@@ -190,7 +180,7 @@ export type SessionDeleteResponse = unknown;
 export type SessionStreamResponse = unknown;
 
 export interface SessionCreateParams {
-  metadata?: Record<string, unknown> | null;
+  metadata?: Record<string, unknown>;
 }
 
 export interface SessionUpdateParams {
@@ -198,19 +188,28 @@ export interface SessionUpdateParams {
 }
 
 export interface SessionListParams extends PageParams {
-  filter?: string | null;
-
-  is_active?: boolean | null;
-
+  /**
+   * Query param:
+   */
   reverse?: boolean | null;
+
+  /**
+   * Body param:
+   */
+  filter?: Record<string, unknown> | null;
+
+  /**
+   * Body param:
+   */
+  is_active?: boolean;
 }
 
 export interface SessionChatParams {
-  query: string;
+  queries: string | Array<string>;
 }
 
 export interface SessionStreamParams {
-  query: string;
+  queries: string | Array<string>;
 }
 
 export namespace Sessions {

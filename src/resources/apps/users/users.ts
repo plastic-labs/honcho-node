@@ -1,35 +1,36 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as UsersAPI from './users';
+import * as MetamessagesAPI from './metamessages';
 import * as CollectionsAPI from './collections/collections';
 import * as SessionsAPI from './sessions/sessions';
 import { Page, type PageParams } from '../../../pagination';
 
 export class Users extends APIResource {
+  metamessages: MetamessagesAPI.Metamessages = new MetamessagesAPI.Metamessages(this._client);
   sessions: SessionsAPI.Sessions = new SessionsAPI.Sessions(this._client);
   collections: CollectionsAPI.Collections = new CollectionsAPI.Collections(this._client);
 
   /**
    * Create a User
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user (schemas.UserCreate): The User object containing any metadata
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user (schemas.UserCreate): The User object containing any metadata
    *
    * Returns: schemas.User: Created User object
    */
   create(appId: string, body: UserCreateParams, options?: Core.RequestOptions): Core.APIPromise<User> {
-    return this._client.post(`/apps/${appId}/users`, { body, ...options });
+    return this._client.post(`/v1/apps/${appId}/users`, { body, ...options });
   }
 
   /**
    * Update a User
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user user (schemas.UserCreate): The User object containing any metadata
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
+   * user (schemas.UserCreate): The User object containing any metadata
    *
    * Returns: schemas.User: Updated User object
    */
@@ -39,71 +40,65 @@ export class Users extends APIResource {
     body: UserUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<User> {
-    return this._client.put(`/apps/${appId}/users/${userId}`, { body, ...options });
+    return this._client.put(`/v1/apps/${appId}/users/${userId}`, { body, ...options });
   }
 
   /**
    * Get All Users for an App
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho
    *
    * Returns: list[schemas.User]: List of User objects
    */
   list(
     appId: string,
-    query?: UserListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<UsersPage, User>;
-  list(appId: string, options?: Core.RequestOptions): Core.PagePromise<UsersPage, User>;
-  list(
-    appId: string,
-    query: UserListParams | Core.RequestOptions = {},
+    params: UserListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<UsersPage, User> {
-    if (isRequestOptions(query)) {
-      return this.list(appId, {}, query);
-    }
-    return this._client.getAPIList(`/apps/${appId}/users`, UsersPage, { query, ...options });
+    const { page, reverse, size, ...body } = params;
+    return this._client.getAPIList(`/v1/apps/${appId}/users/list`, UsersPage, {
+      query: { page, reverse, size },
+      body,
+      method: 'post',
+      ...options,
+    });
   }
 
   /**
    * Get a User
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
    *
    * Returns: schemas.User: User object
    */
   get(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<User> {
-    return this._client.get(`/apps/${appId}/users/${userId}`, options);
+    return this._client.get(`/v1/apps/${appId}/users/${userId}`, options);
   }
 
   /**
    * Get a User
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
    *
    * Returns: schemas.User: User object
    */
   getByName(appId: string, name: string, options?: Core.RequestOptions): Core.APIPromise<User> {
-    return this._client.get(`/apps/${appId}/users/name/${name}`, options);
+    return this._client.get(`/v1/apps/${appId}/users/name/${name}`, options);
   }
 
   /**
    * Get or Create a User
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (str): The User ID representing the user, managed by the
-   * user
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
    *
    * Returns: schemas.User: User object
    */
   getOrCreate(appId: string, name: string, options?: Core.RequestOptions): Core.APIPromise<User> {
-    return this._client.get(`/apps/${appId}/users/get_or_create/${name}`, options);
+    return this._client.get(`/v1/apps/${appId}/users/get_or_create/${name}`, options);
   }
 }
 
@@ -136,7 +131,7 @@ export interface User {
 export interface UserCreateParams {
   name: string;
 
-  metadata?: Record<string, unknown> | null;
+  metadata?: Record<string, unknown>;
 }
 
 export interface UserUpdateParams {
@@ -146,9 +141,15 @@ export interface UserUpdateParams {
 }
 
 export interface UserListParams extends PageParams {
-  filter?: string | null;
-
+  /**
+   * Query param:
+   */
   reverse?: boolean;
+
+  /**
+   * Body param:
+   */
+  filter?: Record<string, unknown> | null;
 }
 
 export namespace Users {
@@ -158,6 +159,8 @@ export namespace Users {
   export import UserCreateParams = UsersAPI.UserCreateParams;
   export import UserUpdateParams = UsersAPI.UserUpdateParams;
   export import UserListParams = UsersAPI.UserListParams;
+  export import Metamessages = MetamessagesAPI.Metamessages;
+  export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;
   export import Sessions = SessionsAPI.Sessions;
   export import AgentChat = SessionsAPI.AgentChat;
   export import PageSession = SessionsAPI.PageSession;
@@ -174,10 +177,8 @@ export namespace Users {
   export import Collection = CollectionsAPI.Collection;
   export import PageCollection = CollectionsAPI.PageCollection;
   export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
-  export import CollectionQueryResponse = CollectionsAPI.CollectionQueryResponse;
   export import CollectionsPage = CollectionsAPI.CollectionsPage;
   export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
   export import CollectionListParams = CollectionsAPI.CollectionListParams;
-  export import CollectionQueryParams = CollectionsAPI.CollectionQueryParams;
 }

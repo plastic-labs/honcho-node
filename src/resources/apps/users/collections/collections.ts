@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CollectionsAPI from './collections';
 import * as DocumentsAPI from './documents';
@@ -19,7 +18,7 @@ export class Collections extends APIResource {
     body: CollectionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Collection> {
-    return this._client.post(`/apps/${appId}/users/${userId}/collections`, { body, ...options });
+    return this._client.post(`/v1/apps/${appId}/users/${userId}/collections`, { body, ...options });
   }
 
   /**
@@ -32,7 +31,7 @@ export class Collections extends APIResource {
     body: CollectionUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Collection> {
-    return this._client.put(`/apps/${appId}/users/${userId}/collections/${collectionId}`, {
+    return this._client.put(`/v1/apps/${appId}/users/${userId}/collections/${collectionId}`, {
       body,
       ...options,
     });
@@ -41,34 +40,22 @@ export class Collections extends APIResource {
   /**
    * Get All Collections for a User
    *
-   * Args: app_id (uuid.UUID): The ID of the app representing the client application
-   * using honcho user_id (uuid.UUID): The User ID representing the user, managed by
-   * the user
+   * Args: app_id (str): The ID of the app representing the client application using
+   * honcho user_id (str): The User ID representing the user, managed by the user
    *
    * Returns: list[schemas.Collection]: List of Collection objects
    */
   list(
     appId: string,
     userId: string,
-    query?: CollectionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CollectionsPage, Collection>;
-  list(
-    appId: string,
-    userId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CollectionsPage, Collection>;
-  list(
-    appId: string,
-    userId: string,
-    query: CollectionListParams | Core.RequestOptions = {},
+    params: CollectionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CollectionsPage, Collection> {
-    if (isRequestOptions(query)) {
-      return this.list(appId, userId, {}, query);
-    }
-    return this._client.getAPIList(`/apps/${appId}/users/${userId}/collections`, CollectionsPage, {
-      query,
+    const { page, reverse, size, ...body } = params;
+    return this._client.getAPIList(`/v1/apps/${appId}/users/${userId}/collections/list`, CollectionsPage, {
+      query: { page, reverse, size },
+      body,
+      method: 'post',
       ...options,
     });
   }
@@ -82,7 +69,7 @@ export class Collections extends APIResource {
     collectionId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    return this._client.delete(`/apps/${appId}/users/${userId}/collections/${collectionId}`, options);
+    return this._client.delete(`/v1/apps/${appId}/users/${userId}/collections/${collectionId}`, options);
   }
 
   /**
@@ -94,7 +81,7 @@ export class Collections extends APIResource {
     collectionId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Collection> {
-    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}`, options);
+    return this._client.get(`/v1/apps/${appId}/users/${userId}/collections/${collectionId}`, options);
   }
 
   /**
@@ -106,23 +93,7 @@ export class Collections extends APIResource {
     name: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Collection> {
-    return this._client.get(`/apps/${appId}/users/${userId}/collections/name/${name}`, options);
-  }
-
-  /**
-   * Query Documents
-   */
-  query(
-    appId: string,
-    userId: string,
-    collectionId: string,
-    query: CollectionQueryParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CollectionQueryResponse> {
-    return this._client.get(`/apps/${appId}/users/${userId}/collections/${collectionId}/query`, {
-      query,
-      ...options,
-    });
+    return this._client.get(`/v1/apps/${appId}/users/${userId}/collections/name/${name}`, options);
   }
 }
 
@@ -154,8 +125,6 @@ export interface PageCollection {
 
 export type CollectionDeleteResponse = unknown;
 
-export type CollectionQueryResponse = Array<DocumentsAPI.Document>;
-
 export interface CollectionCreateParams {
   name: string;
 
@@ -169,35 +138,33 @@ export interface CollectionUpdateParams {
 }
 
 export interface CollectionListParams extends PageParams {
-  filter?: string | null;
-
+  /**
+   * Query param:
+   */
   reverse?: boolean | null;
-}
 
-export interface CollectionQueryParams {
-  query: string;
-
-  filter?: string | null;
-
-  top_k?: number;
+  /**
+   * Body param:
+   */
+  filter?: Record<string, unknown> | null;
 }
 
 export namespace Collections {
   export import Collection = CollectionsAPI.Collection;
   export import PageCollection = CollectionsAPI.PageCollection;
   export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
-  export import CollectionQueryResponse = CollectionsAPI.CollectionQueryResponse;
   export import CollectionsPage = CollectionsAPI.CollectionsPage;
   export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
   export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
   export import CollectionListParams = CollectionsAPI.CollectionListParams;
-  export import CollectionQueryParams = CollectionsAPI.CollectionQueryParams;
   export import Documents = DocumentsAPI.Documents;
   export import Document = DocumentsAPI.Document;
   export import PageDocument = DocumentsAPI.PageDocument;
   export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
+  export import DocumentQueryResponse = DocumentsAPI.DocumentQueryResponse;
   export import DocumentsPage = DocumentsAPI.DocumentsPage;
   export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
   export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
   export import DocumentListParams = DocumentsAPI.DocumentListParams;
+  export import DocumentQueryParams = DocumentsAPI.DocumentQueryParams;
 }

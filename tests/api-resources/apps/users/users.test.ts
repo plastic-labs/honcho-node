@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Honcho from 'honcho-ai';
+import Honcho from 'honcho';
 import { Response } from 'node-fetch';
 
 const client = new Honcho({
@@ -10,9 +10,7 @@ const client = new Honcho({
 
 describe('resource users', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.apps.users.create('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      name: 'name',
-    });
+    const responsePromise = client.apps.users.create('app_id', { name: 'name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,18 +21,11 @@ describe('resource users', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.apps.users.create('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      name: 'name',
-      metadata: { foo: 'bar' },
-    });
+    const response = await client.apps.users.create('app_id', { name: 'name', metadata: { foo: 'bar' } });
   });
 
   test('update', async () => {
-    const responsePromise = client.apps.users.update(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {},
-    );
+    const responsePromise = client.apps.users.update('app_id', 'user_id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,7 +36,7 @@ describe('resource users', () => {
   });
 
   test('list', async () => {
-    const responsePromise = client.apps.users.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+    const responsePromise = client.apps.users.list('app_id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -55,29 +46,8 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.apps.users.list('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Honcho.NotFoundError);
-  });
-
-  test('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.apps.users.list(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { filter: 'filter', page: 1, reverse: true, size: 1 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Honcho.NotFoundError);
-  });
-
   test('get', async () => {
-    const responsePromise = client.apps.users.get(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
+    const responsePromise = client.apps.users.get('app_id', 'user_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -90,14 +60,12 @@ describe('resource users', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apps.users.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-        path: '/_stainless_unknown_path',
-      }),
+      client.apps.users.get('app_id', 'user_id', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Honcho.NotFoundError);
   });
 
   test('getByName', async () => {
-    const responsePromise = client.apps.users.getByName('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'name');
+    const responsePromise = client.apps.users.getByName('app_id', 'name');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -110,14 +78,12 @@ describe('resource users', () => {
   test('getByName: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apps.users.getByName('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'name', {
-        path: '/_stainless_unknown_path',
-      }),
+      client.apps.users.getByName('app_id', 'name', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Honcho.NotFoundError);
   });
 
   test('getOrCreate', async () => {
-    const responsePromise = client.apps.users.getOrCreate('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'name');
+    const responsePromise = client.apps.users.getOrCreate('app_id', 'name');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -130,9 +96,7 @@ describe('resource users', () => {
   test('getOrCreate: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apps.users.getOrCreate('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', 'name', {
-        path: '/_stainless_unknown_path',
-      }),
+      client.apps.users.getOrCreate('app_id', 'name', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Honcho.NotFoundError);
   });
 });

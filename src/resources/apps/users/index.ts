@@ -18,14 +18,13 @@ export {
   Collection,
   PageCollection,
   CollectionDeleteResponse,
-  CollectionQueryResponse,
   CollectionCreateParams,
   CollectionUpdateParams,
   CollectionListParams,
-  CollectionQueryParams,
   CollectionsPage,
   Collections,
 } from './collections/index';
+export { MetamessageListParams, Metamessages } from './metamessages';
 export {
   PageUser,
   User,

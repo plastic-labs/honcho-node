@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Honcho from 'honcho-ai';
+import Honcho from 'honcho';
 import { Response } from 'node-fetch';
 
 const client = new Honcho({
@@ -10,12 +10,10 @@ const client = new Honcho({
 
 describe('resource messages', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.apps.users.sessions.messages.create(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { content: 'content', is_user: true },
-    );
+    const responsePromise = client.apps.users.sessions.messages.create('app_id', 'user_id', 'session_id', {
+      content: 'content',
+      is_user: true,
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,20 +24,19 @@ describe('resource messages', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.apps.users.sessions.messages.create(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { content: 'content', is_user: true, metadata: { foo: 'bar' } },
-    );
+    const response = await client.apps.users.sessions.messages.create('app_id', 'user_id', 'session_id', {
+      content: 'content',
+      is_user: true,
+      metadata: { foo: 'bar' },
+    });
   });
 
   test('update', async () => {
     const responsePromise = client.apps.users.sessions.messages.update(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'app_id',
+      'user_id',
+      'session_id',
+      'message_id',
       {},
     );
     const rawResponse = await responsePromise.asResponse();
@@ -52,11 +49,7 @@ describe('resource messages', () => {
   });
 
   test('list', async () => {
-    const responsePromise = client.apps.users.sessions.messages.list(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
+    const responsePromise = client.apps.users.sessions.messages.list('app_id', 'user_id', 'session_id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,37 +59,12 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.apps.users.sessions.messages.list(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Honcho.NotFoundError);
-  });
-
-  test('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.apps.users.sessions.messages.list(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { filter: 'filter', page: 1, reverse: true, size: 1 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Honcho.NotFoundError);
-  });
-
   test('get', async () => {
     const responsePromise = client.apps.users.sessions.messages.get(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      'app_id',
+      'user_id',
+      'session_id',
+      'message_id',
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -110,13 +78,9 @@ describe('resource messages', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apps.users.sessions.messages.get(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.apps.users.sessions.messages.get('app_id', 'user_id', 'session_id', 'message_id', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Honcho.NotFoundError);
   });
 });
