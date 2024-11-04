@@ -1,11 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Errors from './error';
-import * as Uploads from './uploads';
 import { type Agent } from './_shims/index';
 import * as Core from './core';
+import * as Errors from './error';
 import * as Pagination from './pagination';
+import { type PageParams, PageResponse } from './pagination';
+import * as Uploads from './uploads';
 import * as API from './resources/index';
+import { App, AppCreateParams, AppUpdateParams, Apps } from './resources/apps/apps';
 
 const environments = {
   demo: 'https://demo.honcho.dev',
@@ -178,7 +180,7 @@ export class Honcho extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export const {
+export {
   HonchoError,
   APIError,
   APIConnectionError,
@@ -192,22 +194,25 @@ export const {
   InternalServerError,
   PermissionDeniedError,
   UnprocessableEntityError,
-} = Errors;
+} from './error';
 
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
 
-export namespace Honcho {
-  export import RequestOptions = Core.RequestOptions;
+Honcho.Apps = Apps;
+
+export declare namespace Honcho {
+  export type RequestOptions = Core.RequestOptions;
 
   export import Page = Pagination.Page;
-  export import PageParams = Pagination.PageParams;
-  export import PageResponse = Pagination.PageResponse;
+  export { type PageParams as PageParams, type PageResponse as PageResponse };
 
-  export import Apps = API.Apps;
-  export import App = API.App;
-  export import AppCreateParams = API.AppCreateParams;
-  export import AppUpdateParams = API.AppUpdateParams;
+  export {
+    Apps as Apps,
+    type App as App,
+    type AppCreateParams as AppCreateParams,
+    type AppUpdateParams as AppUpdateParams,
+  };
 }
 
 export default Honcho;
