@@ -1,24 +1,24 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Collection,
-  PageCollection,
-  CollectionDeleteResponse,
-  CollectionCreateParams,
-  CollectionUpdateParams,
-  CollectionListParams,
   CollectionsPage,
   Collections,
+  type Collection,
+  type PageCollection,
+  type CollectionDeleteResponse,
+  type CollectionCreateParams,
+  type CollectionUpdateParams,
+  type CollectionListParams,
 } from './collections';
 export {
-  Document,
-  PageDocument,
-  DocumentDeleteResponse,
-  DocumentQueryResponse,
-  DocumentCreateParams,
-  DocumentUpdateParams,
-  DocumentListParams,
-  DocumentQueryParams,
   DocumentsPage,
   Documents,
+  type Document,
+  type PageDocument,
+  type DocumentDeleteResponse,
+  type DocumentQueryResponse,
+  type DocumentCreateParams,
+  type DocumentUpdateParams,
+  type DocumentListParams,
+  type DocumentQueryParams,
 } from './documents';

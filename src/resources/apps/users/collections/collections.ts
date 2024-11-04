@@ -2,8 +2,19 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as CollectionsAPI from './collections';
 import * as DocumentsAPI from './documents';
+import {
+  Document,
+  DocumentCreateParams,
+  DocumentDeleteResponse,
+  DocumentListParams,
+  DocumentQueryParams,
+  DocumentQueryResponse,
+  DocumentUpdateParams,
+  Documents,
+  DocumentsPage,
+  PageDocument,
+} from './documents';
 import { Page, type PageParams } from '../../../../pagination';
 
 export class Collections extends APIResource {
@@ -149,22 +160,31 @@ export interface CollectionListParams extends PageParams {
   filter?: Record<string, unknown> | null;
 }
 
-export namespace Collections {
-  export import Collection = CollectionsAPI.Collection;
-  export import PageCollection = CollectionsAPI.PageCollection;
-  export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
-  export import CollectionsPage = CollectionsAPI.CollectionsPage;
-  export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
-  export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
-  export import CollectionListParams = CollectionsAPI.CollectionListParams;
-  export import Documents = DocumentsAPI.Documents;
-  export import Document = DocumentsAPI.Document;
-  export import PageDocument = DocumentsAPI.PageDocument;
-  export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
-  export import DocumentQueryResponse = DocumentsAPI.DocumentQueryResponse;
-  export import DocumentsPage = DocumentsAPI.DocumentsPage;
-  export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
-  export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
-  export import DocumentListParams = DocumentsAPI.DocumentListParams;
-  export import DocumentQueryParams = DocumentsAPI.DocumentQueryParams;
+Collections.CollectionsPage = CollectionsPage;
+Collections.Documents = Documents;
+Collections.DocumentsPage = DocumentsPage;
+
+export declare namespace Collections {
+  export {
+    type Collection as Collection,
+    type PageCollection as PageCollection,
+    type CollectionDeleteResponse as CollectionDeleteResponse,
+    CollectionsPage as CollectionsPage,
+    type CollectionCreateParams as CollectionCreateParams,
+    type CollectionUpdateParams as CollectionUpdateParams,
+    type CollectionListParams as CollectionListParams,
+  };
+
+  export {
+    Documents as Documents,
+    type Document as Document,
+    type PageDocument as PageDocument,
+    type DocumentDeleteResponse as DocumentDeleteResponse,
+    type DocumentQueryResponse as DocumentQueryResponse,
+    DocumentsPage as DocumentsPage,
+    type DocumentCreateParams as DocumentCreateParams,
+    type DocumentUpdateParams as DocumentUpdateParams,
+    type DocumentListParams as DocumentListParams,
+    type DocumentQueryParams as DocumentQueryParams,
+  };
 }

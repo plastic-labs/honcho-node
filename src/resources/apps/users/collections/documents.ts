@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as DocumentsAPI from './documents';
 import { Page, type PageParams } from '../../../../pagination';
 
 export class Documents extends APIResource {
@@ -168,14 +167,18 @@ export interface DocumentQueryParams {
   top_k?: number;
 }
 
-export namespace Documents {
-  export import Document = DocumentsAPI.Document;
-  export import PageDocument = DocumentsAPI.PageDocument;
-  export import DocumentDeleteResponse = DocumentsAPI.DocumentDeleteResponse;
-  export import DocumentQueryResponse = DocumentsAPI.DocumentQueryResponse;
-  export import DocumentsPage = DocumentsAPI.DocumentsPage;
-  export import DocumentCreateParams = DocumentsAPI.DocumentCreateParams;
-  export import DocumentUpdateParams = DocumentsAPI.DocumentUpdateParams;
-  export import DocumentListParams = DocumentsAPI.DocumentListParams;
-  export import DocumentQueryParams = DocumentsAPI.DocumentQueryParams;
+Documents.DocumentsPage = DocumentsPage;
+
+export declare namespace Documents {
+  export {
+    type Document as Document,
+    type PageDocument as PageDocument,
+    type DocumentDeleteResponse as DocumentDeleteResponse,
+    type DocumentQueryResponse as DocumentQueryResponse,
+    DocumentsPage as DocumentsPage,
+    type DocumentCreateParams as DocumentCreateParams,
+    type DocumentUpdateParams as DocumentUpdateParams,
+    type DocumentListParams as DocumentListParams,
+    type DocumentQueryParams as DocumentQueryParams,
+  };
 }

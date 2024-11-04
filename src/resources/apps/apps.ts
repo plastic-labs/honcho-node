@@ -2,8 +2,16 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AppsAPI from './apps';
 import * as UsersAPI from './users/users';
+import {
+  PageUser,
+  User,
+  UserCreateParams,
+  UserListParams,
+  UserUpdateParams,
+  Users,
+  UsersPage,
+} from './users/users';
 
 export class Apps extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
@@ -87,15 +95,23 @@ export interface AppUpdateParams {
   name?: string | null;
 }
 
-export namespace Apps {
-  export import App = AppsAPI.App;
-  export import AppCreateParams = AppsAPI.AppCreateParams;
-  export import AppUpdateParams = AppsAPI.AppUpdateParams;
-  export import Users = UsersAPI.Users;
-  export import PageUser = UsersAPI.PageUser;
-  export import User = UsersAPI.User;
-  export import UsersPage = UsersAPI.UsersPage;
-  export import UserCreateParams = UsersAPI.UserCreateParams;
-  export import UserUpdateParams = UsersAPI.UserUpdateParams;
-  export import UserListParams = UsersAPI.UserListParams;
+Apps.Users = Users;
+Apps.UsersPage = UsersPage;
+
+export declare namespace Apps {
+  export {
+    type App as App,
+    type AppCreateParams as AppCreateParams,
+    type AppUpdateParams as AppUpdateParams,
+  };
+
+  export {
+    Users as Users,
+    type PageUser as PageUser,
+    type User as User,
+    UsersPage as UsersPage,
+    type UserCreateParams as UserCreateParams,
+    type UserUpdateParams as UserUpdateParams,
+    type UserListParams as UserListParams,
+  };
 }
