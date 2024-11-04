@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as MetamessagesAPI from './metamessages';
 import * as SessionsMetamessagesAPI from './sessions/metamessages';
 import { MetamessagesPage } from './sessions/metamessages';
 import { type PageParams } from '../../../pagination';
@@ -52,8 +51,8 @@ export interface MetamessageListParams extends PageParams {
   metamessage_type?: string | null;
 }
 
-export namespace Metamessages {
-  export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;
+export declare namespace Metamessages {
+  export { type MetamessageListParams as MetamessageListParams };
 }
 
 export { MetamessagesPage };

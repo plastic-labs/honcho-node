@@ -2,10 +2,34 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as UsersAPI from './users';
 import * as MetamessagesAPI from './metamessages';
+import { MetamessageListParams, Metamessages } from './metamessages';
 import * as CollectionsAPI from './collections/collections';
+import {
+  Collection,
+  CollectionCreateParams,
+  CollectionDeleteResponse,
+  CollectionListParams,
+  CollectionUpdateParams,
+  Collections,
+  CollectionsPage,
+  PageCollection,
+} from './collections/collections';
 import * as SessionsAPI from './sessions/sessions';
+import {
+  AgentChat,
+  PageSession,
+  Session,
+  SessionChatParams,
+  SessionCreateParams,
+  SessionDeleteResponse,
+  SessionListParams,
+  SessionStreamParams,
+  SessionStreamResponse,
+  SessionUpdateParams,
+  Sessions,
+  SessionsPage,
+} from './sessions/sessions';
 import { Page, type PageParams } from '../../../pagination';
 
 export class Users extends APIResource {
@@ -152,33 +176,48 @@ export interface UserListParams extends PageParams {
   filter?: Record<string, unknown> | null;
 }
 
-export namespace Users {
-  export import PageUser = UsersAPI.PageUser;
-  export import User = UsersAPI.User;
-  export import UsersPage = UsersAPI.UsersPage;
-  export import UserCreateParams = UsersAPI.UserCreateParams;
-  export import UserUpdateParams = UsersAPI.UserUpdateParams;
-  export import UserListParams = UsersAPI.UserListParams;
-  export import Metamessages = MetamessagesAPI.Metamessages;
-  export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;
-  export import Sessions = SessionsAPI.Sessions;
-  export import AgentChat = SessionsAPI.AgentChat;
-  export import PageSession = SessionsAPI.PageSession;
-  export import Session = SessionsAPI.Session;
-  export import SessionDeleteResponse = SessionsAPI.SessionDeleteResponse;
-  export import SessionStreamResponse = SessionsAPI.SessionStreamResponse;
-  export import SessionsPage = SessionsAPI.SessionsPage;
-  export import SessionCreateParams = SessionsAPI.SessionCreateParams;
-  export import SessionUpdateParams = SessionsAPI.SessionUpdateParams;
-  export import SessionListParams = SessionsAPI.SessionListParams;
-  export import SessionChatParams = SessionsAPI.SessionChatParams;
-  export import SessionStreamParams = SessionsAPI.SessionStreamParams;
-  export import Collections = CollectionsAPI.Collections;
-  export import Collection = CollectionsAPI.Collection;
-  export import PageCollection = CollectionsAPI.PageCollection;
-  export import CollectionDeleteResponse = CollectionsAPI.CollectionDeleteResponse;
-  export import CollectionsPage = CollectionsAPI.CollectionsPage;
-  export import CollectionCreateParams = CollectionsAPI.CollectionCreateParams;
-  export import CollectionUpdateParams = CollectionsAPI.CollectionUpdateParams;
-  export import CollectionListParams = CollectionsAPI.CollectionListParams;
+Users.UsersPage = UsersPage;
+Users.Metamessages = Metamessages;
+Users.Sessions = Sessions;
+Users.SessionsPage = SessionsPage;
+Users.Collections = Collections;
+Users.CollectionsPage = CollectionsPage;
+
+export declare namespace Users {
+  export {
+    type PageUser as PageUser,
+    type User as User,
+    UsersPage as UsersPage,
+    type UserCreateParams as UserCreateParams,
+    type UserUpdateParams as UserUpdateParams,
+    type UserListParams as UserListParams,
+  };
+
+  export { Metamessages as Metamessages, type MetamessageListParams as MetamessageListParams };
+
+  export {
+    Sessions as Sessions,
+    type AgentChat as AgentChat,
+    type PageSession as PageSession,
+    type Session as Session,
+    type SessionDeleteResponse as SessionDeleteResponse,
+    type SessionStreamResponse as SessionStreamResponse,
+    SessionsPage as SessionsPage,
+    type SessionCreateParams as SessionCreateParams,
+    type SessionUpdateParams as SessionUpdateParams,
+    type SessionListParams as SessionListParams,
+    type SessionChatParams as SessionChatParams,
+    type SessionStreamParams as SessionStreamParams,
+  };
+
+  export {
+    Collections as Collections,
+    type Collection as Collection,
+    type PageCollection as PageCollection,
+    type CollectionDeleteResponse as CollectionDeleteResponse,
+    CollectionsPage as CollectionsPage,
+    type CollectionCreateParams as CollectionCreateParams,
+    type CollectionUpdateParams as CollectionUpdateParams,
+    type CollectionListParams as CollectionListParams,
+  };
 }

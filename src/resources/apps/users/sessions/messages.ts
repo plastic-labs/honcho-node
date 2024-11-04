@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as MessagesAPI from './messages';
 import { Page, type PageParams } from '../../../../pagination';
 
 export class Messages extends APIResource {
@@ -145,11 +144,15 @@ export interface MessageListParams extends PageParams {
   filter?: Record<string, unknown> | null;
 }
 
-export namespace Messages {
-  export import Message = MessagesAPI.Message;
-  export import PageMessage = MessagesAPI.PageMessage;
-  export import MessagesPage = MessagesAPI.MessagesPage;
-  export import MessageCreateParams = MessagesAPI.MessageCreateParams;
-  export import MessageUpdateParams = MessagesAPI.MessageUpdateParams;
-  export import MessageListParams = MessagesAPI.MessageListParams;
+Messages.MessagesPage = MessagesPage;
+
+export declare namespace Messages {
+  export {
+    type Message as Message,
+    type PageMessage as PageMessage,
+    MessagesPage as MessagesPage,
+    type MessageCreateParams as MessageCreateParams,
+    type MessageUpdateParams as MessageUpdateParams,
+    type MessageListParams as MessageListParams,
+  };
 }

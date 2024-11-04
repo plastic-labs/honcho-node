@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as MetamessagesAPI from './metamessages';
 import { Page, type PageParams } from '../../../../pagination';
 
 export class Metamessages extends APIResource {
@@ -173,12 +172,16 @@ export interface MetamessageGetParams {
   message_id: string;
 }
 
-export namespace Metamessages {
-  export import Metamessage = MetamessagesAPI.Metamessage;
-  export import PageMetamessage = MetamessagesAPI.PageMetamessage;
-  export import MetamessagesPage = MetamessagesAPI.MetamessagesPage;
-  export import MetamessageCreateParams = MetamessagesAPI.MetamessageCreateParams;
-  export import MetamessageUpdateParams = MetamessagesAPI.MetamessageUpdateParams;
-  export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;
-  export import MetamessageGetParams = MetamessagesAPI.MetamessageGetParams;
+Metamessages.MetamessagesPage = MetamessagesPage;
+
+export declare namespace Metamessages {
+  export {
+    type Metamessage as Metamessage,
+    type PageMetamessage as PageMetamessage,
+    MetamessagesPage as MetamessagesPage,
+    type MetamessageCreateParams as MetamessageCreateParams,
+    type MetamessageUpdateParams as MetamessageUpdateParams,
+    type MetamessageListParams as MetamessageListParams,
+    type MetamessageGetParams as MetamessageGetParams,
+  };
 }
