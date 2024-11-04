@@ -2,9 +2,27 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as SessionsAPI from './sessions';
 import * as MessagesAPI from './messages';
+import {
+  Message,
+  MessageCreateParams,
+  MessageListParams,
+  MessageUpdateParams,
+  Messages,
+  MessagesPage,
+  PageMessage,
+} from './messages';
 import * as MetamessagesAPI from './metamessages';
+import {
+  Metamessage,
+  MetamessageCreateParams,
+  MetamessageGetParams,
+  MetamessageListParams,
+  MetamessageUpdateParams,
+  Metamessages,
+  MetamessagesPage,
+  PageMetamessage,
+} from './metamessages';
 import { Page, type PageParams } from '../../../../pagination';
 
 export class Sessions extends APIResource {
@@ -212,31 +230,45 @@ export interface SessionStreamParams {
   queries: string | Array<string>;
 }
 
-export namespace Sessions {
-  export import AgentChat = SessionsAPI.AgentChat;
-  export import PageSession = SessionsAPI.PageSession;
-  export import Session = SessionsAPI.Session;
-  export import SessionDeleteResponse = SessionsAPI.SessionDeleteResponse;
-  export import SessionStreamResponse = SessionsAPI.SessionStreamResponse;
-  export import SessionsPage = SessionsAPI.SessionsPage;
-  export import SessionCreateParams = SessionsAPI.SessionCreateParams;
-  export import SessionUpdateParams = SessionsAPI.SessionUpdateParams;
-  export import SessionListParams = SessionsAPI.SessionListParams;
-  export import SessionChatParams = SessionsAPI.SessionChatParams;
-  export import SessionStreamParams = SessionsAPI.SessionStreamParams;
-  export import Messages = MessagesAPI.Messages;
-  export import Message = MessagesAPI.Message;
-  export import PageMessage = MessagesAPI.PageMessage;
-  export import MessagesPage = MessagesAPI.MessagesPage;
-  export import MessageCreateParams = MessagesAPI.MessageCreateParams;
-  export import MessageUpdateParams = MessagesAPI.MessageUpdateParams;
-  export import MessageListParams = MessagesAPI.MessageListParams;
-  export import Metamessages = MetamessagesAPI.Metamessages;
-  export import Metamessage = MetamessagesAPI.Metamessage;
-  export import PageMetamessage = MetamessagesAPI.PageMetamessage;
-  export import MetamessagesPage = MetamessagesAPI.MetamessagesPage;
-  export import MetamessageCreateParams = MetamessagesAPI.MetamessageCreateParams;
-  export import MetamessageUpdateParams = MetamessagesAPI.MetamessageUpdateParams;
-  export import MetamessageListParams = MetamessagesAPI.MetamessageListParams;
-  export import MetamessageGetParams = MetamessagesAPI.MetamessageGetParams;
+Sessions.SessionsPage = SessionsPage;
+Sessions.Messages = Messages;
+Sessions.MessagesPage = MessagesPage;
+Sessions.Metamessages = Metamessages;
+Sessions.MetamessagesPage = MetamessagesPage;
+
+export declare namespace Sessions {
+  export {
+    type AgentChat as AgentChat,
+    type PageSession as PageSession,
+    type Session as Session,
+    type SessionDeleteResponse as SessionDeleteResponse,
+    type SessionStreamResponse as SessionStreamResponse,
+    SessionsPage as SessionsPage,
+    type SessionCreateParams as SessionCreateParams,
+    type SessionUpdateParams as SessionUpdateParams,
+    type SessionListParams as SessionListParams,
+    type SessionChatParams as SessionChatParams,
+    type SessionStreamParams as SessionStreamParams,
+  };
+
+  export {
+    Messages as Messages,
+    type Message as Message,
+    type PageMessage as PageMessage,
+    MessagesPage as MessagesPage,
+    type MessageCreateParams as MessageCreateParams,
+    type MessageUpdateParams as MessageUpdateParams,
+    type MessageListParams as MessageListParams,
+  };
+
+  export {
+    Metamessages as Metamessages,
+    type Metamessage as Metamessage,
+    type PageMetamessage as PageMetamessage,
+    MetamessagesPage as MetamessagesPage,
+    type MetamessageCreateParams as MetamessageCreateParams,
+    type MetamessageUpdateParams as MetamessageUpdateParams,
+    type MetamessageListParams as MetamessageListParams,
+    type MetamessageGetParams as MetamessageGetParams,
+  };
 }
