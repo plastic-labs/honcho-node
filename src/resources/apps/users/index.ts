@@ -23,6 +23,7 @@ export {
   type SessionUpdateParams,
   type SessionListParams,
   type SessionChatParams,
+  type SessionCloneParams,
   type SessionStreamParams,
 } from './sessions/index';
 export {

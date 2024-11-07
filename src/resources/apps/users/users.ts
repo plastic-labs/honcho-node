@@ -21,6 +21,7 @@ import {
   PageSession,
   Session,
   SessionChatParams,
+  SessionCloneParams,
   SessionCreateParams,
   SessionDeleteResponse,
   SessionListParams,
@@ -207,6 +208,7 @@ export declare namespace Users {
     type SessionUpdateParams as SessionUpdateParams,
     type SessionListParams as SessionListParams,
     type SessionChatParams as SessionChatParams,
+    type SessionCloneParams as SessionCloneParams,
     type SessionStreamParams as SessionStreamParams,
   };
 
