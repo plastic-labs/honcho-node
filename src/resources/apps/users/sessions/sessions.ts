@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as MessagesAPI from './messages';
 import {
@@ -127,6 +128,38 @@ export class Sessions extends APIResource {
   }
 
   /**
+   * Clone Session
+   */
+  clone(
+    appId: string,
+    userId: string,
+    sessionId: string,
+    query?: SessionCloneParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Session>;
+  clone(
+    appId: string,
+    userId: string,
+    sessionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Session>;
+  clone(
+    appId: string,
+    userId: string,
+    sessionId: string,
+    query: SessionCloneParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Session> {
+    if (isRequestOptions(query)) {
+      return this.clone(appId, userId, sessionId, {}, query);
+    }
+    return this._client.get(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/clone`, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Get a specific session for a user by ID
    *
    * Args: app_id (str): The ID of the app representing the client application using
@@ -226,6 +259,12 @@ export interface SessionChatParams {
   queries: string | Array<string>;
 }
 
+export interface SessionCloneParams {
+  deep_copy?: boolean;
+
+  message_id?: string | null;
+}
+
 export interface SessionStreamParams {
   queries: string | Array<string>;
 }
@@ -248,6 +287,7 @@ export declare namespace Sessions {
     type SessionUpdateParams as SessionUpdateParams,
     type SessionListParams as SessionListParams,
     type SessionChatParams as SessionChatParams,
+    type SessionCloneParams as SessionCloneParams,
     type SessionStreamParams as SessionStreamParams,
   };
 

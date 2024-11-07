@@ -51,6 +51,7 @@ Methods:
 - <code title="post /v1/apps/{app_id}/users/{user_id}/sessions/list">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">list</a>(appId, userId, { ...params }) -> SessionsPage</code>
 - <code title="delete /v1/apps/{app_id}/users/{user_id}/sessions/{session_id}">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">delete</a>(appId, userId, sessionId) -> unknown</code>
 - <code title="post /v1/apps/{app_id}/users/{user_id}/sessions/{session_id}/chat">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">chat</a>(appId, userId, sessionId, { ...params }) -> AgentChat</code>
+- <code title="get /v1/apps/{app_id}/users/{user_id}/sessions/{session_id}/clone">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">clone</a>(appId, userId, sessionId, { ...params }) -> Session</code>
 - <code title="get /v1/apps/{app_id}/users/{user_id}/sessions/{session_id}">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">get</a>(appId, userId, sessionId) -> Session</code>
 - <code title="post /v1/apps/{app_id}/users/{user_id}/sessions/{session_id}/chat/stream">client.apps.users.sessions.<a href="./src/resources/apps/users/sessions/sessions.ts">stream</a>(appId, userId, sessionId, { ...params }) -> unknown</code>
 
