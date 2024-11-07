@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0 (2024-11-07)
+
+Full Changelog: [v0.0.7...v0.1.0](https://github.com/plastic-labs/honcho-node/compare/v0.0.7...v0.1.0)
+
+### Features
+
+* **api:** Add cloning feature ([#48](https://github.com/plastic-labs/honcho-node/issues/48)) ([54d640b](https://github.com/plastic-labs/honcho-node/commit/54d640b19ca9609d80eb2061e7bb0d62eacee395))
+
+
+### Chores
+
+* rebuild project due to codegen change ([#46](https://github.com/plastic-labs/honcho-node/issues/46)) ([d4f3332](https://github.com/plastic-labs/honcho-node/commit/d4f3332230439cf63e6b4b90602c63c94f04820d))
+
 ## 0.0.7 (2024-10-21)
 
 Full Changelog: [v0.0.6...v0.0.7](https://github.com/plastic-labs/honcho-node/compare/v0.0.6...v0.0.7)
