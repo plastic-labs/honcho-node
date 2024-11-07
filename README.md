@@ -1,6 +1,6 @@
 # honcho-ai API Library
 
-[![NPM version](https://img.shields.io/npm/v/honcho-ai.svg)](https://npmjs.org/package/honcho-ai) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/honcho-ai)
+[![NPM version](https://img.shields.io/npm/v/honcho.svg)](https://npmjs.org/package/honcho) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/honcho)
 
 This library provides convenient access to the Honcho REST API from server-side TypeScript or JavaScript.
 
@@ -11,7 +11,7 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 ## Installation
 
 ```sh
-npm install honcho-ai
+npm install honcho
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Honcho from 'honcho-ai';
+import Honcho from 'honcho';
 
 const client = new Honcho({
   apiKey: process.env['HONCHO_API_KEY'], // This is the default and can be omitted
@@ -42,7 +42,7 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Honcho from 'honcho-ai';
+import Honcho from 'honcho';
 
 const client = new Honcho({
   apiKey: process.env['HONCHO_API_KEY'], // This is the default and can be omitted
@@ -244,11 +244,11 @@ add the following import before your first import `from "Honcho"`:
 ```ts
 // Tell TypeScript and the package to use the global web fetch instead of node-fetch.
 // Note, despite the name, this does not add any polyfills, but expects them to be provided if needed.
-import 'honcho-ai/shims/web';
-import Honcho from 'honcho-ai';
+import 'honcho/shims/web';
+import Honcho from 'honcho';
 ```
 
-To do the inverse, add `import "honcho-ai/shims/node"` (which does import polyfills).
+To do the inverse, add `import "honcho/shims/node"` (which does import polyfills).
 This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/plastic-labs/honcho-node/tree/main/src/_shims#readme)).
 
 ### Logging and middleware
@@ -258,7 +258,7 @@ which can be used to inspect or alter the `Request` or `Response` before/after e
 
 ```ts
 import { fetch } from 'undici'; // as one example
-import Honcho from 'honcho-ai';
+import Honcho from 'honcho';
 
 const client = new Honcho({
   fetch: async (url: RequestInfo, init?: RequestInit): Promise<Response> => {
