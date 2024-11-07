@@ -1,6 +1,6 @@
 {
-  "name": "honcho",
-  "version": "0.1.0",
+  "name": "honcho-ai",
+  "version": "0.0.8",
   "description": "The official TypeScript library for the Honcho API",
   "author": "Honcho <hello@plasticlabs.ai>",
   "types": "dist/index.d.ts",
