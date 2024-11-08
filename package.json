@@ -60,8 +60,8 @@
     "./shims/web.mjs"
   ],
   "imports": {
-    "honcho": ".",
-    "honcho/*": "./src/*"
+    "honcho-ai": ".",
+    "honcho-ai/*": "./src/*"
   },
   "exports": {
     "./_shims/auto/*": {
