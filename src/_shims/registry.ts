@@ -42,11 +42,13 @@ export let isFsReadStream: Shims['isFsReadStream'] | undefined = undefined;
 export function setShims(shims: Shims, options: { auto: boolean } = { auto: false }) {
   if (auto) {
     throw new Error(
-      `you must \`import 'honcho/shims/${shims.kind}'\` before importing anything else from honcho`,
+      `you must \`import 'honcho-ai/shims/${shims.kind}'\` before importing anything else from honcho-ai`,
     );
   }
   if (kind) {
-    throw new Error(`can't \`import 'honcho/shims/${shims.kind}'\` after \`import 'honcho/shims/${kind}'\``);
+    throw new Error(
+      `can't \`import 'honcho-ai/shims/${shims.kind}'\` after \`import 'honcho-ai/shims/${kind}'\``,
+    );
   }
   auto = options.auto;
   kind = shims.kind;
