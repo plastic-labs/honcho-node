@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.9 (2024-11-08)
+
+Full Changelog: [v0.0.8...v0.0.9](https://github.com/plastic-labs/honcho-node/compare/v0.0.8...v0.0.9)
+
+### Bug Fixes
+
+* **api:** swap package name back ([982e6e4](https://github.com/plastic-labs/honcho-node/commit/982e6e45c32d24ae98054b4a2ae0a65652c0a812))
+
 ## 0.0.8 (2024-11-07)
 
 Full Changelog: [v0.1.0...v0.0.8](https://github.com/plastic-labs/honcho-node/compare/v0.1.0...v0.0.8)
