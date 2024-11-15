@@ -39,25 +39,14 @@ export class Users extends APIResource {
   collections: CollectionsAPI.Collections = new CollectionsAPI.Collections(this._client);
 
   /**
-   * Create a User
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user (schemas.UserCreate): The User object containing any metadata
-   *
-   * Returns: schemas.User: Created User object
+   * Create a new User
    */
   create(appId: string, body: UserCreateParams, options?: Core.RequestOptions): Core.APIPromise<User> {
     return this._client.post(`/v1/apps/${appId}/users`, { body, ...options });
   }
 
   /**
-   * Update a User
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   * user (schemas.UserCreate): The User object containing any metadata
-   *
-   * Returns: schemas.User: Updated User object
+   * Update a User's name and/or metadata
    */
   update(
     appId: string,
@@ -70,11 +59,6 @@ export class Users extends APIResource {
 
   /**
    * Get All Users for an App
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho
-   *
-   * Returns: list[schemas.User]: List of User objects
    */
   list(
     appId: string,
@@ -91,36 +75,21 @@ export class Users extends APIResource {
   }
 
   /**
-   * Get a User
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   *
-   * Returns: schemas.User: User object
+   * Get a User by ID
    */
   get(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<User> {
     return this._client.get(`/v1/apps/${appId}/users/${userId}`, options);
   }
 
   /**
-   * Get a User
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   *
-   * Returns: schemas.User: User object
+   * Get a User by name
    */
   getByName(appId: string, name: string, options?: Core.RequestOptions): Core.APIPromise<User> {
     return this._client.get(`/v1/apps/${appId}/users/name/${name}`, options);
   }
 
   /**
-   * Get or Create a User
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   *
-   * Returns: schemas.User: User object
+   * Get a User or create a new one by the input name
    */
   getOrCreate(appId: string, name: string, options?: Core.RequestOptions): Core.APIPromise<User> {
     return this._client.get(`/v1/apps/${appId}/users/get_or_create/${name}`, options);

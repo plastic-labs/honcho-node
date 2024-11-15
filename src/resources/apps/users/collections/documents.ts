@@ -6,7 +6,7 @@ import { Page, type PageParams } from '../../../../pagination';
 
 export class Documents extends APIResource {
   /**
-   * Create Document
+   * Embed text as a vector and create a Document
    */
   create(
     appId: string,
@@ -22,7 +22,7 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Update Document
+   * Update the content and/or the metadata of a Document
    */
   update(
     appId: string,
@@ -39,7 +39,7 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Get Documents
+   * Get all of the Documents in a Collection
    */
   list(
     appId: string,
@@ -57,7 +57,7 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Delete Document
+   * Delete a Document by ID
    */
   delete(
     appId: string,
@@ -73,7 +73,7 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Get Document
+   * Get a document by ID
    */
   get(
     appId: string,
@@ -89,19 +89,19 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Query Documents
+   * Cosine Similarity Search for Documents
    */
   query(
     appId: string,
     userId: string,
     collectionId: string,
-    query: DocumentQueryParams,
+    body: DocumentQueryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DocumentQueryResponse> {
-    return this._client.get(`/v1/apps/${appId}/users/${userId}/collections/${collectionId}/documents/query`, {
-      query,
-      ...options,
-    });
+    return this._client.post(
+      `/v1/apps/${appId}/users/${userId}/collections/${collectionId}/documents/query`,
+      { body, ...options },
+    );
   }
 }
 
@@ -162,7 +162,7 @@ export interface DocumentListParams extends PageParams {
 export interface DocumentQueryParams {
   query: string;
 
-  filter?: string | null;
+  filter?: Record<string, unknown> | null;
 
   top_k?: number;
 }
