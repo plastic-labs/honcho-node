@@ -32,12 +32,6 @@ export class Sessions extends APIResource {
 
   /**
    * Create a Session for a User
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   * session (schemas.SessionCreate): The Session object containing any metadata
-   *
-   * Returns: schemas.Session: The Session object of the new Session
    */
   create(
     appId: string,
@@ -50,13 +44,6 @@ export class Sessions extends APIResource {
 
   /**
    * Update the metadata of a Session
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   * session_id (str): The ID of the Session to update session
-   * (schemas.SessionUpdate): The Session object containing any new metadata
-   *
-   * Returns: schemas.Session: The Session object of the updated Session
    */
   update(
     appId: string,
@@ -70,11 +57,6 @@ export class Sessions extends APIResource {
 
   /**
    * Get All Sessions for a User
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   *
-   * Returns: list[schemas.Session]: List of Session objects
    */
   list(
     appId: string,
@@ -93,14 +75,6 @@ export class Sessions extends APIResource {
 
   /**
    * Delete a session by marking it as inactive
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   * session_id (str): The ID of the Session to delete
-   *
-   * Returns: dict: A message indicating that the session was deleted
-   *
-   * Raises: HTTPException: If the session is not found
    */
   delete(
     appId: string,
@@ -112,7 +86,7 @@ export class Sessions extends APIResource {
   }
 
   /**
-   * Chat
+   * Chat with the Dialectic API
    */
   chat(
     appId: string,
@@ -128,7 +102,7 @@ export class Sessions extends APIResource {
   }
 
   /**
-   * Clone Session
+   * Clone a session for a user, optionally will deep clone metamessages as well
    */
   clone(
     appId: string,
@@ -161,14 +135,6 @@ export class Sessions extends APIResource {
 
   /**
    * Get a specific session for a user by ID
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   * session_id (str): The ID of the Session to retrieve
-   *
-   * Returns: schemas.Session: The Session object of the requested Session
-   *
-   * Raises: HTTPException: If the session is not found
    */
   get(
     appId: string,
@@ -180,7 +146,7 @@ export class Sessions extends APIResource {
   }
 
   /**
-   * Get Chat Stream
+   * Stream Results from the Dialectic API
    */
   stream(
     appId: string,
