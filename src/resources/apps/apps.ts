@@ -17,11 +17,7 @@ export class Apps extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
 
   /**
-   * Create an App
-   *
-   * Args: app (schemas.AppCreate): The App object containing any metadata
-   *
-   * Returns: schemas.App: Created App object
+   * Create a new App
    */
   create(body: AppCreateParams, options?: Core.RequestOptions): Core.APIPromise<App> {
     return this._client.post('/v1/apps', { body, ...options });
@@ -29,11 +25,6 @@ export class Apps extends APIResource {
 
   /**
    * Update an App
-   *
-   * Args: app_id (str): The ID of the app to update app (schemas.AppUpdate): The App
-   * object containing any new metadata
-   *
-   * Returns: schemas.App: The App object of the updated App
    */
   update(appId: string, body: AppUpdateParams, options?: Core.RequestOptions): Core.APIPromise<App> {
     return this._client.put(`/v1/apps/${appId}`, { body, ...options });
@@ -41,10 +32,6 @@ export class Apps extends APIResource {
 
   /**
    * Get an App by ID
-   *
-   * Args: app_id (str): The ID of the app
-   *
-   * Returns: schemas.App: App object
    */
   get(appId: string, options?: Core.RequestOptions): Core.APIPromise<App> {
     return this._client.get(`/v1/apps/${appId}`, options);
@@ -52,10 +39,6 @@ export class Apps extends APIResource {
 
   /**
    * Get an App by Name
-   *
-   * Args: app_name (str): The name of the app
-   *
-   * Returns: schemas.App: App object
    */
   getByName(name: string, options?: Core.RequestOptions): Core.APIPromise<App> {
     return this._client.get(`/v1/apps/name/${name}`, options);
@@ -63,10 +46,6 @@ export class Apps extends APIResource {
 
   /**
    * Get or Create an App
-   *
-   * Args: app_name (str): The name of the app
-   *
-   * Returns: schemas.App: App object
    */
   getOrCreate(name: string, options?: Core.RequestOptions): Core.APIPromise<App> {
     return this._client.get(`/v1/apps/get_or_create/${name}`, options);

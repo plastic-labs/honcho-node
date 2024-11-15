@@ -14,7 +14,6 @@ const environments = {
   local: 'http://localhost:8000',
 };
 type Environment = keyof typeof environments;
-
 export interface ClientOptions {
   /**
    * Defaults to process.env['HONCHO_API_KEY'].
@@ -180,6 +179,22 @@ export class Honcho extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
+Honcho.Apps = Apps;
+export declare namespace Honcho {
+  export type RequestOptions = Core.RequestOptions;
+
+  export import Page = Pagination.Page;
+  export { type PageParams as PageParams, type PageResponse as PageResponse };
+
+  export {
+    Apps as Apps,
+    type App as App,
+    type AppCreateParams as AppCreateParams,
+    type AppUpdateParams as AppUpdateParams,
+  };
+}
+
+export { toFile, fileFromPath } from './uploads';
 export {
   HonchoError,
   APIError,
@@ -195,24 +210,5 @@ export {
   PermissionDeniedError,
   UnprocessableEntityError,
 } from './error';
-
-export import toFile = Uploads.toFile;
-export import fileFromPath = Uploads.fileFromPath;
-
-Honcho.Apps = Apps;
-
-export declare namespace Honcho {
-  export type RequestOptions = Core.RequestOptions;
-
-  export import Page = Pagination.Page;
-  export { type PageParams as PageParams, type PageResponse as PageResponse };
-
-  export {
-    Apps as Apps,
-    type App as App,
-    type AppCreateParams as AppCreateParams,
-    type AppUpdateParams as AppUpdateParams,
-  };
-}
 
 export default Honcho;

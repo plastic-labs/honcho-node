@@ -163,7 +163,7 @@ for (const user of page.items) {
 
 // Convenience methods are provided for manually paginating:
 while (page.hasNextPage()) {
-  page = page.getNextPage();
+  page = await page.getNextPage();
   // ...
 }
 ```
@@ -315,6 +315,15 @@ We are keen for your feedback; please open an [issue](https://www.github.com/pla
 TypeScript >= 4.5 is supported.
 
 The following runtimes are supported:
+
+- Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)
+- Node.js 18 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
+- Deno v1.28.0 or higher, using `import Honcho from "npm:honcho-ai"`.
+- Bun 1.0 or later.
+- Cloudflare Workers.
+- Vercel Edge Runtime.
+- Jest 28 or greater with the `"node"` environment (`"jsdom"` is not supported at this time).
+- Nitro v2.6 or greater.
 
 Note that React Native is not supported at this time.
 

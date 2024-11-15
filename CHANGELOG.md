@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.0.10 (2024-11-15)
+
+Full Changelog: [v0.0.9...v0.0.10](https://github.com/plastic-labs/honcho-node/compare/v0.0.9...v0.0.10)
+
+### Features
+
+* **api:** api update ([#59](https://github.com/plastic-labs/honcho-node/issues/59)) ([aeac0e4](https://github.com/plastic-labs/honcho-node/commit/aeac0e4110048c0860c984b92a2401eb34a13b8a))
+
+
+### Chores
+
+* rebuild project due to codegen change ([#56](https://github.com/plastic-labs/honcho-node/issues/56)) ([126da8f](https://github.com/plastic-labs/honcho-node/commit/126da8f6c1b627b19a7b4900ad8a84c19da6799d))
+* rebuild project due to codegen change ([#58](https://github.com/plastic-labs/honcho-node/issues/58)) ([3e76822](https://github.com/plastic-labs/honcho-node/commit/3e768223717585f365825ced6c88bb33f7cd8ddb))
+
 ## 0.0.9 (2024-11-08)
 
 Full Changelog: [v0.0.8...v0.0.9](https://github.com/plastic-labs/honcho-node/compare/v0.0.8...v0.0.9)
