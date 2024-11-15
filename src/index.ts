@@ -194,7 +194,7 @@ export declare namespace Honcho {
   };
 }
 
-export { toFile, fileFromPath } from 'honcho-ai/uploads';
+export { toFile, fileFromPath } from './uploads';
 export {
   HonchoError,
   APIError,
@@ -209,6 +209,6 @@ export {
   InternalServerError,
   PermissionDeniedError,
   UnprocessableEntityError,
-} from 'honcho-ai/error';
+} from './error';
 
 export default Honcho;
