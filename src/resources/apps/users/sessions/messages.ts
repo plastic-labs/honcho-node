@@ -7,16 +7,6 @@ import { Page, type PageParams } from '../../../../pagination';
 export class Messages extends APIResource {
   /**
    * Adds a message to a session
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   * session_id (int): The ID of the Session to add the message to message
-   * (schemas.MessageCreate): The Message object to add containing the message
-   * content and type
-   *
-   * Returns: schemas.Message: The Message object of the added message
-   *
-   * Raises: HTTPException: If the session is not found
    */
   create(
     appId: string,
@@ -32,7 +22,7 @@ export class Messages extends APIResource {
   }
 
   /**
-   * Update's the metadata of a message
+   * Update the metadata of a Message
    */
   update(
     appId: string,
@@ -50,15 +40,6 @@ export class Messages extends APIResource {
 
   /**
    * Get all messages for a session
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   * session_id (int): The ID of the Session to retrieve reverse (bool): Whether to
-   * reverse the order of the messages
-   *
-   * Returns: list[schemas.Message]: List of Message objects
-   *
-   * Raises: HTTPException: If the session is not found
    */
   list(
     appId: string,
@@ -76,7 +57,7 @@ export class Messages extends APIResource {
   }
 
   /**
-   * Get Message
+   * Get a Message by ID
    */
   get(
     appId: string,

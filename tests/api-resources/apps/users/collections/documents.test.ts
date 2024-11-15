@@ -138,7 +138,7 @@ describe('resource documents', () => {
       'app_id',
       'user_id',
       'collection_id',
-      { query: 'query', filter: 'filter', top_k: 0 },
+      { query: 'query', filter: { foo: 'bar' }, top_k: 0 },
     );
   });
 });

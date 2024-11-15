@@ -21,7 +21,7 @@ export class Collections extends APIResource {
   documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
 
   /**
-   * Create Collection
+   * Create a new Collection
    */
   create(
     appId: string,
@@ -33,7 +33,7 @@ export class Collections extends APIResource {
   }
 
   /**
-   * Update Collection
+   * Update a Collection's name or metadata
    */
   update(
     appId: string,
@@ -50,11 +50,6 @@ export class Collections extends APIResource {
 
   /**
    * Get All Collections for a User
-   *
-   * Args: app_id (str): The ID of the app representing the client application using
-   * honcho user_id (str): The User ID representing the user, managed by the user
-   *
-   * Returns: list[schemas.Collection]: List of Collection objects
    */
   list(
     appId: string,
@@ -72,7 +67,7 @@ export class Collections extends APIResource {
   }
 
   /**
-   * Delete Collection
+   * Delete a Collection and its documents
    */
   delete(
     appId: string,
@@ -84,7 +79,7 @@ export class Collections extends APIResource {
   }
 
   /**
-   * Get Collection By Id
+   * Get a Collection by ID
    */
   get(
     appId: string,
@@ -96,7 +91,7 @@ export class Collections extends APIResource {
   }
 
   /**
-   * Get Collection By Name
+   * Get a Collection by Name
    */
   getByName(
     appId: string,
