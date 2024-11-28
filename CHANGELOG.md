@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0 (2024-11-28)
+
+Full Changelog: [v0.0.10...v0.1.0](https://github.com/plastic-labs/honcho-node/compare/v0.0.10...v0.1.0)
+
+### Features
+
+* **internal:** make git install file structure match npm ([#64](https://github.com/plastic-labs/honcho-node/issues/64)) ([c2a3286](https://github.com/plastic-labs/honcho-node/commit/c2a3286747f151076c5df328b1d15a395f698ca4))
+
+
+### Chores
+
+* remove redundant word in comment ([#63](https://github.com/plastic-labs/honcho-node/issues/63)) ([aa824a1](https://github.com/plastic-labs/honcho-node/commit/aa824a1e3ad5463452d4077d7473b1525bf238ce))
+
+
+### Documentation
+
+* remove suggestion to use `npm` call out ([#61](https://github.com/plastic-labs/honcho-node/issues/61)) ([a269625](https://github.com/plastic-labs/honcho-node/commit/a269625dda4700b9878aa2a55ab1834664c19f91))
+
 ## 0.0.10 (2024-11-15)
 
 Full Changelog: [v0.0.9...v0.0.10](https://github.com/plastic-labs/honcho-node/compare/v0.0.9...v0.0.10)
