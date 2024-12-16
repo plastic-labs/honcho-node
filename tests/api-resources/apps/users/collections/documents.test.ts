@@ -14,7 +14,7 @@ describe('resource documents', () => {
       'app_id',
       'user_id',
       'collection_id',
-      { content: 'content' },
+      { content: 'x' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,7 +30,7 @@ describe('resource documents', () => {
       'app_id',
       'user_id',
       'collection_id',
-      { content: 'content', metadata: { foo: 'bar' } },
+      { content: 'x', metadata: { foo: 'bar' } },
     );
   });
 
@@ -122,7 +122,7 @@ describe('resource documents', () => {
       'app_id',
       'user_id',
       'collection_id',
-      { query: 'query' },
+      { query: 'x' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -138,7 +138,7 @@ describe('resource documents', () => {
       'app_id',
       'user_id',
       'collection_id',
-      { query: 'query', filter: { foo: 'bar' }, top_k: 0 },
+      { query: 'x', filter: { foo: 'bar' }, top_k: 1 },
     );
   });
 });

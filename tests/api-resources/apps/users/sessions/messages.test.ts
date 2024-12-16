@@ -31,13 +31,13 @@ describe('resource messages', () => {
     });
   });
 
-  test('update', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.apps.users.sessions.messages.update(
       'app_id',
       'user_id',
       'session_id',
       'message_id',
-      {},
+      { metadata: { foo: 'bar' } },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,6 +46,16 @@ describe('resource messages', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.apps.users.sessions.messages.update(
+      'app_id',
+      'user_id',
+      'session_id',
+      'message_id',
+      { metadata: { foo: 'bar' } },
+    );
   });
 
   test('list', async () => {
@@ -57,6 +67,25 @@ describe('resource messages', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('batch: only required params', async () => {
+    const responsePromise = client.apps.users.sessions.messages.batch('app_id', 'user_id', 'session_id', {
+      messages: [{ content: 'content', is_user: true }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('batch: required and optional params', async () => {
+    const response = await client.apps.users.sessions.messages.batch('app_id', 'user_id', 'session_id', {
+      messages: [{ content: 'content', is_user: true, metadata: { foo: 'bar' } }],
+    });
   });
 
   test('get', async () => {

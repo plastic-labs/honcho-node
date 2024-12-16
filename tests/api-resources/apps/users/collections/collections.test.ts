@@ -10,7 +10,7 @@ const client = new Honcho({
 
 describe('resource collections', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.apps.users.collections.create('app_id', 'user_id', { name: 'name' });
+    const responsePromise = client.apps.users.collections.create('app_id', 'user_id', { name: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource collections', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.apps.users.collections.create('app_id', 'user_id', {
-      name: 'name',
+      name: 'x',
       metadata: { foo: 'bar' },
     });
   });
