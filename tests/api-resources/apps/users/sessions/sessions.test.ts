@@ -20,8 +20,10 @@ describe('resource sessions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update', async () => {
-    const responsePromise = client.apps.users.sessions.update('app_id', 'user_id', 'session_id', {});
+  test('update: only required params', async () => {
+    const responsePromise = client.apps.users.sessions.update('app_id', 'user_id', 'session_id', {
+      metadata: { foo: 'bar' },
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,6 +31,12 @@ describe('resource sessions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.apps.users.sessions.update('app_id', 'user_id', 'session_id', {
+      metadata: { foo: 'bar' },
+    });
   });
 
   test('list', async () => {

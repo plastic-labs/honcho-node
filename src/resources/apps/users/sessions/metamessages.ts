@@ -109,7 +109,7 @@ export interface MetamessageCreateParams {
 
   metamessage_type: string;
 
-  metadata?: Record<string, unknown> | null;
+  metadata?: Record<string, unknown>;
 }
 
 export interface MetamessageUpdateParams {
