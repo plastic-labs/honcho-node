@@ -134,7 +134,7 @@ export type CollectionDeleteResponse = unknown;
 export interface CollectionCreateParams {
   name: string;
 
-  metadata?: Record<string, unknown> | null;
+  metadata?: Record<string, unknown>;
 }
 
 export interface CollectionUpdateParams {

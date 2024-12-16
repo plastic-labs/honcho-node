@@ -14,7 +14,7 @@ describe('resource metamessages', () => {
       'app_id',
       'user_id',
       'session_id',
-      { content: 'content', message_id: 'message_id', metamessage_type: 'metamessage_type' },
+      { content: 'content', message_id: 'message_id', metamessage_type: 'x' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource metamessages', () => {
     const response = await client.apps.users.sessions.metamessages.create('app_id', 'user_id', 'session_id', {
       content: 'content',
       message_id: 'message_id',
-      metamessage_type: 'metamessage_type',
+      metamessage_type: 'x',
       metadata: { foo: 'bar' },
     });
   });

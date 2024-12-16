@@ -6,6 +6,8 @@ import * as Core from '../../../../core';
 import * as MessagesAPI from './messages';
 import {
   Message,
+  MessageBatchParams,
+  MessageBatchResponse,
   MessageCreateParams,
   MessageListParams,
   MessageUpdateParams,
@@ -201,7 +203,7 @@ export interface SessionCreateParams {
 }
 
 export interface SessionUpdateParams {
-  metadata?: Record<string, unknown> | null;
+  metadata: Record<string, unknown>;
 }
 
 export interface SessionListParams extends PageParams {
@@ -261,10 +263,12 @@ export declare namespace Sessions {
     Messages as Messages,
     type Message as Message,
     type PageMessage as PageMessage,
+    type MessageBatchResponse as MessageBatchResponse,
     MessagesPage as MessagesPage,
     type MessageCreateParams as MessageCreateParams,
     type MessageUpdateParams as MessageUpdateParams,
     type MessageListParams as MessageListParams,
+    type MessageBatchParams as MessageBatchParams,
   };
 
   export {
