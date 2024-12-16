@@ -57,6 +57,23 @@ export class Messages extends APIResource {
   }
 
   /**
+   * Bulk create messages for a session while maintaining order. Maximum 100 messages
+   * per batch.
+   */
+  batch(
+    appId: string,
+    userId: string,
+    sessionId: string,
+    body: MessageBatchParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessageBatchResponse> {
+    return this._client.post(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/messages/batch`, {
+      body,
+      ...options,
+    });
+  }
+
+  /**
    * Get a Message by ID
    */
   get(
@@ -101,6 +118,8 @@ export interface PageMessage {
   pages?: number;
 }
 
+export type MessageBatchResponse = Array<Message>;
+
 export interface MessageCreateParams {
   content: string;
 
@@ -110,7 +129,7 @@ export interface MessageCreateParams {
 }
 
 export interface MessageUpdateParams {
-  metadata?: Record<string, unknown> | null;
+  metadata: Record<string, unknown>;
 }
 
 export interface MessageListParams extends PageParams {
@@ -125,15 +144,31 @@ export interface MessageListParams extends PageParams {
   filter?: Record<string, unknown> | null;
 }
 
+export interface MessageBatchParams {
+  messages: Array<MessageBatchParams.Message>;
+}
+
+export namespace MessageBatchParams {
+  export interface Message {
+    content: string;
+
+    is_user: boolean;
+
+    metadata?: Record<string, unknown>;
+  }
+}
+
 Messages.MessagesPage = MessagesPage;
 
 export declare namespace Messages {
   export {
     type Message as Message,
     type PageMessage as PageMessage,
+    type MessageBatchResponse as MessageBatchResponse,
     MessagesPage as MessagesPage,
     type MessageCreateParams as MessageCreateParams,
     type MessageUpdateParams as MessageUpdateParams,
     type MessageListParams as MessageListParams,
+    type MessageBatchParams as MessageBatchParams,
   };
 }

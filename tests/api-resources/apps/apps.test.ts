@@ -10,7 +10,7 @@ const client = new Honcho({
 
 describe('resource apps', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.apps.create({ name: 'name' });
+    const responsePromise = client.apps.create({ name: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,7 +21,7 @@ describe('resource apps', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.apps.create({ name: 'name', metadata: { foo: 'bar' } });
+    const response = await client.apps.create({ name: 'x', metadata: { foo: 'bar' } });
   });
 
   test('update', async () => {

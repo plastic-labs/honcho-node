@@ -28,7 +28,7 @@ const client = new Honcho({
 });
 
 async function main() {
-  const app = await client.apps.create({ name: 'name' });
+  const app = await client.apps.create({ name: 'x' });
 
   console.log(app.id);
 }
@@ -50,7 +50,7 @@ const client = new Honcho({
 });
 
 async function main() {
-  const params: Honcho.AppCreateParams = { name: 'name' };
+  const params: Honcho.AppCreateParams = { name: 'x' };
   const app: Honcho.App = await client.apps.create(params);
 }
 
@@ -68,7 +68,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const app = await client.apps.create({ name: 'name' }).catch(async (err) => {
+  const app = await client.apps.create({ name: 'x' }).catch(async (err) => {
     if (err instanceof Honcho.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -111,7 +111,7 @@ const client = new Honcho({
 });
 
 // Or, configure per-request:
-await client.apps.create({ name: 'name' }, {
+await client.apps.create({ name: 'x' }, {
   maxRetries: 5,
 });
 ```
@@ -128,7 +128,7 @@ const client = new Honcho({
 });
 
 // Override per-request:
-await client.apps.create({ name: 'name' }, {
+await client.apps.create({ name: 'x' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -180,11 +180,11 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Honcho();
 
-const response = await client.apps.create({ name: 'name' }).asResponse();
+const response = await client.apps.create({ name: 'x' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: app, response: raw } = await client.apps.create({ name: 'name' }).withResponse();
+const { data: app, response: raw } = await client.apps.create({ name: 'x' }).withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(app.id);
 ```
@@ -291,7 +291,7 @@ const client = new Honcho({
 
 // Override per-request:
 await client.apps.create(
-  { name: 'name' },
+  { name: 'x' },
   {
     httpAgent: new http.Agent({ keepAlive: false }),
   },
@@ -318,7 +318,7 @@ The following runtimes are supported:
 
 - Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)
 - Node.js 18 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
-- Deno v1.28.0 or higher, using `import Honcho from "npm:honcho-ai"`.
+- Deno v1.28.0 or higher.
 - Bun 1.0 or later.
 - Cloudflare Workers.
 - Vercel Edge Runtime.

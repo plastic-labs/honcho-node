@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.0.11 (2024-12-16)
+
+Full Changelog: [v0.0.10...v0.0.11](https://github.com/plastic-labs/honcho-node/compare/v0.0.10...v0.0.11)
+
+### Features
+
+* **api:** api update ([#69](https://github.com/plastic-labs/honcho-node/issues/69)) ([e935432](https://github.com/plastic-labs/honcho-node/commit/e935432f477a0db8c40f0938a7189e84095c7270))
+* **internal:** make git install file structure match npm ([#64](https://github.com/plastic-labs/honcho-node/issues/64)) ([c2a3286](https://github.com/plastic-labs/honcho-node/commit/c2a3286747f151076c5df328b1d15a395f698ca4))
+
+
+### Chores
+
+* **internal:** bump cross-spawn to v7.0.6 ([#66](https://github.com/plastic-labs/honcho-node/issues/66)) ([6abb709](https://github.com/plastic-labs/honcho-node/commit/6abb709d0c7ffac23c4c011f5923827576e68664))
+* **internal:** remove unnecessary getRequestClient function ([#65](https://github.com/plastic-labs/honcho-node/issues/65)) ([cd1b27d](https://github.com/plastic-labs/honcho-node/commit/cd1b27d490ce16f14354a89086335a563f2df397))
+* **internal:** update isAbsoluteURL ([#68](https://github.com/plastic-labs/honcho-node/issues/68)) ([0f35089](https://github.com/plastic-labs/honcho-node/commit/0f35089c96f38becbedfef37d51287a797d21cfe))
+* remove redundant word in comment ([#63](https://github.com/plastic-labs/honcho-node/issues/63)) ([aa824a1](https://github.com/plastic-labs/honcho-node/commit/aa824a1e3ad5463452d4077d7473b1525bf238ce))
+* **types:** nicer error class types + jsdocs ([#67](https://github.com/plastic-labs/honcho-node/issues/67)) ([3a5c429](https://github.com/plastic-labs/honcho-node/commit/3a5c429e2e632e07558fd077da614c5bc4fb145b))
+
+
+### Documentation
+
+* remove suggestion to use `npm` call out ([#61](https://github.com/plastic-labs/honcho-node/issues/61)) ([a269625](https://github.com/plastic-labs/honcho-node/commit/a269625dda4700b9878aa2a55ab1834664c19f91))
+
 ## 0.0.10 (2024-11-15)
 
 Full Changelog: [v0.0.9...v0.0.10](https://github.com/plastic-labs/honcho-node/compare/v0.0.9...v0.0.10)

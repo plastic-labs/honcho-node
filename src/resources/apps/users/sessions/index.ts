@@ -5,9 +5,11 @@ export {
   Messages,
   type Message,
   type PageMessage,
+  type MessageBatchResponse,
   type MessageCreateParams,
   type MessageUpdateParams,
   type MessageListParams,
+  type MessageBatchParams,
 } from './messages';
 export {
   MetamessagesPage,

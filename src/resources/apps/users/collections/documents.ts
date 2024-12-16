@@ -138,7 +138,7 @@ export type DocumentQueryResponse = Array<Document>;
 export interface DocumentCreateParams {
   content: string;
 
-  metadata?: Record<string, unknown> | null;
+  metadata?: Record<string, unknown>;
 }
 
 export interface DocumentUpdateParams {

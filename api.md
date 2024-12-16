@@ -61,12 +61,14 @@ Types:
 
 - <code><a href="./src/resources/apps/users/sessions/messages.ts">Message</a></code>
 - <code><a href="./src/resources/apps/users/sessions/messages.ts">PageMessage</a></code>
+- <code><a href="./src/resources/apps/users/sessions/messages.ts">MessageBatchResponse</a></code>
 
 Methods:
 
 - <code title="post /v1/apps/{app_id}/users/{user_id}/sessions/{session_id}/messages">client.apps.users.sessions.messages.<a href="./src/resources/apps/users/sessions/messages.ts">create</a>(appId, userId, sessionId, { ...params }) -> Message</code>
 - <code title="put /v1/apps/{app_id}/users/{user_id}/sessions/{session_id}/messages/{message_id}">client.apps.users.sessions.messages.<a href="./src/resources/apps/users/sessions/messages.ts">update</a>(appId, userId, sessionId, messageId, { ...params }) -> Message</code>
 - <code title="post /v1/apps/{app_id}/users/{user_id}/sessions/{session_id}/messages/list">client.apps.users.sessions.messages.<a href="./src/resources/apps/users/sessions/messages.ts">list</a>(appId, userId, sessionId, { ...params }) -> MessagesPage</code>
+- <code title="post /v1/apps/{app_id}/users/{user_id}/sessions/{session_id}/messages/batch">client.apps.users.sessions.messages.<a href="./src/resources/apps/users/sessions/messages.ts">batch</a>(appId, userId, sessionId, { ...params }) -> MessageBatchResponse</code>
 - <code title="get /v1/apps/{app_id}/users/{user_id}/sessions/{session_id}/messages/{message_id}">client.apps.users.sessions.messages.<a href="./src/resources/apps/users/sessions/messages.ts">get</a>(appId, userId, sessionId, messageId) -> Message</code>
 
 #### Metamessages
