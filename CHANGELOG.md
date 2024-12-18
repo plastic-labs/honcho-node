@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.12 (2024-12-18)
+
+Full Changelog: [v0.0.11...v0.0.12](https://github.com/plastic-labs/honcho-node/compare/v0.0.11...v0.0.12)
+
+### Chores
+
+* **internal:** fix some typos ([#71](https://github.com/plastic-labs/honcho-node/issues/71)) ([819389e](https://github.com/plastic-labs/honcho-node/commit/819389ed8fedb1c9116d5bfdd180adc9a7d5cf7b))
+
 ## 0.0.11 (2024-12-16)
 
 Full Changelog: [v0.0.10...v0.0.11](https://github.com/plastic-labs/honcho-node/compare/v0.0.10...v0.0.11)
