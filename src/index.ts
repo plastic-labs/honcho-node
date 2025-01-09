@@ -14,6 +14,7 @@ const environments = {
   local: 'http://localhost:8000',
 };
 type Environment = keyof typeof environments;
+
 export interface ClientOptions {
   /**
    * Defaults to process.env['HONCHO_API_KEY'].
