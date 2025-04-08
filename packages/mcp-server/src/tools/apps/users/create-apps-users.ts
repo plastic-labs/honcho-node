@@ -1,0 +1,40 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import type { Metadata } from '../../';
+import Honcho from 'honcho-ai';
+
+export const metadata: Metadata = {
+  resource: 'apps.users',
+  operation: 'write',
+  tags: [],
+};
+
+export const tool: Tool = {
+  name: 'create_apps_users',
+  description: 'Create a new User',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      app_id: {
+        type: 'string',
+        title: 'App Id',
+      },
+      name: {
+        type: 'string',
+        title: 'Name',
+      },
+      metadata: {
+        type: 'object',
+        title: 'Metadata',
+      },
+    },
+  },
+};
+
+export const handler = (client: Honcho, args: any) => {
+  const { app_id, ...body } = args;
+  return client.apps.users.create(app_id, body);
+};
+
+export default { metadata, tool, handler };
