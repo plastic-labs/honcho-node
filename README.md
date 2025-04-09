@@ -24,7 +24,7 @@ import Honcho from 'honcho-ai';
 
 const client = new Honcho({
   apiKey: process.env['HONCHO_API_KEY'], // This is the default and can be omitted
-  environment: 'local', // defaults to 'demo'
+  environment: 'local', // or 'demo' | 'production'; defaults to 'demo'
 });
 
 async function main() {
@@ -46,7 +46,7 @@ import Honcho from 'honcho-ai';
 
 const client = new Honcho({
   apiKey: process.env['HONCHO_API_KEY'], // This is the default and can be omitted
-  environment: 'local', // defaults to 'demo'
+  environment: 'local', // or 'demo' | 'production'; defaults to 'demo'
 });
 
 async function main() {

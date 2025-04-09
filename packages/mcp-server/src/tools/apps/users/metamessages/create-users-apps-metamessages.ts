@@ -1,56 +1,59 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import type { Metadata } from '../../../../';
+import type { Metadata } from '../../../';
 import Honcho from 'honcho-ai';
 
 export const metadata: Metadata = {
-  resource: 'apps.users.sessions.metamessages',
+  resource: 'apps.users.metamessages',
   operation: 'write',
   tags: [],
 };
 
 export const tool: Tool = {
-  name: 'create_sessions_users_apps_metamessages',
-  description: 'Adds a message to a session',
+  name: 'create_users_apps_metamessages',
+  description:
+    'Create a new metamessage associated with a user.\nOptionally link to a session and message by providing those IDs in the request body.',
   inputSchema: {
     type: 'object',
     properties: {
       app_id: {
         type: 'string',
         title: 'App Id',
+        description: 'ID of the app',
       },
       user_id: {
         type: 'string',
         title: 'User Id',
-      },
-      session_id: {
-        type: 'string',
-        title: 'Session Id',
+        description: 'ID of the user',
       },
       content: {
         type: 'string',
         title: 'Content',
       },
-      message_id: {
-        type: 'string',
-        title: 'Message Id',
-      },
       metamessage_type: {
         type: 'string',
         title: 'Metamessage Type',
       },
+      message_id: {
+        type: 'string',
+        title: 'Message Id',
+      },
       metadata: {
         type: 'object',
         title: 'Metadata',
+      },
+      session_id: {
+        type: 'string',
+        title: 'Session Id',
       },
     },
   },
 };
 
 export const handler = (client: Honcho, args: any) => {
-  const { app_id, user_id, session_id, ...body } = args;
-  return client.apps.users.sessions.metamessages.create(app_id, user_id, session_id, body);
+  const { app_id, user_id, ...body } = args;
+  return client.apps.users.metamessages.create(app_id, user_id, body);
 };
 
 export default { metadata, tool, handler };

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as DocumentsAPI from './documents';
 import {
@@ -79,15 +80,28 @@ export class Collections extends APIResource {
   }
 
   /**
-   * Get a Collection by ID
+   * Get a specific collection for a user.
+   *
+   * If collection_id is provided as a query parameter, it uses that (must match JWT
+   * collection_id). Otherwise, it uses the collection_id from the JWT token.
    */
   get(
     appId: string,
     userId: string,
-    collectionId: string,
+    query?: CollectionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Collection>;
+  get(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<Collection>;
+  get(
+    appId: string,
+    userId: string,
+    query: CollectionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Collection> {
-    return this._client.get(`/v1/apps/${appId}/users/${userId}/collections/${collectionId}`, options);
+    if (isRequestOptions(query)) {
+      return this.get(appId, userId, {}, query);
+    }
+    return this._client.get(`/v1/apps/${appId}/users/${userId}/collections`, { query, ...options });
   }
 
   /**
@@ -145,7 +159,7 @@ export interface CollectionUpdateParams {
 
 export interface CollectionListParams extends PageParams {
   /**
-   * Query param:
+   * Query param: Whether to reverse the order of results
    */
   reverse?: boolean | null;
 
@@ -153,6 +167,13 @@ export interface CollectionListParams extends PageParams {
    * Body param:
    */
   filter?: Record<string, unknown> | null;
+}
+
+export interface CollectionGetParams {
+  /**
+   * Collection ID to retrieve. If not provided, uses JWT token
+   */
+  collection_id?: string | null;
 }
 
 Collections.CollectionsPage = CollectionsPage;
@@ -168,6 +189,7 @@ export declare namespace Collections {
     type CollectionCreateParams as CollectionCreateParams,
     type CollectionUpdateParams as CollectionUpdateParams,
     type CollectionListParams as CollectionListParams,
+    type CollectionGetParams as CollectionGetParams,
   };
 
   export {

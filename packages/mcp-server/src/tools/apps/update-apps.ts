@@ -19,6 +19,7 @@ export const tool: Tool = {
       app_id: {
         type: 'string',
         title: 'App Id',
+        description: 'ID of the app to update',
       },
       metadata: {
         type: 'object',

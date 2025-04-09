@@ -19,10 +19,12 @@ export const tool: Tool = {
       app_id: {
         type: 'string',
         title: 'App Id',
+        description: 'ID of the app',
       },
       user_id: {
         type: 'string',
         title: 'User Id',
+        description: 'ID of the user',
       },
       page: {
         type: 'integer',
@@ -32,6 +34,7 @@ export const tool: Tool = {
       reverse: {
         type: 'boolean',
         title: 'Reverse',
+        description: 'Whether to reverse the order of results',
       },
       size: {
         type: 'integer',

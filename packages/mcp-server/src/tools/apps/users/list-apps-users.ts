@@ -19,6 +19,7 @@ export const tool: Tool = {
       app_id: {
         type: 'string',
         title: 'App Id',
+        description: 'ID of the app',
       },
       page: {
         type: 'integer',
@@ -28,6 +29,7 @@ export const tool: Tool = {
       reverse: {
         type: 'boolean',
         title: 'Reverse',
+        description: 'Whether to reverse the order of results',
       },
       size: {
         type: 'integer',

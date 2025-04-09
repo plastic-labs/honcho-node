@@ -5,6 +5,7 @@ import { Tool } from '@modelcontextprotocol/sdk/types.js';
 
 import create_apps from './apps/create-apps';
 import update_apps from './apps/update-apps';
+import list_apps from './apps/list-apps';
 import get_apps from './apps/get-apps';
 import get_by_name_apps from './apps/get-by-name-apps';
 import get_or_create_apps from './apps/get-or-create-apps';
@@ -14,7 +15,10 @@ import list_apps_users from './apps/users/list-apps-users';
 import get_apps_users from './apps/users/get-apps-users';
 import get_by_name_apps_users from './apps/users/get-by-name-apps-users';
 import get_or_create_apps_users from './apps/users/get-or-create-apps-users';
+import create_users_apps_metamessages from './apps/users/metamessages/create-users-apps-metamessages';
+import update_users_apps_metamessages from './apps/users/metamessages/update-users-apps-metamessages';
 import list_users_apps_metamessages from './apps/users/metamessages/list-users-apps-metamessages';
+import get_users_apps_metamessages from './apps/users/metamessages/get-users-apps-metamessages';
 import create_users_apps_sessions from './apps/users/sessions/create-users-apps-sessions';
 import update_users_apps_sessions from './apps/users/sessions/update-users-apps-sessions';
 import list_users_apps_sessions from './apps/users/sessions/list-users-apps-sessions';
@@ -22,16 +26,11 @@ import delete_users_apps_sessions from './apps/users/sessions/delete-users-apps-
 import chat_users_apps_sessions from './apps/users/sessions/chat-users-apps-sessions';
 import clone_users_apps_sessions from './apps/users/sessions/clone-users-apps-sessions';
 import get_users_apps_sessions from './apps/users/sessions/get-users-apps-sessions';
-import stream_users_apps_sessions from './apps/users/sessions/stream-users-apps-sessions';
 import create_sessions_users_apps_messages from './apps/users/sessions/messages/create-sessions-users-apps-messages';
 import update_sessions_users_apps_messages from './apps/users/sessions/messages/update-sessions-users-apps-messages';
 import list_sessions_users_apps_messages from './apps/users/sessions/messages/list-sessions-users-apps-messages';
 import batch_sessions_users_apps_messages from './apps/users/sessions/messages/batch-sessions-users-apps-messages';
 import get_sessions_users_apps_messages from './apps/users/sessions/messages/get-sessions-users-apps-messages';
-import create_sessions_users_apps_metamessages from './apps/users/sessions/metamessages/create-sessions-users-apps-metamessages';
-import update_sessions_users_apps_metamessages from './apps/users/sessions/metamessages/update-sessions-users-apps-metamessages';
-import list_sessions_users_apps_metamessages from './apps/users/sessions/metamessages/list-sessions-users-apps-metamessages';
-import get_sessions_users_apps_metamessages from './apps/users/sessions/metamessages/get-sessions-users-apps-metamessages';
 import create_users_apps_collections from './apps/users/collections/create-users-apps-collections';
 import update_users_apps_collections from './apps/users/collections/update-users-apps-collections';
 import list_users_apps_collections from './apps/users/collections/list-users-apps-collections';
@@ -44,6 +43,7 @@ import list_collections_users_apps_documents from './apps/users/collections/docu
 import delete_collections_users_apps_documents from './apps/users/collections/documents/delete-collections-users-apps-documents';
 import get_collections_users_apps_documents from './apps/users/collections/documents/get-collections-users-apps-documents';
 import query_collections_users_apps_documents from './apps/users/collections/documents/query-collections-users-apps-documents';
+import create_keys from './keys/create-keys';
 
 export type HandlerFunction = (client: Honcho, args: any) => Promise<any>;
 
@@ -67,6 +67,7 @@ function addEndpoint(endpoint: Endpoint) {
 
 addEndpoint(create_apps);
 addEndpoint(update_apps);
+addEndpoint(list_apps);
 addEndpoint(get_apps);
 addEndpoint(get_by_name_apps);
 addEndpoint(get_or_create_apps);
@@ -76,7 +77,10 @@ addEndpoint(list_apps_users);
 addEndpoint(get_apps_users);
 addEndpoint(get_by_name_apps_users);
 addEndpoint(get_or_create_apps_users);
+addEndpoint(create_users_apps_metamessages);
+addEndpoint(update_users_apps_metamessages);
 addEndpoint(list_users_apps_metamessages);
+addEndpoint(get_users_apps_metamessages);
 addEndpoint(create_users_apps_sessions);
 addEndpoint(update_users_apps_sessions);
 addEndpoint(list_users_apps_sessions);
@@ -84,16 +88,11 @@ addEndpoint(delete_users_apps_sessions);
 addEndpoint(chat_users_apps_sessions);
 addEndpoint(clone_users_apps_sessions);
 addEndpoint(get_users_apps_sessions);
-addEndpoint(stream_users_apps_sessions);
 addEndpoint(create_sessions_users_apps_messages);
 addEndpoint(update_sessions_users_apps_messages);
 addEndpoint(list_sessions_users_apps_messages);
 addEndpoint(batch_sessions_users_apps_messages);
 addEndpoint(get_sessions_users_apps_messages);
-addEndpoint(create_sessions_users_apps_metamessages);
-addEndpoint(update_sessions_users_apps_metamessages);
-addEndpoint(list_sessions_users_apps_metamessages);
-addEndpoint(get_sessions_users_apps_metamessages);
 addEndpoint(create_users_apps_collections);
 addEndpoint(update_users_apps_collections);
 addEndpoint(list_users_apps_collections);
@@ -106,6 +105,7 @@ addEndpoint(list_collections_users_apps_documents);
 addEndpoint(delete_collections_users_apps_documents);
 addEndpoint(get_collections_users_apps_documents);
 addEndpoint(query_collections_users_apps_documents);
+addEndpoint(create_keys);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

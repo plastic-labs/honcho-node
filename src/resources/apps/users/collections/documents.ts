@@ -149,7 +149,7 @@ export interface DocumentUpdateParams {
 
 export interface DocumentListParams extends PageParams {
   /**
-   * Query param:
+   * Query param: Whether to reverse the order of results
    */
   reverse?: boolean | null;
 

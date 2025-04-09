@@ -1,17 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as UsersAPI from './users/users';
 import {
   PageUser,
   User,
   UserCreateParams,
+  UserGetParams,
   UserListParams,
   UserUpdateParams,
   Users,
   UsersPage,
 } from './users/users';
+import { Page, type PageParams } from '../../pagination';
 
 export class Apps extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
@@ -31,10 +34,31 @@ export class Apps extends APIResource {
   }
 
   /**
-   * Get an App by ID
+   * Get all Apps
    */
-  get(appId: string, options?: Core.RequestOptions): Core.APIPromise<App> {
-    return this._client.get(`/v1/apps/${appId}`, options);
+  list(params: AppListParams, options?: Core.RequestOptions): Core.PagePromise<AppsPage, App> {
+    const { page, reverse, size, ...body } = params;
+    return this._client.getAPIList('/v1/apps/list', AppsPage, {
+      query: { page, reverse, size },
+      body,
+      method: 'post',
+      ...options,
+    });
+  }
+
+  /**
+   * Get an App by ID.
+   *
+   * If app_id is provided as a query parameter, it uses that (must match JWT
+   * app_id). Otherwise, it uses the app_id from the JWT token.
+   */
+  get(query?: AppGetParams, options?: Core.RequestOptions): Core.APIPromise<App>;
+  get(options?: Core.RequestOptions): Core.APIPromise<App>;
+  get(query: AppGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<App> {
+    if (isRequestOptions(query)) {
+      return this.get({}, query);
+    }
+    return this._client.get('/v1/apps', { query, ...options });
   }
 
   /**
@@ -52,6 +76,8 @@ export class Apps extends APIResource {
   }
 }
 
+export class AppsPage extends Page<App> {}
+
 export interface App {
   id: string;
 
@@ -60,6 +86,18 @@ export interface App {
   metadata: Record<string, unknown>;
 
   name: string;
+}
+
+export interface PageApp {
+  items: Array<App>;
+
+  page: number;
+
+  size: number;
+
+  total: number;
+
+  pages?: number;
 }
 
 export interface AppCreateParams {
@@ -74,14 +112,38 @@ export interface AppUpdateParams {
   name?: string | null;
 }
 
+export interface AppListParams extends PageParams {
+  /**
+   * Query param: Whether to reverse the order of results
+   */
+  reverse?: boolean | null;
+
+  /**
+   * Body param:
+   */
+  filter?: Record<string, unknown> | null;
+}
+
+export interface AppGetParams {
+  /**
+   * App ID to retrieve. If not provided, uses JWT token
+   */
+  app_id?: string | null;
+}
+
+Apps.AppsPage = AppsPage;
 Apps.Users = Users;
 Apps.UsersPage = UsersPage;
 
 export declare namespace Apps {
   export {
     type App as App,
+    type PageApp as PageApp,
+    AppsPage as AppsPage,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
+    type AppListParams as AppListParams,
+    type AppGetParams as AppGetParams,
   };
 
   export {
@@ -92,5 +154,6 @@ export declare namespace Apps {
     type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
+    type UserGetParams as UserGetParams,
   };
 }

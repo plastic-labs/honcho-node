@@ -19,14 +19,17 @@ export const tool: Tool = {
       app_id: {
         type: 'string',
         title: 'App Id',
+        description: 'ID of the app',
       },
       user_id: {
         type: 'string',
         title: 'User Id',
+        description: 'ID of the user',
       },
       session_id: {
         type: 'string',
         title: 'Session Id',
+        description: 'ID of the session to update',
       },
       metadata: {
         type: 'object',

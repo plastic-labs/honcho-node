@@ -86,6 +86,7 @@ describe('resource sessions', () => {
   test('chat: required and optional params', async () => {
     const response = await client.apps.users.sessions.chat('app_id', 'user_id', 'session_id', {
       queries: 'string',
+      stream: true,
     });
   });
 
@@ -123,7 +124,7 @@ describe('resource sessions', () => {
   });
 
   test('get', async () => {
-    const responsePromise = client.apps.users.sessions.get('app_id', 'user_id', 'session_id');
+    const responsePromise = client.apps.users.sessions.get('app_id', 'user_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -136,26 +137,19 @@ describe('resource sessions', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apps.users.sessions.get('app_id', 'user_id', 'session_id', { path: '/_stainless_unknown_path' }),
+      client.apps.users.sessions.get('app_id', 'user_id', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Honcho.NotFoundError);
   });
 
-  test('stream: only required params', async () => {
-    const responsePromise = client.apps.users.sessions.stream('app_id', 'user_id', 'session_id', {
-      queries: 'string',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('stream: required and optional params', async () => {
-    const response = await client.apps.users.sessions.stream('app_id', 'user_id', 'session_id', {
-      queries: 'string',
-    });
+  test('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.apps.users.sessions.get(
+        'app_id',
+        'user_id',
+        { session_id: 'session_id' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Honcho.NotFoundError);
   });
 });
