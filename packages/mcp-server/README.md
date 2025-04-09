@@ -95,7 +95,12 @@ The following tools are available in this MCP server.
 
 - `create_apps` (`write`): Create a new App
 - `update_apps` (`write`): Update an App
-- `get_apps` (`read`): Get an App by ID
+- `list_apps` (`write`): Get all Apps
+- `get_apps` (`read`): Get an App by ID.
+
+If app_id is provided as a query parameter, it uses that (must match JWT app_id).
+Otherwise, it uses the app_id from the JWT token.
+
 - `get_by_name_apps` (`read`): Get an App by Name
 - `get_or_create_apps` (`read`): Get or Create an App
 
@@ -105,12 +110,27 @@ The following tools are available in this MCP server.
 - `update_apps_users` (`write`): Update a User's name and/or metadata
 - `list_apps_users` (`write`): Get All Users for an App
 - `get_apps_users` (`read`): Get a User by ID
+
+If user_id is provided as a query parameter, it uses that (must match JWT app_id).
+Otherwise, it uses the user_id from the JWT token.
+
 - `get_by_name_apps_users` (`read`): Get a User by name
 - `get_or_create_apps_users` (`read`): Get a User or create a new one by the input name
 
 ### Resource `apps.users.metamessages`:
 
-- `list_users_apps_metamessages` (`write`): Paginate through the user metamessages for a user
+- `create_users_apps_metamessages` (`write`): Create a new metamessage associated with a user.
+  Optionally link to a session and message by providing those IDs in the request body.
+- `update_users_apps_metamessages` (`write`): Update a metamessage's metadata, type, or relationships
+- `list_users_apps_metamessages` (`write`): Get metamessages with flexible filtering.
+
+* Filter by user only: No additional parameters needed
+* Filter by session: Provide session_id
+* Filter by message: Provide message_id (and session_id)
+* Filter by type: Provide metamessage_type
+* Filter by metadata: Provide filter object
+
+- `get_users_apps_metamessages` (`read`): Get a specific Metamessage by ID
 
 ### Resource `apps.users.sessions`:
 
@@ -119,9 +139,11 @@ The following tools are available in this MCP server.
 - `list_users_apps_sessions` (`write`): Get All Sessions for a User
 - `delete_users_apps_sessions` (`write`): Delete a session by marking it as inactive
 - `chat_users_apps_sessions` (`write`): Chat with the Dialectic API
-- `clone_users_apps_sessions` (`read`): Clone a session for a user, optionally will deep clone metamessages as well
-- `get_users_apps_sessions` (`read`): Get a specific session for a user by ID
-- `stream_users_apps_sessions` (`write`): Stream Results from the Dialectic API
+- `clone_users_apps_sessions` (`read`): Clone a session, optionally up to a specific message
+- `get_users_apps_sessions` (`read`): Get a specific session for a user.
+
+If session_id is provided as a query parameter, it uses that (must match JWT session_id).
+Otherwise, it uses the session_id from the JWT token.
 
 ### Resource `apps.users.sessions.messages`:
 
@@ -131,20 +153,17 @@ The following tools are available in this MCP server.
 - `batch_sessions_users_apps_messages` (`write`): Bulk create messages for a session while maintaining order. Maximum 100 messages per batch.
 - `get_sessions_users_apps_messages` (`read`): Get a Message by ID
 
-### Resource `apps.users.sessions.metamessages`:
-
-- `create_sessions_users_apps_metamessages` (`write`): Adds a message to a session
-- `update_sessions_users_apps_metamessages` (`write`): Update's the metadata of a metamessage
-- `list_sessions_users_apps_metamessages` (`write`): Get all messages for a session
-- `get_sessions_users_apps_metamessages` (`read`): Get a specific Metamessage by ID
-
 ### Resource `apps.users.collections`:
 
 - `create_users_apps_collections` (`write`): Create a new Collection
 - `update_users_apps_collections` (`write`): Update a Collection's name or metadata
 - `list_users_apps_collections` (`write`): Get All Collections for a User
 - `delete_users_apps_collections` (`write`): Delete a Collection and its documents
-- `get_users_apps_collections` (`read`): Get a Collection by ID
+- `get_users_apps_collections` (`read`): Get a specific collection for a user.
+
+If collection_id is provided as a query parameter, it uses that (must match JWT collection_id).
+Otherwise, it uses the collection_id from the JWT token.
+
 - `get_by_name_users_apps_collections` (`read`): Get a Collection by Name
 
 ### Resource `apps.users.collections.documents`:
@@ -155,3 +174,7 @@ The following tools are available in this MCP server.
 - `delete_collections_users_apps_documents` (`write`): Delete a Document by ID
 - `get_collections_users_apps_documents` (`read`): Get a document by ID
 - `query_collections_users_apps_documents` (`write`): Cosine Similarity Search for Documents
+
+### Resource `keys`:
+
+- `create_keys` (`write`): Create a new Key

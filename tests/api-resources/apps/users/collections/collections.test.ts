@@ -70,7 +70,7 @@ describe('resource collections', () => {
   });
 
   test('get', async () => {
-    const responsePromise = client.apps.users.collections.get('app_id', 'user_id', 'collection_id');
+    const responsePromise = client.apps.users.collections.get('app_id', 'user_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -83,9 +83,19 @@ describe('resource collections', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apps.users.collections.get('app_id', 'user_id', 'collection_id', {
-        path: '/_stainless_unknown_path',
-      }),
+      client.apps.users.collections.get('app_id', 'user_id', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Honcho.NotFoundError);
+  });
+
+  test('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.apps.users.collections.get(
+        'app_id',
+        'user_id',
+        { collection_id: 'collection_id' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Honcho.NotFoundError);
   });
 

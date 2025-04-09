@@ -1,14 +1,24 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as MetamessagesAPI from './metamessages';
-import { MetamessageListParams, Metamessages } from './metamessages';
+import {
+  Metamessage,
+  MetamessageCreateParams,
+  MetamessageListParams,
+  MetamessageUpdateParams,
+  Metamessages,
+  MetamessagesPage,
+  PageMetamessage,
+} from './metamessages';
 import * as CollectionsAPI from './collections/collections';
 import {
   Collection,
   CollectionCreateParams,
   CollectionDeleteResponse,
+  CollectionGetParams,
   CollectionListParams,
   CollectionUpdateParams,
   Collections,
@@ -17,16 +27,15 @@ import {
 } from './collections/collections';
 import * as SessionsAPI from './sessions/sessions';
 import {
-  AgentChat,
+  DialecticResponse,
   PageSession,
   Session,
   SessionChatParams,
   SessionCloneParams,
   SessionCreateParams,
   SessionDeleteResponse,
+  SessionGetParams,
   SessionListParams,
-  SessionStreamParams,
-  SessionStreamResponse,
   SessionUpdateParams,
   Sessions,
   SessionsPage,
@@ -76,9 +85,21 @@ export class Users extends APIResource {
 
   /**
    * Get a User by ID
+   *
+   * If user_id is provided as a query parameter, it uses that (must match JWT
+   * app_id). Otherwise, it uses the user_id from the JWT token.
    */
-  get(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<User> {
-    return this._client.get(`/v1/apps/${appId}/users/${userId}`, options);
+  get(appId: string, query?: UserGetParams, options?: Core.RequestOptions): Core.APIPromise<User>;
+  get(appId: string, options?: Core.RequestOptions): Core.APIPromise<User>;
+  get(
+    appId: string,
+    query: UserGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<User> {
+    if (isRequestOptions(query)) {
+      return this.get(appId, {}, query);
+    }
+    return this._client.get(`/v1/apps/${appId}/users`, { query, ...options });
   }
 
   /**
@@ -136,7 +157,7 @@ export interface UserUpdateParams {
 
 export interface UserListParams extends PageParams {
   /**
-   * Query param:
+   * Query param: Whether to reverse the order of results
    */
   reverse?: boolean;
 
@@ -146,8 +167,16 @@ export interface UserListParams extends PageParams {
   filter?: Record<string, unknown> | null;
 }
 
+export interface UserGetParams {
+  /**
+   * User ID to retrieve. If not provided, users JWT token
+   */
+  user_id?: string | null;
+}
+
 Users.UsersPage = UsersPage;
 Users.Metamessages = Metamessages;
+Users.MetamessagesPage = MetamessagesPage;
 Users.Sessions = Sessions;
 Users.SessionsPage = SessionsPage;
 Users.Collections = Collections;
@@ -161,24 +190,32 @@ export declare namespace Users {
     type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
+    type UserGetParams as UserGetParams,
   };
 
-  export { Metamessages as Metamessages, type MetamessageListParams as MetamessageListParams };
+  export {
+    Metamessages as Metamessages,
+    type Metamessage as Metamessage,
+    type PageMetamessage as PageMetamessage,
+    MetamessagesPage as MetamessagesPage,
+    type MetamessageCreateParams as MetamessageCreateParams,
+    type MetamessageUpdateParams as MetamessageUpdateParams,
+    type MetamessageListParams as MetamessageListParams,
+  };
 
   export {
     Sessions as Sessions,
-    type AgentChat as AgentChat,
+    type DialecticResponse as DialecticResponse,
     type PageSession as PageSession,
     type Session as Session,
     type SessionDeleteResponse as SessionDeleteResponse,
-    type SessionStreamResponse as SessionStreamResponse,
     SessionsPage as SessionsPage,
     type SessionCreateParams as SessionCreateParams,
     type SessionUpdateParams as SessionUpdateParams,
     type SessionListParams as SessionListParams,
     type SessionChatParams as SessionChatParams,
     type SessionCloneParams as SessionCloneParams,
-    type SessionStreamParams as SessionStreamParams,
+    type SessionGetParams as SessionGetParams,
   };
 
   export {
@@ -190,5 +227,6 @@ export declare namespace Users {
     type CollectionCreateParams as CollectionCreateParams,
     type CollectionUpdateParams as CollectionUpdateParams,
     type CollectionListParams as CollectionListParams,
+    type CollectionGetParams as CollectionGetParams,
   };
 }

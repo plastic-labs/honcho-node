@@ -19,10 +19,12 @@ export const tool: Tool = {
       app_id: {
         type: 'string',
         title: 'App Id',
+        description: 'ID of the app',
       },
       name: {
         type: 'string',
         title: 'Name',
+        description: 'Name of the user to retrieve',
       },
     },
   },

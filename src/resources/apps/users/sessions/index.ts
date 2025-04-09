@@ -12,27 +12,16 @@ export {
   type MessageBatchParams,
 } from './messages';
 export {
-  MetamessagesPage,
-  Metamessages,
-  type Metamessage,
-  type PageMetamessage,
-  type MetamessageCreateParams,
-  type MetamessageUpdateParams,
-  type MetamessageListParams,
-  type MetamessageGetParams,
-} from './metamessages';
-export {
   SessionsPage,
   Sessions,
-  type AgentChat,
+  type DialecticResponse,
   type PageSession,
   type Session,
   type SessionDeleteResponse,
-  type SessionStreamResponse,
   type SessionCreateParams,
   type SessionUpdateParams,
   type SessionListParams,
   type SessionChatParams,
   type SessionCloneParams,
-  type SessionStreamParams,
+  type SessionGetParams,
 } from './sessions';

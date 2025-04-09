@@ -12,17 +12,20 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_users_apps_metamessages',
-  description: 'Paginate through the user metamessages for a user',
+  description:
+    'Get metamessages with flexible filtering.\n\n- Filter by user only: No additional parameters needed\n- Filter by session: Provide session_id\n- Filter by message: Provide message_id (and session_id)\n- Filter by type: Provide metamessage_type\n- Filter by metadata: Provide filter object',
   inputSchema: {
     type: 'object',
     properties: {
       app_id: {
         type: 'string',
         title: 'App Id',
+        description: 'ID of the app',
       },
       user_id: {
         type: 'string',
         title: 'User Id',
+        description: 'ID of the user',
       },
       page: {
         type: 'integer',
@@ -32,6 +35,7 @@ export const tool: Tool = {
       reverse: {
         type: 'boolean',
         title: 'Reverse',
+        description: 'Whether to reverse the order of results',
       },
       size: {
         type: 'integer',
@@ -42,9 +46,17 @@ export const tool: Tool = {
         type: 'object',
         title: 'Filter',
       },
+      message_id: {
+        type: 'string',
+        title: 'Message Id',
+      },
       metamessage_type: {
         type: 'string',
         title: 'Metamessage Type',
+      },
+      session_id: {
+        type: 'string',
+        title: 'Session Id',
       },
     },
   },

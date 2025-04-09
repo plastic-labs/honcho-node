@@ -9,22 +9,30 @@ export {
   type CollectionCreateParams,
   type CollectionUpdateParams,
   type CollectionListParams,
+  type CollectionGetParams,
 } from './collections/index';
-export { Metamessages, type MetamessageListParams } from './metamessages';
+export {
+  MetamessagesPage,
+  Metamessages,
+  type Metamessage,
+  type PageMetamessage,
+  type MetamessageCreateParams,
+  type MetamessageUpdateParams,
+  type MetamessageListParams,
+} from './metamessages';
 export {
   SessionsPage,
   Sessions,
-  type AgentChat,
+  type DialecticResponse,
   type PageSession,
   type Session,
   type SessionDeleteResponse,
-  type SessionStreamResponse,
   type SessionCreateParams,
   type SessionUpdateParams,
   type SessionListParams,
   type SessionChatParams,
   type SessionCloneParams,
-  type SessionStreamParams,
+  type SessionGetParams,
 } from './sessions/index';
 export {
   UsersPage,
@@ -34,4 +42,5 @@ export {
   type UserCreateParams,
   type UserUpdateParams,
   type UserListParams,
+  type UserGetParams,
 } from './users';

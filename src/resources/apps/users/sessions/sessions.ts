@@ -15,22 +15,10 @@ import {
   MessagesPage,
   PageMessage,
 } from './messages';
-import * as MetamessagesAPI from './metamessages';
-import {
-  Metamessage,
-  MetamessageCreateParams,
-  MetamessageGetParams,
-  MetamessageListParams,
-  MetamessageUpdateParams,
-  Metamessages,
-  MetamessagesPage,
-  PageMetamessage,
-} from './metamessages';
 import { Page, type PageParams } from '../../../../pagination';
 
 export class Sessions extends APIResource {
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
-  metamessages: MetamessagesAPI.Metamessages = new MetamessagesAPI.Metamessages(this._client);
 
   /**
    * Create a Session for a User
@@ -96,7 +84,7 @@ export class Sessions extends APIResource {
     sessionId: string,
     body: SessionChatParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AgentChat> {
+  ): Core.APIPromise<DialecticResponse> {
     return this._client.post(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/chat`, {
       body,
       ...options,
@@ -104,7 +92,7 @@ export class Sessions extends APIResource {
   }
 
   /**
-   * Clone a session for a user, optionally will deep clone metamessages as well
+   * Clone a session, optionally up to a specific message
    */
   clone(
     appId: string,
@@ -136,37 +124,34 @@ export class Sessions extends APIResource {
   }
 
   /**
-   * Get a specific session for a user by ID
+   * Get a specific session for a user.
+   *
+   * If session_id is provided as a query parameter, it uses that (must match JWT
+   * session_id). Otherwise, it uses the session_id from the JWT token.
    */
   get(
     appId: string,
     userId: string,
-    sessionId: string,
+    query?: SessionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Session> {
-    return this._client.get(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}`, options);
-  }
-
-  /**
-   * Stream Results from the Dialectic API
-   */
-  stream(
+  ): Core.APIPromise<Session>;
+  get(appId: string, userId: string, options?: Core.RequestOptions): Core.APIPromise<Session>;
+  get(
     appId: string,
     userId: string,
-    sessionId: string,
-    body: SessionStreamParams,
+    query: SessionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
-    return this._client.post(`/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/chat/stream`, {
-      body,
-      ...options,
-    });
+  ): Core.APIPromise<Session> {
+    if (isRequestOptions(query)) {
+      return this.get(appId, userId, {}, query);
+    }
+    return this._client.get(`/v1/apps/${appId}/users/${userId}/sessions`, { query, ...options });
   }
 }
 
 export class SessionsPage extends Page<Session> {}
 
-export interface AgentChat {
+export interface DialecticResponse {
   content: string;
 }
 
@@ -196,8 +181,6 @@ export interface Session {
 
 export type SessionDeleteResponse = unknown;
 
-export type SessionStreamResponse = unknown;
-
 export interface SessionCreateParams {
   metadata?: Record<string, unknown>;
 }
@@ -208,7 +191,7 @@ export interface SessionUpdateParams {
 
 export interface SessionListParams extends PageParams {
   /**
-   * Query param:
+   * Query param: Whether to reverse the order of results
    */
   reverse?: boolean | null;
 
@@ -225,38 +208,46 @@ export interface SessionListParams extends PageParams {
 
 export interface SessionChatParams {
   queries: string | Array<string>;
+
+  stream?: boolean;
 }
 
 export interface SessionCloneParams {
+  /**
+   * Whether to deep copy metamessages
+   */
   deep_copy?: boolean;
 
+  /**
+   * Message ID to cut off the clone at
+   */
   message_id?: string | null;
 }
 
-export interface SessionStreamParams {
-  queries: string | Array<string>;
+export interface SessionGetParams {
+  /**
+   * Session ID to retrieve. If not provided, uses JWT token
+   */
+  session_id?: string | null;
 }
 
 Sessions.SessionsPage = SessionsPage;
 Sessions.Messages = Messages;
 Sessions.MessagesPage = MessagesPage;
-Sessions.Metamessages = Metamessages;
-Sessions.MetamessagesPage = MetamessagesPage;
 
 export declare namespace Sessions {
   export {
-    type AgentChat as AgentChat,
+    type DialecticResponse as DialecticResponse,
     type PageSession as PageSession,
     type Session as Session,
     type SessionDeleteResponse as SessionDeleteResponse,
-    type SessionStreamResponse as SessionStreamResponse,
     SessionsPage as SessionsPage,
     type SessionCreateParams as SessionCreateParams,
     type SessionUpdateParams as SessionUpdateParams,
     type SessionListParams as SessionListParams,
     type SessionChatParams as SessionChatParams,
     type SessionCloneParams as SessionCloneParams,
-    type SessionStreamParams as SessionStreamParams,
+    type SessionGetParams as SessionGetParams,
   };
 
   export {
@@ -269,16 +260,5 @@ export declare namespace Sessions {
     type MessageUpdateParams as MessageUpdateParams,
     type MessageListParams as MessageListParams,
     type MessageBatchParams as MessageBatchParams,
-  };
-
-  export {
-    Metamessages as Metamessages,
-    type Metamessage as Metamessage,
-    type PageMetamessage as PageMetamessage,
-    MetamessagesPage as MetamessagesPage,
-    type MetamessageCreateParams as MetamessageCreateParams,
-    type MetamessageUpdateParams as MetamessageUpdateParams,
-    type MetamessageListParams as MetamessageListParams,
-    type MetamessageGetParams as MetamessageGetParams,
   };
 }

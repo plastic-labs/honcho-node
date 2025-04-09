@@ -19,6 +19,7 @@ export const tool: Tool = {
       name: {
         type: 'string',
         title: 'Name',
+        description: 'Name of the app to retrieve',
       },
     },
   },

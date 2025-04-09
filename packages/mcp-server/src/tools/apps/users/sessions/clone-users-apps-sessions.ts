@@ -12,29 +12,34 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'clone_users_apps_sessions',
-  description: 'Clone a session for a user, optionally will deep clone metamessages as well',
+  description: 'Clone a session, optionally up to a specific message',
   inputSchema: {
     type: 'object',
     properties: {
       app_id: {
         type: 'string',
         title: 'App Id',
+        description: 'ID of the app',
       },
       user_id: {
         type: 'string',
         title: 'User Id',
+        description: 'ID of the user',
       },
       session_id: {
         type: 'string',
         title: 'Session Id',
+        description: 'ID of the session to clone',
       },
       deep_copy: {
         type: 'boolean',
         title: 'Deep Copy',
+        description: 'Whether to deep copy metamessages',
       },
       message_id: {
         type: 'string',
         title: 'Message Id',
+        description: 'Message ID to cut off the clone at',
       },
     },
   },
