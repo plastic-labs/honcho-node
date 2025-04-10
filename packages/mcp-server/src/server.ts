@@ -11,7 +11,7 @@ export { endpoints } from './tools';
 export const server = new McpServer(
   {
     name: 'honcho_ai_api',
-    version: '0.0.11',
+    version: '0.1.0',
   },
   {
     capabilities: {
