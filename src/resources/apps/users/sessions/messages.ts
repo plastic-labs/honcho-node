@@ -134,7 +134,7 @@ export interface MessageUpdateParams {
 
 export interface MessageListParams extends PageParams {
   /**
-   * Query param:
+   * Query param: Whether to reverse the order of results
    */
   reverse?: boolean | null;
 

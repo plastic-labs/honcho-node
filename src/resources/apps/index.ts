@@ -1,6 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Apps, type App, type AppCreateParams, type AppUpdateParams } from './apps';
+export {
+  AppsPage,
+  Apps,
+  type App,
+  type PageApp,
+  type AppCreateParams,
+  type AppUpdateParams,
+  type AppListParams,
+  type AppGetParams,
+} from './apps';
 export {
   UsersPage,
   Users,
@@ -9,4 +18,5 @@ export {
   type UserCreateParams,
   type UserUpdateParams,
   type UserListParams,
+  type UserGetParams,
 } from './users/index';

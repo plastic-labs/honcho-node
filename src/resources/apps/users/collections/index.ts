@@ -9,6 +9,7 @@ export {
   type CollectionCreateParams,
   type CollectionUpdateParams,
   type CollectionListParams,
+  type CollectionGetParams,
 } from './collections';
 export {
   DocumentsPage,

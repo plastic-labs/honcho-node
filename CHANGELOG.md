@@ -1,5 +1,54 @@
 # Changelog
 
+## 0.1.0 (2025-04-10)
+
+Full Changelog: [v0.0.11...v0.1.0](https://github.com/plastic-labs/honcho-node/compare/v0.0.11...v0.1.0)
+
+### Features
+
+* add SKIP_BREW env var to ./scripts/bootstrap ([#83](https://github.com/plastic-labs/honcho-node/issues/83)) ([d9ac028](https://github.com/plastic-labs/honcho-node/commit/d9ac028963482e43105f9ed0e4714279b4488040))
+* **api:** api update ([4cee1e2](https://github.com/plastic-labs/honcho-node/commit/4cee1e28b5f23d36fa222e0f37f96b87cf2fdde3))
+* **client:** accept RFC6838 JSON content types ([#84](https://github.com/plastic-labs/honcho-node/issues/84)) ([ee43c1e](https://github.com/plastic-labs/honcho-node/commit/ee43c1e9eff4ea37d42595c5d33e07f2729b2008))
+* **client:** send `X-Stainless-Timeout` header ([#79](https://github.com/plastic-labs/honcho-node/issues/79)) ([00e5a1b](https://github.com/plastic-labs/honcho-node/commit/00e5a1b1331f7f74a0c50d31845249498e9ee6bb))
+
+
+### Bug Fixes
+
+* **api:** improve type resolution when importing as a package ([#93](https://github.com/plastic-labs/honcho-node/issues/93)) ([09c8810](https://github.com/plastic-labs/honcho-node/commit/09c88106383ae86b5a63712a5dea06e7975bf0c3))
+* avoid type error in certain environments ([#89](https://github.com/plastic-labs/honcho-node/issues/89)) ([bc95c28](https://github.com/plastic-labs/honcho-node/commit/bc95c28365af13f8602d8d627f3b63024c7a9ff9))
+* **client:** fix export map for index exports ([#80](https://github.com/plastic-labs/honcho-node/issues/80)) ([50907d7](https://github.com/plastic-labs/honcho-node/commit/50907d7b14b30be3a52886a1ab82dbd69b1832a0))
+* **client:** normalize method ([#73](https://github.com/plastic-labs/honcho-node/issues/73)) ([f89c690](https://github.com/plastic-labs/honcho-node/commit/f89c69087921faaa2a309e10b24001da094669c1))
+* **client:** send `X-Stainless-Timeout` in seconds ([#91](https://github.com/plastic-labs/honcho-node/issues/91)) ([47583ae](https://github.com/plastic-labs/honcho-node/commit/47583ae8b8f5ff081e22673a83314bd12c388c04))
+* **exports:** ensure resource imports don't require /index ([#86](https://github.com/plastic-labs/honcho-node/issues/86)) ([3d9947f](https://github.com/plastic-labs/honcho-node/commit/3d9947faf1f88c1f7d0465769406f94288d1893b))
+* **internal:** work around https://github.com/vercel/next.js/issues/76881 ([#90](https://github.com/plastic-labs/honcho-node/issues/90)) ([12e4048](https://github.com/plastic-labs/honcho-node/commit/12e4048ed490cbc17d1ddb1a665201aa1423b64a))
+* **mcp:** fix readEnv type error ([f072743](https://github.com/plastic-labs/honcho-node/commit/f07274316050f6e19d909a9a4ffc8888da993565))
+* **mcp:** include all necessary env vars in client instantiation ([338bb06](https://github.com/plastic-labs/honcho-node/commit/338bb061669134d93c56fe4c321f0aa00d8a62c6))
+* **mcp:** point homepage and repo for mcp package to the `packages/mcp-server` directory ([#96](https://github.com/plastic-labs/honcho-node/issues/96)) ([82644c2](https://github.com/plastic-labs/honcho-node/commit/82644c2ba9621cfd7064411ebf0c4a40905eaf82))
+* **mcp:** remove unused tools.ts ([#94](https://github.com/plastic-labs/honcho-node/issues/94)) ([eeeff4b](https://github.com/plastic-labs/honcho-node/commit/eeeff4b7cebf27c3a6080ef8abcce83fb47cf88e))
+
+
+### Chores
+
+* configure new SDK language ([#95](https://github.com/plastic-labs/honcho-node/issues/95)) ([25bd245](https://github.com/plastic-labs/honcho-node/commit/25bd245ff1f85a84fb92fc605a5a0b63ae48cb68))
+* **exports:** cleaner resource index imports ([#87](https://github.com/plastic-labs/honcho-node/issues/87)) ([274a81f](https://github.com/plastic-labs/honcho-node/commit/274a81f8849164a972536deab341b0dd474e2b6d))
+* **exports:** stop using path fallbacks ([#88](https://github.com/plastic-labs/honcho-node/issues/88)) ([8ad8649](https://github.com/plastic-labs/honcho-node/commit/8ad8649dc96a07446b69d61021af4d5781b78467))
+* **internal:** add aliases for Record and Array ([#92](https://github.com/plastic-labs/honcho-node/issues/92)) ([2415a12](https://github.com/plastic-labs/honcho-node/commit/2415a121459b6a33ffdd85173ca5816ced46fb77))
+* **internal:** codegen related update ([#74](https://github.com/plastic-labs/honcho-node/issues/74)) ([6e6fc48](https://github.com/plastic-labs/honcho-node/commit/6e6fc489de03c68bd34c127b4aaf8b9410fd9660))
+* **internal:** codegen related update ([#75](https://github.com/plastic-labs/honcho-node/issues/75)) ([a990584](https://github.com/plastic-labs/honcho-node/commit/a9905846585c804528d9c668c6e35799de317557))
+* **internal:** codegen related update ([#76](https://github.com/plastic-labs/honcho-node/issues/76)) ([0295117](https://github.com/plastic-labs/honcho-node/commit/0295117eb4af398dcbea2b9c06a633612b25eeec))
+* **internal:** codegen related update ([#77](https://github.com/plastic-labs/honcho-node/issues/77)) ([3805b01](https://github.com/plastic-labs/honcho-node/commit/3805b015a510610d95a18b21a272c2fe022574ba))
+* **internal:** codegen related update ([#78](https://github.com/plastic-labs/honcho-node/issues/78)) ([e81efbd](https://github.com/plastic-labs/honcho-node/commit/e81efbdd710e9077b0e34d75999edbab0e50cdfe))
+* **internal:** fix devcontainers setup ([#81](https://github.com/plastic-labs/honcho-node/issues/81)) ([df524fb](https://github.com/plastic-labs/honcho-node/commit/df524fbe0ecbf91ce66cab1833d426499753b01c))
+* **internal:** fix some typos ([#71](https://github.com/plastic-labs/honcho-node/issues/71)) ([819389e](https://github.com/plastic-labs/honcho-node/commit/819389ed8fedb1c9116d5bfdd180adc9a7d5cf7b))
+* **internal:** reduce CI branch coverage ([2de3294](https://github.com/plastic-labs/honcho-node/commit/2de3294240ac1accd271954cc6fdf92e2ee3dc85))
+* **internal:** remove extra empty newlines ([#85](https://github.com/plastic-labs/honcho-node/issues/85)) ([60d7b49](https://github.com/plastic-labs/honcho-node/commit/60d7b4970e4b912c955481016c80448f1ab320a3))
+* **internal:** upload builds and expand CI branch coverage ([0fa4b4d](https://github.com/plastic-labs/honcho-node/commit/0fa4b4d3a77b3cbbe20484f1c703d99198174af0))
+
+
+### Documentation
+
+* update URLs from stainlessapi.com to stainless.com ([#82](https://github.com/plastic-labs/honcho-node/issues/82)) ([2cbe007](https://github.com/plastic-labs/honcho-node/commit/2cbe007f5e7fa8246e4b115dbefee3169dbe2cbc))
+
 ## 0.0.11 (2024-12-16)
 
 Full Changelog: [v0.0.10...v0.0.11](https://github.com/plastic-labs/honcho-node/compare/v0.0.10...v0.0.11)

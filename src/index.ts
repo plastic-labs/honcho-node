@@ -7,13 +7,25 @@ import * as Pagination from './pagination';
 import { type PageParams, PageResponse } from './pagination';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
-import { App, AppCreateParams, AppUpdateParams, Apps } from './resources/apps/apps';
+import { KeyCreateParams, KeyCreateResponse, Keys } from './resources/keys';
+import {
+  App,
+  AppCreateParams,
+  AppGetParams,
+  AppListParams,
+  AppUpdateParams,
+  Apps,
+  AppsPage,
+  PageApp,
+} from './resources/apps/apps';
 
 const environments = {
   demo: 'https://demo.honcho.dev',
   local: 'http://localhost:8000',
+  production: 'https://api.honcho.dev',
 };
 type Environment = keyof typeof environments;
+
 export interface ClientOptions {
   /**
    * Defaults to process.env['HONCHO_API_KEY'].
@@ -26,8 +38,9 @@ export interface ClientOptions {
    * Each environment maps to a different base URL:
    * - `demo` corresponds to `https://demo.honcho.dev`
    * - `local` corresponds to `http://localhost:8000`
+   * - `production` corresponds to `https://api.honcho.dev`
    */
-  environment?: Environment;
+  environment?: Environment | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -43,7 +56,7 @@ export interface ClientOptions {
    * Note that request timeouts are retried by default, so in a worst-case scenario you may wait
    * much longer than this timeout before the promise succeeds or fails.
    */
-  timeout?: number;
+  timeout?: number | undefined;
 
   /**
    * An HTTP agent used to manage HTTP(S) connections.
@@ -51,7 +64,7 @@ export interface ClientOptions {
    * If not provided, an agent will be constructed by default in the Node.js environment,
    * otherwise no agent is used.
    */
-  httpAgent?: Agent;
+  httpAgent?: Agent | undefined;
 
   /**
    * Specify a custom `fetch` function implementation.
@@ -67,7 +80,7 @@ export interface ClientOptions {
    *
    * @default 2
    */
-  maxRetries?: number;
+  maxRetries?: number | undefined;
 
   /**
    * Default headers to include with every request to the API.
@@ -75,7 +88,7 @@ export interface ClientOptions {
    * These can be removed in individual requests by explicitly setting the
    * header to `undefined` or `null` in request options.
    */
-  defaultHeaders?: Core.Headers;
+  defaultHeaders?: Core.Headers | undefined;
 
   /**
    * Default query parameters to include with every request to the API.
@@ -83,7 +96,7 @@ export interface ClientOptions {
    * These can be removed in individual requests by explicitly setting the
    * param to `undefined` in request options.
    */
-  defaultQuery?: Core.DefaultQuery;
+  defaultQuery?: Core.DefaultQuery | undefined;
 }
 
 /**
@@ -139,6 +152,7 @@ export class Honcho extends Core.APIClient {
   }
 
   apps: API.Apps = new API.Apps(this);
+  keys: API.Keys = new API.Keys(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -180,6 +194,8 @@ export class Honcho extends Core.APIClient {
 }
 
 Honcho.Apps = Apps;
+Honcho.AppsPage = AppsPage;
+Honcho.Keys = Keys;
 export declare namespace Honcho {
   export type RequestOptions = Core.RequestOptions;
 
@@ -189,8 +205,18 @@ export declare namespace Honcho {
   export {
     Apps as Apps,
     type App as App,
+    type PageApp as PageApp,
+    AppsPage as AppsPage,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
+    type AppListParams as AppListParams,
+    type AppGetParams as AppGetParams,
+  };
+
+  export {
+    Keys as Keys,
+    type KeyCreateResponse as KeyCreateResponse,
+    type KeyCreateParams as KeyCreateParams,
   };
 }
 
