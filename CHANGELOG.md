@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1 (2025-04-15)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/plastic-labs/honcho-node/compare/v0.1.0...v0.1.1)
+
+### Chores
+
+* **client:** minor internal fixes ([2284baf](https://github.com/plastic-labs/honcho-node/commit/2284baf0a3b3a87538ada780b86d89eaf0059e30))
+
 ## 0.1.0 (2025-04-10)
 
 Full Changelog: [v0.0.11...v0.1.0](https://github.com/plastic-labs/honcho-node/compare/v0.0.11...v0.1.0)
