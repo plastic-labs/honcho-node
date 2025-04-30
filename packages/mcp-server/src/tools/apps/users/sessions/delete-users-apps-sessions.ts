@@ -35,8 +35,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Honcho, args: any) => {
-  const { app_id, user_id, session_id } = args;
+export const handler = (client: Honcho, args: Record<string, unknown> | undefined) => {
+  const { app_id, user_id, session_id, ...body } = args as any;
   return client.apps.users.sessions.delete(app_id, user_id, session_id);
 };
 
