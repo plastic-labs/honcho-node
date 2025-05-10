@@ -35,8 +35,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Honcho, args: any) => {
-  const { app_id, user_id, name } = args;
+export const handler = (client: Honcho, args: Record<string, unknown> | undefined) => {
+  const { app_id, user_id, name, ...body } = args as any;
   return client.apps.users.collections.getByName(app_id, user_id, name);
 };
 

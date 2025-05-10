@@ -40,8 +40,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Honcho, args: any) => {
-  const { app_id, user_id, session_id, message_id } = args;
+export const handler = (client: Honcho, args: Record<string, unknown> | undefined) => {
+  const { app_id, user_id, session_id, message_id, ...body } = args as any;
   return client.apps.users.sessions.messages.get(app_id, user_id, session_id, message_id);
 };
 
