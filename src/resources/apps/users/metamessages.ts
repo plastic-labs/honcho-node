@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { Page, type PageParams } from '../../../pagination';
 
@@ -40,15 +41,29 @@ export class Metamessages extends APIResource {
    * - Filter by user only: No additional parameters needed
    * - Filter by session: Provide session_id
    * - Filter by message: Provide message_id (and session_id)
-   * - Filter by type: Provide metamessage_type
+   * - Filter by type: Provide label
    * - Filter by metadata: Provide filter object
    */
   list(
     appId: string,
     userId: string,
-    params: MetamessageListParams,
+    params?: MetamessageListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MetamessagesPage, Metamessage>;
+  list(
+    appId: string,
+    userId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MetamessagesPage, Metamessage>;
+  list(
+    appId: string,
+    userId: string,
+    params: MetamessageListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<MetamessagesPage, Metamessage> {
+    if (isRequestOptions(params)) {
+      return this.list(appId, userId, {}, params);
+    }
     const { page, reverse, size, ...body } = params;
     return this._client.getAPIList(`/v1/apps/${appId}/users/${userId}/metamessages/list`, MetamessagesPage, {
       query: { page, reverse, size },
@@ -76,19 +91,23 @@ export class MetamessagesPage extends Page<Metamessage> {}
 export interface Metamessage {
   id: string;
 
+  app_id: string;
+
   content: string;
 
   created_at: string;
 
-  message_id: string | null;
+  label: string;
 
-  metadata: Record<string, unknown>;
+  message_id: string | null;
 
   metamessage_type: string;
 
   session_id: string | null;
 
   user_id: string;
+
+  metadata?: Record<string, unknown>;
 }
 
 export interface PageMetamessage {

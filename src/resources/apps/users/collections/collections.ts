@@ -55,9 +55,23 @@ export class Collections extends APIResource {
   list(
     appId: string,
     userId: string,
-    params: CollectionListParams,
+    params?: CollectionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CollectionsPage, Collection>;
+  list(
+    appId: string,
+    userId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CollectionsPage, Collection>;
+  list(
+    appId: string,
+    userId: string,
+    params: CollectionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CollectionsPage, Collection> {
+    if (isRequestOptions(params)) {
+      return this.list(appId, userId, {}, params);
+    }
     const { page, reverse, size, ...body } = params;
     return this._client.getAPIList(`/v1/apps/${appId}/users/${userId}/collections/list`, CollectionsPage, {
       query: { page, reverse, size },
@@ -122,13 +136,15 @@ export class CollectionsPage extends Page<Collection> {}
 export interface Collection {
   id: string;
 
-  created_at: string;
+  app_id: string;
 
-  metadata: Record<string, unknown>;
+  created_at: string;
 
   name: string;
 
   user_id: string;
+
+  metadata?: Record<string, unknown>;
 }
 
 export interface PageCollection {
