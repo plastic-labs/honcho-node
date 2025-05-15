@@ -36,7 +36,15 @@ export class Apps extends APIResource {
   /**
    * Get all Apps
    */
-  list(params: AppListParams, options?: Core.RequestOptions): Core.PagePromise<AppsPage, App> {
+  list(params?: AppListParams, options?: Core.RequestOptions): Core.PagePromise<AppsPage, App>;
+  list(options?: Core.RequestOptions): Core.PagePromise<AppsPage, App>;
+  list(
+    params: AppListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AppsPage, App> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
     const { page, reverse, size, ...body } = params;
     return this._client.getAPIList('/v1/apps/list', AppsPage, {
       query: { page, reverse, size },
@@ -83,9 +91,9 @@ export interface App {
 
   created_at: string;
 
-  metadata: Record<string, unknown>;
-
   name: string;
+
+  metadata?: Record<string, unknown>;
 }
 
 export interface PageApp {

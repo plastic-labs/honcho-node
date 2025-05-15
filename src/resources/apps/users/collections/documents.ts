@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { Page, type PageParams } from '../../../../pagination';
 
@@ -45,9 +46,25 @@ export class Documents extends APIResource {
     appId: string,
     userId: string,
     collectionId: string,
-    params: DocumentListParams,
+    params?: DocumentListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DocumentsPage, Document>;
+  list(
+    appId: string,
+    userId: string,
+    collectionId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DocumentsPage, Document>;
+  list(
+    appId: string,
+    userId: string,
+    collectionId: string,
+    params: DocumentListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DocumentsPage, Document> {
+    if (isRequestOptions(params)) {
+      return this.list(appId, userId, collectionId, {}, params);
+    }
     const { page, reverse, size, ...body } = params;
     return this._client.getAPIList(
       `/v1/apps/${appId}/users/${userId}/collections/${collectionId}/documents/list`,
@@ -110,13 +127,17 @@ export class DocumentsPage extends Page<Document> {}
 export interface Document {
   id: string;
 
+  app_id: string;
+
   collection_id: string;
 
   content: string;
 
   created_at: string;
 
-  metadata: Record<string, unknown>;
+  user_id: string;
+
+  metadata?: Record<string, unknown>;
 }
 
 export interface PageDocument {

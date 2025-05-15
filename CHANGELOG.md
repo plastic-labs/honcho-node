@@ -1,5 +1,39 @@
 # Changelog
 
+## 0.2.0 (2025-05-15)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/plastic-labs/honcho-node/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** api update ([e0070f0](https://github.com/plastic-labs/honcho-node/commit/e0070f048f38bb46b2e874fff99cf4626dd19fa8))
+* **mcp:** support dynamically discovering and invoking tools for APIs with many endpoints ([a1744e0](https://github.com/plastic-labs/honcho-node/commit/a1744e077c8ae72c33e02666acf9046728f24d3c))
+* more gracefully handle $refs and work around schema limitations ([fc2155f](https://github.com/plastic-labs/honcho-node/commit/fc2155f557af5e833dc5409b660321dd1fa62838))
+
+
+### Bug Fixes
+
+* **mcp:** explicitly include zod and zod-to-json-schema in package.json ([2411040](https://github.com/plastic-labs/honcho-node/commit/2411040f1883b34967a61fc7385ef2e279243d7c))
+* **mcp:** remove ajv dependency so MCP servers are more compatible with Cloudflare Workers ([a3aa0d5](https://github.com/plastic-labs/honcho-node/commit/a3aa0d5487e64d17d9b984656a7f4d70a79bd9ea))
+
+
+### Chores
+
+* **build:** automatically build subpackages if present ([d0e8b72](https://github.com/plastic-labs/honcho-node/commit/d0e8b728cff8f9c06dbcbf83950c3e4271ee02d5))
+* **ci:** add timeout thresholds for CI jobs ([66e96d1](https://github.com/plastic-labs/honcho-node/commit/66e96d10224d55ae57498f3c93ce11c10fdad65e))
+* **ci:** bump node version for release workflows ([530837d](https://github.com/plastic-labs/honcho-node/commit/530837d932a265feafe3e8cb97e37aebe0cf2332))
+* **ci:** only use depot for staging repos ([cfe21eb](https://github.com/plastic-labs/honcho-node/commit/cfe21eb5b9c705b37c2b23094326bbc7a70a3060))
+* **client:** minor internal fixes ([2284baf](https://github.com/plastic-labs/honcho-node/commit/2284baf0a3b3a87538ada780b86d89eaf0059e30))
+* **internal:** codegen related update ([71c0b81](https://github.com/plastic-labs/honcho-node/commit/71c0b81ec1547244caf3844dc9a860f39665a852))
+* **internal:** codegen related update ([5300210](https://github.com/plastic-labs/honcho-node/commit/53002100e5806c1d9bffb14287912503c01ce88f))
+* **internal:** update dependency ([2b95042](https://github.com/plastic-labs/honcho-node/commit/2b950429da5fd721fe1b18df6a4fd3180ebde1ad))
+* **tests:** use node 22 for CI tests ([609aea1](https://github.com/plastic-labs/honcho-node/commit/609aea130a6fdbced697e9a36e9bcd35a3967e6c))
+
+
+### Documentation
+
+* **readme:** fix typo ([dff651d](https://github.com/plastic-labs/honcho-node/commit/dff651d38245cca4f39f4e72f91dbb3d249ffef5))
+
 ## 0.1.0 (2025-04-10)
 
 Full Changelog: [v0.0.11...v0.1.0](https://github.com/plastic-labs/honcho-node/compare/v0.0.11...v0.1.0)

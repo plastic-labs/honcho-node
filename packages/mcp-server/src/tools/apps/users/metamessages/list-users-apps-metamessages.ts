@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_users_apps_metamessages',
   description:
-    'Get metamessages with flexible filtering.\n\n- Filter by user only: No additional parameters needed\n- Filter by session: Provide session_id\n- Filter by message: Provide message_id (and session_id)\n- Filter by type: Provide metamessage_type\n- Filter by metadata: Provide filter object',
+    'Get metamessages with flexible filtering.\n\n- Filter by user only: No additional parameters needed\n- Filter by session: Provide session_id\n- Filter by message: Provide message_id (and session_id)\n- Filter by type: Provide label\n- Filter by metadata: Provide filter object',
   inputSchema: {
     type: 'object',
     properties: {
@@ -62,8 +62,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Honcho, args: any) => {
-  const { app_id, user_id, ...body } = args;
+export const handler = (client: Honcho, args: Record<string, unknown> | undefined) => {
+  const { app_id, user_id, ...body } = args as any;
   return client.apps.users.metamessages.list(app_id, user_id, body);
 };
 

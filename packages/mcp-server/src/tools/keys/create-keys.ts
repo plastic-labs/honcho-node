@@ -45,8 +45,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Honcho, args: any) => {
-  const { ...body } = args;
+export const handler = (client: Honcho, args: Record<string, unknown> | undefined) => {
+  const body = args as any;
   return client.keys.create(body);
 };
 

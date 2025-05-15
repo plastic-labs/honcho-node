@@ -51,9 +51,19 @@ export class Sessions extends APIResource {
   list(
     appId: string,
     userId: string,
-    params: SessionListParams,
+    params?: SessionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SessionsPage, Session>;
+  list(appId: string, userId: string, options?: Core.RequestOptions): Core.PagePromise<SessionsPage, Session>;
+  list(
+    appId: string,
+    userId: string,
+    params: SessionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SessionsPage, Session> {
+    if (isRequestOptions(params)) {
+      return this.list(appId, userId, {}, params);
+    }
     const { page, reverse, size, ...body } = params;
     return this._client.getAPIList(`/v1/apps/${appId}/users/${userId}/sessions/list`, SessionsPage, {
       query: { page, reverse, size },
@@ -170,13 +180,15 @@ export interface PageSession {
 export interface Session {
   id: string;
 
+  app_id: string;
+
   created_at: string;
 
   is_active: boolean;
 
-  metadata: Record<string, unknown>;
-
   user_id: string;
+
+  metadata?: Record<string, unknown>;
 }
 
 export type SessionDeleteResponse = unknown;
