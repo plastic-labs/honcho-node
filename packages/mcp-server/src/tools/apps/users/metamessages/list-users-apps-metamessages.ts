@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_users_apps_metamessages',
   description:
-    'Get metamessages with flexible filtering.\n\n- Filter by user only: No additional parameters needed\n- Filter by session: Provide session_id\n- Filter by message: Provide message_id (and session_id)\n- Filter by type: Provide metamessage_type\n- Filter by metadata: Provide filter object',
+    'Get metamessages with flexible filtering.\n\n- Filter by user only: No additional parameters needed\n- Filter by session: Provide session_id\n- Filter by message: Provide message_id (and session_id)\n- Filter by type: Provide label\n- Filter by metadata: Provide filter object',
   inputSchema: {
     type: 'object',
     properties: {

@@ -36,7 +36,7 @@ describe('resource apps', () => {
   });
 
   test('list', async () => {
-    const responsePromise = client.apps.list({});
+    const responsePromise = client.apps.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,6 +44,23 @@ describe('resource apps', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.apps.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Honcho.NotFoundError,
+    );
+  });
+
+  test('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.apps.list(
+        { page: 1, reverse: true, size: 1, filter: { foo: 'bar' } },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Honcho.NotFoundError);
   });
 
   test('get', async () => {

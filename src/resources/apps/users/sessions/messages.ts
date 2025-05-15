@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { Page, type PageParams } from '../../../../pagination';
 
@@ -45,9 +46,25 @@ export class Messages extends APIResource {
     appId: string,
     userId: string,
     sessionId: string,
-    params: MessageListParams,
+    params?: MessageListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MessagesPage, Message>;
+  list(
+    appId: string,
+    userId: string,
+    sessionId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MessagesPage, Message>;
+  list(
+    appId: string,
+    userId: string,
+    sessionId: string,
+    params: MessageListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<MessagesPage, Message> {
+    if (isRequestOptions(params)) {
+      return this.list(appId, userId, sessionId, {}, params);
+    }
     const { page, reverse, size, ...body } = params;
     return this._client.getAPIList(
       `/v1/apps/${appId}/users/${userId}/sessions/${sessionId}/messages/list`,
@@ -95,15 +112,19 @@ export class MessagesPage extends Page<Message> {}
 export interface Message {
   id: string;
 
+  app_id: string;
+
   content: string;
 
   created_at: string;
 
   is_user: boolean;
 
-  metadata: Record<string, unknown>;
-
   session_id: string;
+
+  user_id: string;
+
+  metadata?: Record<string, unknown>;
 }
 
 export interface PageMessage {

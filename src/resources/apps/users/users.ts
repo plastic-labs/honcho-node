@@ -71,9 +71,18 @@ export class Users extends APIResource {
    */
   list(
     appId: string,
-    params: UserListParams,
+    params?: UserListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<UsersPage, User>;
+  list(appId: string, options?: Core.RequestOptions): Core.PagePromise<UsersPage, User>;
+  list(
+    appId: string,
+    params: UserListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<UsersPage, User> {
+    if (isRequestOptions(params)) {
+      return this.list(appId, {}, params);
+    }
     const { page, reverse, size, ...body } = params;
     return this._client.getAPIList(`/v1/apps/${appId}/users/list`, UsersPage, {
       query: { page, reverse, size },
@@ -138,9 +147,9 @@ export interface User {
 
   created_at: string;
 
-  metadata: Record<string, unknown>;
-
   name: string;
+
+  metadata?: Record<string, unknown>;
 }
 
 export interface UserCreateParams {

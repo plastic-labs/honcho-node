@@ -201,7 +201,7 @@ Otherwise, it uses the user_id from the JWT token.
 * Filter by user only: No additional parameters needed
 * Filter by session: Provide session_id
 * Filter by message: Provide message_id (and session_id)
-* Filter by type: Provide metamessage_type
+* Filter by type: Provide label
 * Filter by metadata: Provide filter object
 
 - `get_users_apps_metamessages` (`read`): Get a specific Metamessage by ID
