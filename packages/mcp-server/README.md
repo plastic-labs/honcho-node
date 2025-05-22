@@ -10,6 +10,7 @@ You can run the MCP Server directly via `npx`:
 
 ```sh
 export HONCHO_API_KEY="My API Key"
+export HONCHO_ENVIRONMENT="demo"
 npx -y honcho-ai-mcp@latest
 ```
 
@@ -27,7 +28,8 @@ For clients with a configuration JSON, it might look something like this:
       "command": "npx",
       "args": ["-y", "honcho-ai-mcp", "--client=claude", "--tools=dynamic"],
       "env": {
-        "HONCHO_API_KEY": "My API Key"
+        "HONCHO_API_KEY": "My API Key",
+        "HONCHO_ENVIRONMENT": "demo"
       }
     }
   }
