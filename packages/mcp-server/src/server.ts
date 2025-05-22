@@ -43,7 +43,8 @@ export function init(params: {
 
   const endpointMap = Object.fromEntries(providedEndpoints.map((endpoint) => [endpoint.tool.name, endpoint]));
 
-  const client = params.client || new Honcho({});
+  const client =
+    params.client || new Honcho({ environment: (readEnv('HONCHO_ENVIRONMENT') || undefined) as any });
 
   server.setRequestHandler(ListToolsRequestSchema, async () => {
     return {
