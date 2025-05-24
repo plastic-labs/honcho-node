@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.0 (2025-05-24)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/plastic-labs/honcho-node/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **mcp:** support initializing the server with an "environment" ([229ce6f](https://github.com/plastic-labs/honcho-node/commit/229ce6fb0c95805673fc35d8735147f644aee2bd))
+
+
+### Bug Fixes
+
+* **mcp:** fix cursor schema transformation issue with recursive references ([83e67c4](https://github.com/plastic-labs/honcho-node/commit/83e67c4b221ed77612b635ccfb84f5f4d23c2215))
+
+
+### Chores
+
+* **docs:** grammar improvements ([772c0eb](https://github.com/plastic-labs/honcho-node/commit/772c0eb1016d2eea2b8907bdec1fdc3b721f7c3a))
+* improve docs for MCP servers ([6d0fe48](https://github.com/plastic-labs/honcho-node/commit/6d0fe48aa25c5a81df03e7e6fa13591859a8be4a))
+
 ## 0.2.0 (2025-05-15)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/plastic-labs/honcho-node/compare/v0.1.0...v0.2.0)
