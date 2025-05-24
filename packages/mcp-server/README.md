@@ -10,6 +10,7 @@ You can run the MCP Server directly via `npx`:
 
 ```sh
 export HONCHO_API_KEY="My API Key"
+export HONCHO_ENVIRONMENT="demo"
 npx -y honcho-ai-mcp@latest
 ```
 
@@ -27,7 +28,8 @@ For clients with a configuration JSON, it might look something like this:
       "command": "npx",
       "args": ["-y", "honcho-ai-mcp", "--client=claude", "--tools=dynamic"],
       "env": {
-        "HONCHO_API_KEY": "My API Key"
+        "HONCHO_API_KEY": "My API Key",
+        "HONCHO_ENVIRONMENT": "demo"
       }
     }
   }
@@ -172,8 +174,8 @@ The following tools are available in this MCP server.
 - `list_apps` (`write`): Get all Apps
 - `get_apps` (`read`): Get an App by ID.
 
-If app_id is provided as a query parameter, it uses that (must match JWT app_id).
-Otherwise, it uses the app_id from the JWT token.
+  If app_id is provided as a query parameter, it uses that (must match JWT app_id).
+  Otherwise, it uses the app_id from the JWT token.
 
 - `get_by_name_apps` (`read`): Get an App by Name
 - `get_or_create_apps` (`read`): Get or Create an App
@@ -185,8 +187,8 @@ Otherwise, it uses the app_id from the JWT token.
 - `list_apps_users` (`write`): Get All Users for an App
 - `get_apps_users` (`read`): Get a User by ID
 
-If user_id is provided as a query parameter, it uses that (must match JWT app_id).
-Otherwise, it uses the user_id from the JWT token.
+  If user_id is provided as a query parameter, it uses that (must match JWT app_id).
+  Otherwise, it uses the user_id from the JWT token.
 
 - `get_by_name_apps_users` (`read`): Get a User by name
 - `get_or_create_apps_users` (`read`): Get a User or create a new one by the input name
@@ -198,11 +200,11 @@ Otherwise, it uses the user_id from the JWT token.
 - `update_users_apps_metamessages` (`write`): Update a metamessage's metadata, type, or relationships
 - `list_users_apps_metamessages` (`write`): Get metamessages with flexible filtering.
 
-* Filter by user only: No additional parameters needed
-* Filter by session: Provide session_id
-* Filter by message: Provide message_id (and session_id)
-* Filter by type: Provide label
-* Filter by metadata: Provide filter object
+  - Filter by user only: No additional parameters needed
+  - Filter by session: Provide session_id
+  - Filter by message: Provide message_id (and session_id)
+  - Filter by type: Provide label
+  - Filter by metadata: Provide filter object
 
 - `get_users_apps_metamessages` (`read`): Get a specific Metamessage by ID
 
@@ -216,8 +218,8 @@ Otherwise, it uses the user_id from the JWT token.
 - `clone_users_apps_sessions` (`read`): Clone a session, optionally up to a specific message
 - `get_users_apps_sessions` (`read`): Get a specific session for a user.
 
-If session_id is provided as a query parameter, it uses that (must match JWT session_id).
-Otherwise, it uses the session_id from the JWT token.
+  If session_id is provided as a query parameter, it uses that (must match JWT session_id).
+  Otherwise, it uses the session_id from the JWT token.
 
 ### Resource `apps.users.sessions.messages`:
 
@@ -235,8 +237,8 @@ Otherwise, it uses the session_id from the JWT token.
 - `delete_users_apps_collections` (`write`): Delete a Collection and its documents
 - `get_users_apps_collections` (`read`): Get a specific collection for a user.
 
-If collection_id is provided as a query parameter, it uses that (must match JWT collection_id).
-Otherwise, it uses the collection_id from the JWT token.
+  If collection_id is provided as a query parameter, it uses that (must match JWT collection_id).
+  Otherwise, it uses the collection_id from the JWT token.
 
 - `get_by_name_users_apps_collections` (`read`): Get a Collection by Name
 

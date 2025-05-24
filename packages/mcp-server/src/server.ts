@@ -19,7 +19,7 @@ export { endpoints } from './tools';
 export const server = new McpServer(
   {
     name: 'honcho_ai_api',
-    version: '0.2.0',
+    version: '0.3.0',
   },
   {
     capabilities: {
@@ -43,7 +43,8 @@ export function init(params: {
 
   const endpointMap = Object.fromEntries(providedEndpoints.map((endpoint) => [endpoint.tool.name, endpoint]));
 
-  const client = params.client || new Honcho({});
+  const client =
+    params.client || new Honcho({ environment: (readEnv('HONCHO_ENVIRONMENT') || undefined) as any });
 
   server.setRequestHandler(ListToolsRequestSchema, async () => {
     return {
